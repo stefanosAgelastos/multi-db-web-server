@@ -3,7 +3,7 @@
 DELIMITER $$
  CREATE PROCEDURE selectTeachers(IN id int)
  BEGIN 
-	 SELECT fullname(first_name, last_name) AS "Teacher List"  FROM teachers 
+	 SELECT fullname(first_name, last_name) AS "Teachers List"  FROM teachers 
      WHERE department_id = id; 
  END$$
 DELIMITER ;
@@ -11,7 +11,7 @@ DELIMITER ;
 --2--
 
 DELIMITER $$
-CREATE PROCEDURE course_Stud(In id int)
+CREATE PROCEDURE courseById(In id int)
  BEGIN 
 
  SELECT course_id, course_name  AS "Course Name by id "  FROM courses 
@@ -21,14 +21,15 @@ CREATE PROCEDURE course_Stud(In id int)
   
 DELIMITER ;
 
+
 --3--	 
-    
+--3--	 
 DELIMITER $$
-CREATE PROCEDURE course_subject()
+CREATE PROCEDURE subjectByCourseId(IN id int )
  BEGIN 
 
- SELECT  subject_id, subject_name As "Software Developmant subjects are  " FROM subjects
-     WHERE course_id = "1"; 
+ SELECT  subject_id, subject_name As "Course's subjects are  " FROM subjects
+     WHERE course_id = id; 
      
      END $$
   
