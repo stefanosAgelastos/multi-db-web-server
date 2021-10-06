@@ -1,0 +1,5 @@
+-- EXAMPLE --
+
+CREATE EVENT e_totals
+ON SCHEDULE AT '2006-02-10 23:59:00'
+DO INSERT INTO test.totals VALUES (NOW());
