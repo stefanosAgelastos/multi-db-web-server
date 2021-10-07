@@ -1,3 +1,5 @@
+USE rollcall_db;
+
 DROP VIEW  IF EXISTS students_course;
 
 CREATE VIEW students_course

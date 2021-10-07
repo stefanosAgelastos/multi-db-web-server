@@ -1,3 +1,5 @@
+USE rollcall_db;
+
 --1--
 
 DELIMITER $$
