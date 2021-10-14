@@ -1,103 +1,114 @@
-CREATE DATABASE IF NOT EXISTS `rollcall_db`;
+CREATE SCHEMA IF NOT EXISTS `rollcall_db`;
+USE `rollcall_db` ;
 
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`kea_departments`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`kea_departments` (
-  `department_id` INT NOT NULL AUTO_INCREMENT,
-  `department_name` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`department_id`),
-  UNIQUE INDEX `department_name_UNIQUE` (`department_name` ASC),
-  UNIQUE INDEX `department_id_UNIQUE` (`department_id` ASC)); 
+`department_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+`department_name` VARCHAR(20) NOT NULL);
 
-CREATE TABLE IF NOT EXISTS `rollcall_db`.`courses` (
-  `course_id` INT NOT NULL AUTO_INCREMENT,
-  `course_name` VARCHAR(60) NOT NULL,
-  `department_id` INT NOT NULL,
-  PRIMARY KEY (`course_id`),
-  INDEX `department_id` (`department_id` ASC),
-  UNIQUE INDEX `course_id_UNIQUE` (`course_id` ASC),
-  CONSTRAINT `courses_ibfk_1`
-    FOREIGN KEY (`department_id`)
-    REFERENCES `rollcall_db`.`kea_departments` (`department_id`));
- 
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`program`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`program` (
+`program_id` INT NOT NULL,
+`program_name` VARCHAR(60) NOT NULL,
+`department_id` INT NOT NULL,
+`kea_departments_department_id` INT NOT NULL);
+
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`subjects`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`subjects` (
-  `subject_id` INT NOT NULL AUTO_INCREMENT,
-  `subject_name` VARCHAR(200) NOT NULL,
-  `course_id` INT NOT NULL,
-  PRIMARY KEY (`subject_id`),
-  INDEX `course_id` (`course_id` ASC),
-  UNIQUE INDEX `subject_id_UNIQUE` (`subject_id` ASC),
-  CONSTRAINT `subjects_ibfk_1`
-    FOREIGN KEY (`course_id`)
-    REFERENCES `rollcall_db`.`courses` (`course_id`));
+`subject_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+`subject_name` VARCHAR(200) NOT NULL,
+`program_id` INT NOT NULL);
 
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`teachers`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers` (
-  `teacher_id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(20) NOT NULL,
-  `last_name` VARCHAR(20) NOT NULL,
-  `email` VARCHAR(60) NOT NULL,
-  `password` VARCHAR(120) NOT NULL,
-  `department_id` INT NOT NULL,
-  PRIMARY KEY (`teacher_id`),
-  INDEX `department_id` (`department_id` ASC),
-  UNIQUE INDEX `teacher_id_UNIQUE` (`teacher_id` ASC),
-  CONSTRAINT `teachers_ibfk_1`
-    FOREIGN KEY (`department_id`)
-    REFERENCES `rollcall_db`.`kea_departments` (`department_id`)) ;
+`teacher_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+`first_name` VARCHAR(20) NOT NULL,
+`last_name` VARCHAR(20) NOT NULL,
+`email` VARCHAR(60) NOT NULL,
+`password` VARCHAR(120) NOT NULL,
+`department_id` INT NOT NULL);
 
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`teachers_subjects`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers_subjects` (
+`teacher_id` INT NOT NULL,
+`subject_id` INT NOT NULL);
+
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`code`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`code` (
-  `code_id` INT NOT NULL AUTO_INCREMENT,
-  `teacher_id` INT NOT NULL,
-  `subject_id` INT NOT NULL,
-  `current_dateTime` DATETIME NOT NULL,
-  PRIMARY KEY (`code_id`),
-  INDEX `subject_id` (`subject_id` ASC),
-  INDEX `teacher_id` (`teacher_id` ASC),
-  UNIQUE INDEX `code_id_UNIQUE` (`code_id` ASC),
-  CONSTRAINT `code_ibfk_1`
-    FOREIGN KEY (`subject_id`)
-    REFERENCES `rollcall_db`.`subjects` (`subject_id`),
-  CONSTRAINT `code_ibfk_2`
-    FOREIGN KEY (`teacher_id`)
-    REFERENCES `rollcall_db`.`teachers` (`teacher_id`)) ;
+`code_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+`current_dateTime` DATETIME NOT NULL,
+`teacher_id` INT NOT NULL,
+`subject_id` INT NOT NULL);
 
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`students_subjects`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_subjects` (
+`student_id` INT NOT NULL,
+`subject_id` INT NOT NULL);
+
+
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`students`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`students` (
-  `student_id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(20) NOT NULL,
-  `last_name` VARCHAR(20) NOT NULL,
-  `user_name` VARCHAR(20) NOT NULL,
-  `password` VARCHAR(120) NOT NULL,
-  `course_id` INT NOT NULL,
-  PRIMARY KEY (`student_id`),
-  INDEX `course_id` (`course_id` ASC),
-  UNIQUE INDEX `student_id_UNIQUE` (`student_id` ASC),
-  CONSTRAINT `students_ibfk_1`
-    FOREIGN KEY (`course_id`)
-    REFERENCES `rollcall_db`.`courses` (`course_id`)) ;
- 
+`student_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+`first_name` VARCHAR(20) NOT NULL,
+`last_name` VARCHAR(20) NOT NULL,
+`user_name` VARCHAR(20) NOT NULL,
+`password` VARCHAR(120) NOT NULL,
+`program_id` INT NOT NULL);
+
+
+
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`students_status`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_status` (
-  `status_id` INT NOT NULL AUTO_INCREMENT,
-  `student_id` INT NOT NULL,
-  `subject_id` INT NOT NULL,
-  `is_present` TINYINT(1) NOT NULL,
-  `current_datetime` DATETIME NOT NULL,
-  PRIMARY KEY (`status_id`),
-  INDEX `subject_id` (`subject_id` ASC),
-  INDEX `student_id` (`student_id` ASC),
-  UNIQUE INDEX `status_id_UNIQUE` (`status_id` ASC),
-  CONSTRAINT `students_status_ibfk_1`
-    FOREIGN KEY (`subject_id`)
-    REFERENCES `rollcall_db`.`subjects` (`subject_id`),
-  CONSTRAINT `students_status_ibfk_2`
-    FOREIGN KEY (`student_id`)
-    REFERENCES `rollcall_db`.`students` (`student_id`)) ;
- 
-CREATE TABLE IF NOT EXISTS `rollcall_db`.`teacher_course` (
-  `teacher_id` INT NOT NULL,
-  `course_id` INT NOT NULL,
-  INDEX `course_id` (`course_id` ASC),
-  PRIMARY KEY (`course_id`, `teacher_id`),
-  CONSTRAINT `teacher_course_ibfk_1`
-    FOREIGN KEY (`teacher_id`)
-    REFERENCES `rollcall_db`.`teachers` (`teacher_id`),
-  CONSTRAINT `teacher_course_ibfk_2`
-    FOREIGN KEY (`course_id`)
-    REFERENCES `rollcall_db`.`courses` (`course_id`)) ;
+`status_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+`is_present` TINYINT(1) NOT NULL,
+`current_datetime` DATETIME NOT NULL,
+`subject_id` INT NOT NULL,
+`student_id` INT NOT NULL);
+
+
+
+ALTER TABLE `rollcall_db`.`kea_departments` ADD PRIMARY KEY (`department_id`);
+
+ALTER TABLE `rollcall_db`.`program` ADD PRIMARY KEY (`program_id`);
+ALTER TABLE `rollcall_db`.`program` ADD FOREIGN KEY (`kea_departments_department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
+
+ALTER TABLE `rollcall_db`.`subjects` ADD PRIMARY KEY (`subject_id`);
+ALTER TABLE `rollcall_db`.`subjects` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`program` (`program_id`);
+
+ALTER TABLE `rollcall_db`.`teachers` ADD PRIMARY KEY (`teacher_id`);
+ALTER TABLE `rollcall_db`.`teachers` ADD FOREIGN KEY (`department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
+
+ALTER TABLE `teachers_subjects` ADD PRIMARY KEY(`teacher_id`, `subject_id`);
+ALTER TABLE `teachers_subjects` ADD FOREIGN KEY(`subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
+ALTER TABLE `teachers_subjects` ADD FOREIGN KEY (`teacher_id`) REFERENCES `rollcall_db`.`teachers` (`teacher_id`);
+
+ALTER TABLE `rollcall_db`.`code` ADD PRIMARY KEY (`code_id`, `teacher_id`, `subject_id`);
+ALTER TABLE `rollcall_db`.`code` ADD FOREIGN KEY (`teacher_id` , `subject_id`) REFERENCES `rollcall_db`.`teachers_subjects` (`teacher_id` , `subject_id`);
+
+ALTER TABLE `rollcall_db`.`students` ADD PRIMARY KEY (`student_id`);
+ALTER TABLE `rollcall_db`.`students` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`program` (`program_id`);
+
+ALTER TABLE `rollcall_db`.`students_subjects` ADD PRIMARY KEY (`student_id`, `subject_id`);
+ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`student_id`) REFERENCES `rollcall_db`.`students` (`student_id`);
+ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
+
+ALTER TABLE `rollcall_db`.`students_status` ADD PRIMARY KEY (`status_id`, `subject_id`, `student_id`);
+ALTER TABLE `rollcall_db`.`students_status` ADD FOREIGN KEY (`subject_id` , `student_id`) REFERENCES `rollcall_db`.`students_subjects` (`subject_id` , `student_id`);
