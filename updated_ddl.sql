@@ -53,6 +53,16 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`code` (
 `teachers_subjects_teachers_teacher_id` INT NOT NULL,
 `teachers_subjects_subjects_subject_id` INT NOT NULL);
 
+-- -----------------------------------------------------
+-- Table `rollcall_db`.`students_subjects`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_subjects` (
+`students_student_id` INT NOT NULL,
+`subjects_subject_id` INT NOT NULL,
+`students_status_status_id` INT NOT NULL,
+`students_status_subjects_has_students_subjects_subject_id` INT NOT NULL,
+`students_status_subjects_has_students_students_student_id` INT NOT NULL);
+
 
 -- -----------------------------------------------------
 -- Table `rollcall_db`.`students`
@@ -78,16 +88,6 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_status` (
 `subjects_has_students_subjects_subject_id` INT NOT NULL,
 `subjects_has_students_students_student_id` INT NOT NULL);
 
--- -----------------------------------------------------
--- Table `rollcall_db`.`students_subjects`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_subjects` (
-`students_student_id` INT NOT NULL,
-`subjects_subject_id` INT NOT NULL,
-`students_status_status_id` INT NOT NULL,
-`students_status_subjects_has_students_subjects_subject_id` INT NOT NULL,
-`students_status_subjects_has_students_students_student_id` INT NOT NULL)
-ENGINE=INNODB;
 
 
 ALTER TABLE `rollcall_db`.`kea_departments` ADD PRIMARY KEY (`department_id`);
@@ -112,10 +112,11 @@ ALTER TABLE `rollcall_db`.`code` ADD FOREIGN KEY (`teachers_subjects_teachers_te
 ALTER TABLE `rollcall_db`.`students` ADD PRIMARY KEY (`student_id`);
 ALTER TABLE `rollcall_db`.`students` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`program` (`program_id`);
 
+
 ALTER TABLE `rollcall_db`.`students_subjects` ADD PRIMARY KEY (`students_student_id`, `subjects_subject_id`, `students_status_status_id`, `students_status_subjects_has_students_subjects_subject_id`, `students_status_subjects_has_students_students_student_id`);
 ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`students_student_id`) REFERENCES `rollcall_db`.`students` (`student_id`);
--- ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`students_status_status_id` , `students_status_subjects_has_students_subjects_subject_id` , `students_status_subjects_has_students_students_student_id`) REFERENCES `rollcall_db`.`students_status` (`status_id` , `subjects_has_students_subjects_subject_id` , `subjects_has_students_students_student_id`);
--- ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`subjects_subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
+ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`students_status_status_id` , `students_status_subjects_has_students_subjects_subject_id` , `students_status_subjects_has_students_students_student_id`) REFERENCES `rollcall_db`.`students_status` (`status_id` , `subjects_has_students_subjects_subject_id` , `subjects_has_students_students_student_id`);
+ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`subjects_subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
 
 ALTER TABLE `rollcall_db`.`students_status` ADD PRIMARY KEY (`status_id`, `subjects_has_students_subjects_subject_id`, `subjects_has_students_students_student_id`);
--- ALTER TABLE `rollcall_db`.`students_status` ADD FOREIGN KEY (`subjects_has_students_subjects_subject_id` , `subjects_has_students_students_student_id`) REFERENCES `rollcall_db`.`students_subject` (`subjects_subject_id` , `students_student_id`);
+ALTER TABLE `rollcall_db`.`students_status` ADD FOREIGN KEY (`subjects_has_students_subjects_subject_id` , `subjects_has_students_students_student_id`) REFERENCES `rollcall_db`.`students_subjects` (`subjects_subject_id` , `students_student_id`);
