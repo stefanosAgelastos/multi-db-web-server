@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`kea_departments` (
 -- -----------------------------------------------------
 -- Table `rollcall_db`.`program`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rollcall_db`.`program` (
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`programs` (
 `program_id` INT NOT NULL,
 `program_name` VARCHAR(60) NOT NULL,
 `department_id` INT NOT NULL,
@@ -87,11 +87,11 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_status` (
 
 ALTER TABLE `rollcall_db`.`kea_departments` ADD PRIMARY KEY (`department_id`);
 
-ALTER TABLE `rollcall_db`.`program` ADD PRIMARY KEY (`program_id`);
-ALTER TABLE `rollcall_db`.`program` ADD FOREIGN KEY (`kea_departments_department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
+ALTER TABLE `rollcall_db`.`programs` ADD PRIMARY KEY (`program_id`);
+ALTER TABLE `rollcall_db`.`programs` ADD FOREIGN KEY (`kea_departments_department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
 
 ALTER TABLE `rollcall_db`.`subjects` ADD PRIMARY KEY (`subject_id`);
-ALTER TABLE `rollcall_db`.`subjects` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`program` (`program_id`);
+ALTER TABLE `rollcall_db`.`subjects` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`programs` (`program_id`);
 
 ALTER TABLE `rollcall_db`.`teachers` ADD PRIMARY KEY (`teacher_id`);
 ALTER TABLE `rollcall_db`.`teachers` ADD FOREIGN KEY (`department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
@@ -104,7 +104,7 @@ ALTER TABLE `rollcall_db`.`code` ADD PRIMARY KEY (`code_id`, `teacher_id`, `subj
 ALTER TABLE `rollcall_db`.`code` ADD FOREIGN KEY (`teacher_id` , `subject_id`) REFERENCES `rollcall_db`.`teachers_subjects` (`teacher_id` , `subject_id`);
 
 ALTER TABLE `rollcall_db`.`students` ADD PRIMARY KEY (`student_id`);
-ALTER TABLE `rollcall_db`.`students` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`program` (`program_id`);
+ALTER TABLE `rollcall_db`.`students` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`programs` (`program_id`);
 
 ALTER TABLE `rollcall_db`.`students_subjects` ADD PRIMARY KEY (`student_id`, `subject_id`);
 ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`student_id`) REFERENCES `rollcall_db`.`students` (`student_id`);

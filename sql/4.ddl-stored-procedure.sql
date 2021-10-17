@@ -16,8 +16,8 @@ DELIMITER $$
 CREATE PROCEDURE course_Stud(In id int)
  BEGIN 
 
- SELECT course_id, course_name  AS "Course Name by id "  FROM courses 
-     WHERE course_id = id; 
+ SELECT program_id, program_name  AS "Course Name by id "  FROM programs
+     WHERE program_id = id;
      
      END $$
   
@@ -30,7 +30,7 @@ CREATE PROCEDURE course_subject()
  BEGIN 
 
  SELECT  subject_id, subject_name As "Software Developmant subjects are  " FROM subjects
-     WHERE course_id = "1"; 
+     WHERE program_id = "1";
      
      END $$
   
