@@ -1,36 +1,36 @@
 USE rollcall_db;
 
--- 1 --
+-- SET DELIMITER FOR THE CREATING THE PROCEDURES --
 
 DELIMITER $$
+
+-- 1 --
+
+
  CREATE PROCEDURE selectTeachers(IN id int)
  BEGIN 
 	 SELECT fullname(first_name, last_name) AS "Teacher List"  FROM teachers 
      WHERE department_id = id; 
- END$$
-DELIMITER ;
+ END $$
 
 -- 2 --
 
-DELIMITER $$
-CREATE PROCEDURE course_Stud(In id int)
- BEGIN 
+
+CREATE PROCEDURE program_Stud(In id int)
+ BEGIN
  SELECT program_id, program_name  AS "Program Name by id "  FROM programs
      WHERE program_id = id;
-     
-     END $$
-  
-DELIMITER ;
+     END $$  
 
 -- 3 --	 
     
-DELIMITER $$
-CREATE PROCEDURE course_subject()
- BEGIN 
 
+CREATE PROCEDURE program_subject(In id int)
+ BEGIN
  SELECT  subject_id, subject_name As "Software Developmant subjects are  " FROM subjects
-     WHERE program_id = "1";
-     
+     WHERE program_id = id;
      END $$
-  
+
+
+-- RESET DELIMITER TO STANDARD --
 DELIMITER ;
