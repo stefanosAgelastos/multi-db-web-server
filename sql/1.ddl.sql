@@ -12,10 +12,9 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`kea_departments` (
 -- Table `rollcall_db`.`program`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`programs` (
-`program_id` INT NOT NULL,
+`program_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 `program_name` VARCHAR(60) NOT NULL,
-`department_id` INT NOT NULL,
-`kea_departments_department_id` INT NOT NULL);
+`department_id` INT NOT NULL);
 
 -- -----------------------------------------------------
 -- Table `rollcall_db`.`subjects`
@@ -88,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_status` (
 ALTER TABLE `rollcall_db`.`kea_departments` ADD PRIMARY KEY (`department_id`);
 
 ALTER TABLE `rollcall_db`.`programs` ADD PRIMARY KEY (`program_id`);
-ALTER TABLE `rollcall_db`.`programs` ADD FOREIGN KEY (`kea_departments_department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
+ALTER TABLE `rollcall_db`.`programs` ADD FOREIGN KEY (`department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
 
 ALTER TABLE `rollcall_db`.`subjects` ADD PRIMARY KEY (`subject_id`);
 ALTER TABLE `rollcall_db`.`subjects` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`programs` (`program_id`);
