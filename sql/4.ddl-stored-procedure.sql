@@ -1,6 +1,6 @@
 USE rollcall_db;
 
---1--
+-- 1 --
 
 DELIMITER $$
  CREATE PROCEDURE selectTeachers(IN id int)
@@ -10,7 +10,7 @@ DELIMITER $$
  END$$
 DELIMITER ;
 
---2--
+-- 2 --
 
 DELIMITER $$
 CREATE PROCEDURE course_Stud(In id int)
@@ -23,7 +23,7 @@ CREATE PROCEDURE course_Stud(In id int)
   
 DELIMITER ;
 
---3--	 
+-- 3 --	 
     
 DELIMITER $$
 CREATE PROCEDURE course_subject()
