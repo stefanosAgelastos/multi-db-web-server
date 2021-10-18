@@ -4,10 +4,10 @@ INSERT INTO `rollcall_db`.`kea_departments` (`department_name`) VALUES ('Build')
 INSERT INTO `rollcall_db`.`kea_departments` (`department_name`) VALUES ('Design');
  
  
-INSERT INTO `rollcall_db`.`program` (`program_name`, `department_id`) VALUES ('Software Developmant','1');
-INSERT INTO `rollcall_db`.`program` (`program_name`, `department_id`) VALUES ('Tech','2');
-INSERT INTO `rollcall_db`.`program` (`program_name`, `department_id`) VALUES ('Product Development and Integrative Technology','3');
-INSERT INTO `rollcall_db`.`program` (`program_name`, `department_id`) VALUES ('Design & business','4');
+INSERT INTO `rollcall_db`.`programs` (`program_name`, `department_id`) VALUES ('Software Developmant','1');
+INSERT INTO `rollcall_db`.`programs` (`program_name`, `department_id`) VALUES ('Tech','2');
+INSERT INTO `rollcall_db`.`programs` (`program_name`, `department_id`) VALUES ('Product Development and Integrative Technology','3');
+INSERT INTO `rollcall_db`.`programs` (`program_name`, `department_id`) VALUES ('Design & business','4');
  
  
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Database for System Developers','1');
