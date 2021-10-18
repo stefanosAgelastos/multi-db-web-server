@@ -10,7 +10,9 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Start containers
-        run: docker-compose up -d --build && sleep 10s
+        run: docker-compose up -d --build
+      - name: Wait for containers to start
+        run: sleep 20s
       - name: Check connection to Database
         run: mysql -h 127.0.0.1 -P 3306 -u root -pdatabases
       - name: Stop containers and remove volumes
