@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/stefanosAgelastos/multi-db-web-server/issues"
   },
-  "homepage": "https://github.com/stefanosAgelastos/multi-db-web-server#readme"
+  "homepage": "https://github.com/stefanosAgelastos/multi-db-web-server#readme",
+  "devDependencies": {
+    "sequelize-auto": "^0.8.5"
+  }
 }
