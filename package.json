@@ -1,0 +1,19 @@
+{
+  "name": "multi-db-web-server",
+  "version": "1.0.0",
+  "description": "Node.js API with polyglot persistence",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --verbose --detectOpenHandles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanosAgelastos/multi-db-web-server.git"
+  },
+  "author": "Archana Stefanos Tariq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefanosAgelastos/multi-db-web-server/issues"
+  },
+  "homepage": "https://github.com/stefanosAgelastos/multi-db-web-server#readme"
+}
