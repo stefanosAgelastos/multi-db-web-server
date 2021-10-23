@@ -25,3 +25,14 @@ This is useful when you make changes to the schema and you want to rerun the DDL
 ```
 cat ./path-to-your-script-here.sql | mysql -h 127.0.0.1 -P 3306 -u root -pdatabases
 ```
+## How to generate sequelize models from the dabase tables
+
+[sequelize-auto documentation](https://www.npmjs.com/package/sequelize-auto)
+
+We can use this library to auto-generate our javascript models.
+
+We can run this command `sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true`
+
+We have made a shortcut for this command at out `package.json`, so one can just run `npm run generate-models`
+
+Remember that the databse must be up and running when you run this command.

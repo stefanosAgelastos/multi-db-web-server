@@ -1,0 +1,27 @@
+{
+  "name": "multi-db-web-server",
+  "version": "1.0.0",
+  "description": "Node.js API with polyglot persistence",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true # -t kea_departments -c ./config/sequelize.json "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stefanosAgelastos/multi-db-web-server.git"
+  },
+  "author": "Archana Stefanos Tariq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stefanosAgelastos/multi-db-web-server/issues"
+  },
+  "homepage": "https://github.com/stefanosAgelastos/multi-db-web-server#readme",
+  "devDependencies": {
+    "sequelize-auto": "^0.8.5"
+  },
+  "dependencies": {
+    "mysql2": "^2.3.2",
+    "sequelize": "^6.7.0"
+  }
+}
