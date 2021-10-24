@@ -21,6 +21,7 @@
     "sequelize-auto": "^0.8.5"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "mysql2": "^2.3.2",
     "sequelize": "^6.7.0"
   }
