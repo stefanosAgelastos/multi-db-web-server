@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
 const { initModels } = require('../models/init-models.js')
 
+console.log("here")
+
 // define mysql database connection
 const sequelize = new Sequelize({
     host: 'localhost',
@@ -11,27 +13,11 @@ const sequelize = new Sequelize({
     dialect: 'mysql'
 });
 
-// define sequelize models'
+// define sequelize models
 initModels(sequelize);
 
-// Test connection
-sequelize
-    .authenticate()
-    .then(function (err) {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(function (err) {
-        console.error('Unable to connect to the database:', error);
-    })
-    .finally(function () {
-        console.error("Closing Connection..");
-        sequelize.close();
-    });
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-sequelize.models.teachers.findAll()
-    .then(function (data, err) {
-        console.log(data);
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
+module.exports = db;
