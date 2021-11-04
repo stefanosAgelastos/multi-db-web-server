@@ -47,6 +47,8 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers_subjects` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`code` (
 `code_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+-- Can be changed when we deceide to generate number or url as a code  --
+`actual_code` varchar(255), 
 `current_dateTime` DATETIME NOT NULL,
 `teacher_id` INT NOT NULL,
 `subject_id` INT NOT NULL);

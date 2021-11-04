@@ -16,7 +16,7 @@ DELIMITER $$
 -- 2 --
 
 
-CREATE PROCEDURE program_Stud(In id int)
+CREATE PROCEDURE programNameById(In id int)
  BEGIN
  SELECT program_id, program_name  AS "Program Name by id "  FROM programs
      WHERE program_id = id;
@@ -27,7 +27,7 @@ CREATE PROCEDURE program_Stud(In id int)
 
 CREATE PROCEDURE program_subject(In id int)
  BEGIN
- SELECT  subject_id, subject_name As "Software Developmant subjects are  " FROM subjects
+ SELECT  subject_id, subject_name As  "Program's subjects are  " FROM subjects
      WHERE program_id = id;
      END $$
 
