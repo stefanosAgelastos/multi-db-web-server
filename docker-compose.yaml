@@ -32,6 +32,15 @@ services:
       # the scripts will run only when the volume is removed with docker-compose down -v
       # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
       - ./sql/:/docker-entrypoint-initdb.d/
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: helpdev
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   #  app_container:
 volumes:
   sqldb:
