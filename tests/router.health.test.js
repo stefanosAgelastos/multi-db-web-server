@@ -1,12 +1,9 @@
 
 const db = require("../startup/db.mysql");
 
-
-
 describe('database connection', () => {
 
-
-    test('Default value is false', () => {
+    test('Test that the connection promise resolves', () => {
         expect.assertions(1);
 
         return db.sequelize
@@ -18,6 +15,4 @@ describe('database connection', () => {
                 expect(true).toBe(false);
             });
     });
-
 })
-
