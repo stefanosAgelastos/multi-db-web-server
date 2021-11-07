@@ -4,7 +4,9 @@
   "description": "Node.js API with polyglot persistence",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "build-node-docker": "docker build -t multi-bd-node .",
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
     "test": "jest --watchAll --verbose --detectOpenHandles",
     "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true # -t kea_departments -c ./config/sequelize.json "
   },
