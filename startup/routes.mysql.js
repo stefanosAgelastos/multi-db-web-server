@@ -1,7 +1,12 @@
-const tokenRouter = require("../routes/token.mysql");
-const healthCheckRouter = require("../routes/health_check.mysql");
+const router = express.Router();
+const postToken = require("../routes/token.mysql");
+const gethealthcheck = require("../routes/health_check.mysql");
 
 module.exports = function (app) {
-    app.use("/sql/token", tokenRouter)
-    app.use("/sql/health_check", healthCheckRouter)
+    // assign the router to the app
+    app.use("/", router)
+
+    // assign controller classes to the router
+    router.post("/sql/health_check", gethealthcheck)
+    router.post("/sql/token", postToken)
 }
