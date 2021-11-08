@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 //Path to frontend folder. __dirname alone will only point to current path and not the correct one
 const path = require('path');
 const frontendPath = path.resolve (__dirname, '../../frontend/');
+router.use(express.static(frontendPath));
 
 router.use(express.urlencoded({extended: false}));
 
