@@ -5,12 +5,18 @@ Content-Type: application/json
 {
     "first_name": "name",
     "last_name": "names",
-    "email": "test@test.com",
+    "email": "reste@test.com",
     "password": "qweqwe",
     "department_id": 3
 }
 
 ###GET
 
-GET http://localhost:8080/
+GET http://localhost:8080/login/
+Content-Type: application/json
+{
+    "email": "test@test.com",
+    "password": "qweqwe"
+}
+
 
