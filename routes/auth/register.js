@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
     //console.log(teachers);  
     
     try {
-        db.sequelize.models.teachers.create({
+        await db.sequelize.models.teachers.create({
 
             first_name: req.body.first_name,
             last_name: req.body.last_name,
