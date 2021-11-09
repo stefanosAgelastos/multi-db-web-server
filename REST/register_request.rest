@@ -1,0 +1,16 @@
+###POST 
+POST http://localhost:8080/register/ 
+Content-Type: application/json
+
+{
+    "first_name": "name",
+    "last_name": "names",
+    "email": "test@test.com",
+    "password": "qweqwe",
+    "department_id": 3
+}
+
+###GET
+
+GET http://localhost:8080/
+
