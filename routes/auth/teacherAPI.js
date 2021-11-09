@@ -42,43 +42,65 @@ router.get("/findOne/:id", (req, res) => {
 
 });
 
-//.then(updateTeacher => res.send(updateTeacher));
+
 
 
 // Update a teacher by the id 
 router.post("/updateTeacher/:id", (req, res) => {
-    db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id }}).then(
-    //.then(oneTeacher => res.send(oneTeacher));
 
-    try {
-        db.sequelize.models.teachers.update({
+     db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } }).then(
+        () => {
+            try {
+                const teacherUpdated= db.sequelize.models.teachers.update({
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email: req.body.email,
+                    password: req.body.password,
+                    department_id: req.body.department_id
+                },
+                  
+                    { where: { teacher_id: req.params.id }} 
 
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            email: req.body.email,
-            password: req.body.password,
-            department_id: req.body.department_id
-        })
-    } 
+                )
+                 console.log(teacherUpdated);
+                return res.json(teacherUpdated);
 
-    catch (error) {
-        console.log(error)
-        return res.status(400).send({
-            message: 'Unable to update data',
-            errors: error,
-            status: 400
+            }
+           
+
+            catch (error) {
+                console.log(error)
+                return res.status(400).send({
+                    message: 'Unable to update data',
+                    errors: error,
+                    status: 400
+                });
+            }
+            
         });
-    }
-    )
+    
+
 })
 
 
-/*
+
 
 // Delete a Teacher by id 
-sequelize.delete = (req, res) => {
-  
-};
+router.post("/delete/:id", (req, res) => {
 
- */
+    try {
+        db.sequelize.models.teachers.destroy({ where: { teacher_id: req.params.id } }).then(oneTeacher => res.send(oneTeacher))
+    }
+    catch (error) {
+        console.log(error)
+
+    }
+    return res.status(404).send('User not found')
+})
+
+
+
+
+
+
 module.exports = router

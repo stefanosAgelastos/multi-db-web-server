@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 const db = require("./models/teachers");
-const PORT = process.env.PORT || 9090;
 require('dotenv').config();
+const PORT = process.env.PORT || 9090;
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
