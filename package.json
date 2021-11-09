@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "jest --watchAll --verbose --detectOpenHandles",
-    "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x Fek22dbz -p 3306  --dialect mysql -o ./models/ -v true"
+    "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true # -t kea_departments -c ./config/sequelize.json "
   },
   "repository": {
     "type": "git",
@@ -28,10 +28,7 @@
     "express": "^4.17.1",
     "express-rate-limiter": "^1.3.1",
     "joi": "^17.4.2",
-    "jsonwebtoken": "8.5.1",
     "mysql2": "^2.3.2",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
     "sequelize": "^6.7.0"
   }
 }
