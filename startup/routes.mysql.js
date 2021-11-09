@@ -1,5 +1,5 @@
 const router = express.Router();
-const postToken = require("../routes/token.mysql");
+const createToken = require("../routes/token.mysql");
 const gethealthcheck = require("../routes/health_check.mysql");
 
 module.exports = function (app) {
@@ -8,5 +8,5 @@ module.exports = function (app) {
 
     // assign controller classes to the router
     router.post("/sql/health_check", gethealthcheck)
-    router.post("/sql/token", postToken)
+    router.post("/sql/token/", createToken)
 }
