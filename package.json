@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "jest --watchAll --verbose --detectOpenHandles",
-    "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x Fek22dbz -p 3306  --dialect mysql -o ./models/ -v true"
+    "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x  -p 3306  --dialect mysql -o ./models/ -v true"
   },
   "repository": {
     "type": "git",
