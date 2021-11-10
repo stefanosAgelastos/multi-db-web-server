@@ -13,6 +13,7 @@ const sequelize = new Sequelize({
     dialect: 'mysql'
 });
 
+
 //Synchronizes the models each time the application is started
 //sequelize.sync(); 
 
@@ -32,6 +33,3 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 module.exports = db;
-
-
-

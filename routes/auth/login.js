@@ -11,7 +11,6 @@ const db = require('../../startup/db.mysql');
 const frontendPath = path.resolve(__dirname, '../../frontend/');
 router.use(express.static(frontendPath));
 
-
 router.get('/login', (req, res) => {
     return res.sendFile(frontendPath + '/login/login.html');
 });

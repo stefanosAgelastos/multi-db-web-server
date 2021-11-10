@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+
 const db = require("../../startup/db.mysql");
  
 //Modified Path
@@ -51,8 +52,5 @@ router.post('/register', rateLimiter, async (req, res) => {
         res.status(501).send(error);
     }
 });
-
-
-
 
 module.exports = router;
