@@ -19,10 +19,11 @@
     <h2>Registration</h2>
     <div>
         <form method="POST" action="/register">
+            <input class="center-blok" type="text" name="first_name" id="first_name" placeholder="First name" required><br>
+            <input class="center-blok" type="text" name="last_name" id="last_name" placeholder="Last name" required><br>
             <input class="center-blok" type="email" name="email" id="email" placeholder="Email" required><br>
-            <input class="center-blok" type="text" name="username" id="username" placeholder="Username" required><br>
-            <input class="center-blok" type="password" name="password" id="password" placeholder="Password"
-                required><br>
+            <input class="center-blok" type="password" name="password" id="password-input" placeholder="Password" required><br>
+            <input class="center-blok" type="number" name="department_id" id="department_id" placeholder="Department ID" required><br>
             <button class="btn btn-dark" type="submit" id="register-button">Register</button>
         </form>
         <p id="sign-in-here">Already a member? <a href="/login">Sign in here</a></p>
