@@ -25,8 +25,6 @@ router.post("/createNew", (req, res) => {
 
 })
 
-
-
 // Retrieve all Teachers from the database.
 
 router.get("/all", (req, res) => {
@@ -43,47 +41,32 @@ router.get("/findOne/:id", (req, res) => {
 });
 
 
-
-
 // Update a teacher by the id 
 router.post("/updateTeacher/:id", (req, res) => {
 
-     db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } }).then(
-        () => {
-            try {
-                const teacherUpdated= db.sequelize.models.teachers.update({
-                    first_name: req.body.first_name,
-                    last_name: req.body.last_name,
-                    email: req.body.email,
-                    password: req.body.password,
-                    department_id: req.body.department_id
-                },
-                  
-                    { where: { teacher_id: req.params.id }} 
+    const rowsaffected = db.sequelize.models.teachers.update({
 
-                )
-                 console.log(teacherUpdated);
-                return res.json(teacherUpdated);
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        password: req.body.password,
+        department_id: req.body.department_id
+    },
 
-            }
-           
+        { where: { teacher_id: req.params.id } }
 
-            catch (error) {
-                console.log(error)
-                return res.status(400).send({
-                    message: 'Unable to update data',
-                    errors: error,
-                    status: 400
-                });
-            }
-            
+    ).then(rowsaffected => {
+        res.json(rowsaffected);
+        console.log(rowsaffected);
+    }).catch(error => {
+        console.log(error)
+        return res.status(400).send({
+            message: 'Unable to update data',
+            errors: error,
+            status: 400
         });
-    
-
+    })
 })
-
-
-
 
 // Delete a Teacher by id 
 router.post("/delete/:id", (req, res) => {
@@ -97,9 +80,6 @@ router.post("/delete/:id", (req, res) => {
     }
     return res.status(404).send('User not found')
 })
-
-
-
 
 
 
