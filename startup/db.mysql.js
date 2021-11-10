@@ -12,9 +12,11 @@ const sequelize = new Sequelize({
     database: process.env.DB_NAME,
     dialect: 'mysql'
 });
-console.log(process.env.DB_HOST);
 
-(async() => {
+//Synchronizes the models each time the application is started
+//sequelize.sync(); 
+
+(async () => {
     try {
         await sequelize.authenticate();
         console.log('Connection to DB established successfully');

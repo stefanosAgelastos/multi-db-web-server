@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+
 
 //Path to frontend folder. __dirname alone will only point to current path and not the correct one
 const path = require('path');
 const db = require('../../startup/db.mysql');
-const frontendPath = path.resolve (__dirname, '../../frontend/');
+const frontendPath = path.resolve(__dirname, '../../frontend/');
 router.use(express.static(frontendPath));
 
 
@@ -13,26 +15,38 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    try{
+    try {
 
-        //initialize variables with value from .body.username and password
-        const email = req.body.email;
+
+        const email = req.body.email; 
         const plainPassword = req.body.password;
 
-        const userInfo = await db.sequelize.models.teachers.findOne({ where: { email }});
-        console.log(userInfo[0][0])
-        /*
-        if (userInfo[0][0] === undefined || userInfo[0][0].length === 0) {
-            res.status(404).send(`User: ${username} not found!`);
-            return res.redirect('/login');
 
-        } else if (await bcrypt.compare(plainPassword, userInfo[0][0].password)) {
-            console.log(userInfo);
+
+        const teacher = await db.sequelize.models.teachers.findOne({ where: { email } });
+
+        if(teacher == null){
+            res.json({ message: "Wrong email or password" });
+        } else {
+            if (await bcrypt.compare(plainPassword, teacher.password)) {
+                res.json({ message: "Success" });
+            } else {
+                res.json({ message: "Wrong email or password" });
+                res.redirect('/login');
+            }
         }
-        */
-    } catch(error) {
+    
+        
+        return res.json({ message: 'Loginsuccess' })
+    
+
+
+        
+
+    } catch (error) {
 
     }
+    
 });
 
 module.exports = router;

@@ -3,12 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require("../../startup/db.mysql");
 
-
 //Modified Path
 const path = require('path');
 const frontendPath = path.resolve(__dirname, '../../frontend/');
-//Middleware to parse incoming requests
-router.use(express.urlencoded({ extended: false }));
+
 
 //GET
 router.get('/register', (req, res) => {
@@ -41,9 +39,9 @@ router.post('/register', async (req, res) => {
                 department_id,
 
             }).then(newTeacher => res.send(newTeacher));
-            
 
-        }return res.redirect('/login');
+
+        } return res.redirect('/login');
     } catch (error) {
         res.status(501).send(error);
     }
