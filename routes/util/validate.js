@@ -4,16 +4,24 @@ const joi = require('joi');
 const validateRegister = (data) => {
 
     const schema = joi.object({
-        username: joi.string()
-            .min(6)
+        first_name: joi.string()
+            .min(3)
+            .regex(/[a-zA-Z]+/)
+            .required(),
+        last_name: joi.string()
+            .min(3)
             .required(),
         password: joi.string()
             .min(8)
+            .regex(/[a-zA-Z]+/)
             .required(),
         email: joi.string()
             .min(6)
             .required()
-            .email()
+            .email(),
+        department_id: joi.number()
+            .min(1)
+            .required()
     });
     return schema.validate(data);
 }
@@ -23,10 +31,10 @@ const validateRegister = (data) => {
 const validateLogin = (data) => {
 
     const schema = joi.object({
-        username: joi.string()
+        email: joi.string()
             .min(6)
-            .uppercase()
-            .required(),
+            .required()
+            .email(),
         password: joi.string()
             .min(8)
             .required()
@@ -37,4 +45,4 @@ const validateLogin = (data) => {
 
 //Exports both methods
 module.exports.validateRegister = validateRegister;
-module.exports.validateLogin = validateLogin; 
+module.exports.validateLogin = validateLogin;

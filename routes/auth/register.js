@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require("../../startup/db.mysql");
-
+ 
 //Modified Path
 const path = require('path');
+const rateLimiter = require('../util/rate-limiter');
+const { validateRegister } = require('../util/validate');
 const frontendPath = path.resolve(__dirname, '../../frontend/');
 
 
@@ -14,7 +16,10 @@ router.get('/register', (req, res) => {
 });
 
 //POST
-router.post('/register', async (req, res) => {
+router.post('/register', rateLimiter, async (req, res) => {
+
+    const { error } = validateRegister(req.body);
+    if (error) return res.status(400).send(error.details[0].message); //400 = bad request
 
 
     try {
