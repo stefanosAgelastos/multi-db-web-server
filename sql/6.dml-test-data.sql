@@ -48,29 +48,27 @@ INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`pass
 INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Kenneth','Henson','kenneth11','kenhan','4');
 
 
-insert into students_subjects (semester, student_id, subject_id) values (SD21i, 1, 1);
-insert into students_subjects (semester, student_id, subject_id) values (SD21i, 2, 1);
-insert into students_subjects (semester, student_id, subject_id) values (SD21i, 3, 1);
-insert into students_subjects (semester, student_id, subject_id) values (SD21i, 1, 2);
-insert into students_subjects (semester, student_id, subject_id) values (SD21i, 2, 2);
-insert into students_subjects (semester, student_id, subject_id) values (SD21i, 3, 2);
-insert into students_subjects (semester, student_id, subject_id) values (SD21w, 4, 3);
-insert into students_subjects (semester, student_id, subject_id) values (SD21w, 5, 3);
-insert into students_subjects (semester, student_id, subject_id) values (SD21w, 6, 3);
-insert into students_subjects (semester, student_id, subject_id) values (SD21w, 4, 4);
-insert into students_subjects (semester, student_id, subject_id) values (SD21w, 5, 4);
-insert into students_subjects (semester, student_id, subject_id) values (SD21w, 6, 4);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 1, 1);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 2, 1);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 3, 1);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 1, 2);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 2, 2);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 3, 2);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21w', 4, 3);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21w', 5, 3);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21w', 6, 3);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21w', 4, 4);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21w', 5, 4);
+INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21w', 6, 4);
 
 
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21i, 1, 1);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21i, 2, 1);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21i, 3, 1);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21i, 1, 2);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21i, 2, 2);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21i, 3, 2);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21w, 4, 3);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21w, 5, 3);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21w, 5, 3);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21w, 4, 4);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21w, 5, 4);
-insert into teachers_subjects (semester, teacher_id, subject_id) values (SD21w, 5, 4);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21i', 1, 1);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21i', 2, 1);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21i', 3, 1);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21i', 1, 2);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21i', 2, 2);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21i', 3, 2);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21w', 4, 3);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21w', 5, 3);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21w', 4, 4);
+INSERT into `rollcall_db`.`teachers_subjects` (semester, teacher_id, subject_id) values ('SD21w', 5, 4);
