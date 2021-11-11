@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json())
 // load the mysql routers to our app
-require("./startup/routes.mysql")(app);
+require("./utilities/routes.mysql")(app);
 
 
 const port = 8080;

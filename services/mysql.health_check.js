@@ -1,8 +1,8 @@
-const db = require("../startup/db.mysql");
+const db = require("../utilities/db.mysql");
 
 exports.gethealthcheck = function (req, res) {
     console.log("Checking db connection health")
-    db.sequelize
+    return db.sequelize
         .authenticate()
         .then(function (err) {
             res.status(200).send('Connection has been established successfully.')
