@@ -29,6 +29,7 @@ router.post('/register', rateLimiter, async (req, res) => {
         const password = await bcrypt.hash(req.body.password, 10);
 
         const teacherAlreadyExists = await db.sequelize.models.teachers.findOne({ where: { email } })
+            .then()
             .catch((error) => {
                 console.log(error);
             });
@@ -43,8 +44,9 @@ router.post('/register', rateLimiter, async (req, res) => {
                 email,
                 password,
                 department_id,
-
-            }).then(newTeacher => res.send(newTeacher));
+            })
+            .then(newTeacher => res.send("New user created: "+newTeacher.email))
+            .catch();
 
 
         } return res.redirect('/login');
