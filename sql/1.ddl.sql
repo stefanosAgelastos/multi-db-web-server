@@ -43,12 +43,12 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers_subjects` (
 `subject_id` INT NOT NULL);
 
 -- -----------------------------------------------------
--- Table `rollcall_db`.`code`
+-- Table `rollcall_db`.`presenceKey`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rollcall_db`.`code` (
-`code_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
--- Can be changed when we deceide to generate number or url as a code  --
-`actual_code` varchar(255), 
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`presenceKey` (
+`presenceKey_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+-- Can be changed when we deceide to generate number or url as a presenceKey  --
+`actual_presenceKey` varchar(255), 
 `current_dateTime` DATETIME NOT NULL,
 `teacher_id` INT NOT NULL,
 `subject_id` INT NOT NULL);
@@ -101,8 +101,8 @@ ALTER TABLE `teachers_subjects` ADD PRIMARY KEY(`teacher_id`, `subject_id`);
 ALTER TABLE `teachers_subjects` ADD FOREIGN KEY(`subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
 ALTER TABLE `teachers_subjects` ADD FOREIGN KEY (`teacher_id`) REFERENCES `rollcall_db`.`teachers` (`teacher_id`);
 
-ALTER TABLE `rollcall_db`.`code` ADD PRIMARY KEY (`code_id`, `teacher_id`, `subject_id`);
-ALTER TABLE `rollcall_db`.`code` ADD FOREIGN KEY (`teacher_id` , `subject_id`) REFERENCES `rollcall_db`.`teachers_subjects` (`teacher_id` , `subject_id`);
+ALTER TABLE `rollcall_db`.`presenceKey` ADD PRIMARY KEY (`presenceKey_id`, `teacher_id`, `subject_id`);
+ALTER TABLE `rollcall_db`.`presenceKey` ADD FOREIGN KEY (`teacher_id` , `subject_id`) REFERENCES `rollcall_db`.`teachers_subjects` (`teacher_id` , `subject_id`);
 
 ALTER TABLE `rollcall_db`.`students` ADD PRIMARY KEY (`student_id`);
 ALTER TABLE `rollcall_db`.`students` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`programs` (`program_id`);
