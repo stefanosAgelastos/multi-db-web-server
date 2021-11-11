@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers` (
 -- Table `rollcall_db`.`teachers_subjects`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers_subjects` (
+`semester` VARCHAR(5) NOT NULL,
 `teacher_id` INT NOT NULL,
 `subject_id` INT NOT NULL);
 
@@ -57,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`presenceKey` (
 -- Table `rollcall_db`.`students_subjects`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_subjects` (
+`semester` VARCHAR(5) NOT NULL,
 `student_id` INT NOT NULL,
 `subject_id` INT NOT NULL);
 
@@ -75,10 +77,10 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students` (
 
 
 -- -----------------------------------------------------
--- Table `rollcall_db`.`students_status`
+-- Table `rollcall_db`.`students_presence`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_status` (
-`status_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
+CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_presence` (
+`presence_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
 `current_datetime` DATETIME NOT NULL,
 `subject_id` INT NOT NULL,
 `student_id` INT NOT NULL);
@@ -96,7 +98,7 @@ ALTER TABLE `rollcall_db`.`subjects` ADD FOREIGN KEY (`program_id`) REFERENCES `
 ALTER TABLE `rollcall_db`.`teachers` ADD PRIMARY KEY (`teacher_id`);
 ALTER TABLE `rollcall_db`.`teachers` ADD FOREIGN KEY (`department_id`) REFERENCES `rollcall_db`.`kea_departments` (`department_id`);
 
-ALTER TABLE `teachers_subjects` ADD PRIMARY KEY(`teacher_id`, `subject_id`);
+ALTER TABLE `teachers_subjects` ADD PRIMARY KEY(`teacher_id`, `subject_id`, `semester`);
 ALTER TABLE `teachers_subjects` ADD FOREIGN KEY(`subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
 ALTER TABLE `teachers_subjects` ADD FOREIGN KEY (`teacher_id`) REFERENCES `rollcall_db`.`teachers` (`teacher_id`);
 
@@ -106,9 +108,9 @@ ALTER TABLE `rollcall_db`.`presenceKey` ADD FOREIGN KEY (`teacher_id` , `subject
 ALTER TABLE `rollcall_db`.`students` ADD PRIMARY KEY (`student_id`);
 ALTER TABLE `rollcall_db`.`students` ADD FOREIGN KEY (`program_id`) REFERENCES `rollcall_db`.`programs` (`program_id`);
 
-ALTER TABLE `rollcall_db`.`students_subjects` ADD PRIMARY KEY (`student_id`, `subject_id`);
+ALTER TABLE `rollcall_db`.`students_subjects` ADD PRIMARY KEY (`student_id`, `subject_id`, `semester`);
 ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`student_id`) REFERENCES `rollcall_db`.`students` (`student_id`);
 ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
 
-ALTER TABLE `rollcall_db`.`students_status` ADD PRIMARY KEY (`status_id`, `subject_id`, `student_id`);
-ALTER TABLE `rollcall_db`.`students_status` ADD FOREIGN KEY (`subject_id` , `student_id`) REFERENCES `rollcall_db`.`students_subjects` (`subject_id` , `student_id`);
+ALTER TABLE `rollcall_db`.`students_presence` ADD PRIMARY KEY (`presence_id`, `subject_id`, `student_id`);
+ALTER TABLE `rollcall_db`.`students_presence` ADD FOREIGN KEY (`subject_id` , `student_id`) REFERENCES `rollcall_db`.`students_subjects` (`subject_id` , `student_id`);
