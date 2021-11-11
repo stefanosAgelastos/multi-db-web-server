@@ -1,0 +1,35 @@
+
+GET http://localhost:8080/all
+Content-Type: application/json
+
+###
+POST http://localhost:8080/createNew
+Content-Type: application/json
+
+{
+    "first_name": "John",
+    "last_name": "Doeh",
+    "email": "sage@test.com",
+    "password": "12345678",
+    "department_id": 2
+}
+
+###
+GET http://localhost:8080/findOne/6
+Content-Type: application/json
+
+###
+POST http://localhost:8080/updateTeacher/6
+Content-Type: application/json
+
+{
+    "first_name": "Michael",
+    "last_name": "Doeh",
+    "email": "sage@test.com",
+    "password": "12345678",
+    "department_id": "2"
+}
+
+###
+POST http://localhost:8080/delete/1
+Content-Type: application/json
