@@ -79,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_status` (
 `status_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
-`is_present` TINYINT(1) NOT NULL,
 `current_datetime` DATETIME NOT NULL,
 `subject_id` INT NOT NULL,
 `student_id` INT NOT NULL);
