@@ -1,6 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('teachers_subjects', {
+    semester: {
+      type: DataTypes.STRING(5),
+      allowNull: false,
+      primaryKey: true
+    },
     teacher_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -31,6 +36,7 @@ module.exports = function(sequelize, DataTypes) {
         fields: [
           { name: "teacher_id" },
           { name: "subject_id" },
+          { name: "semester" },
         ]
       },
       {

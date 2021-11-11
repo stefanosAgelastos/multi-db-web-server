@@ -34,7 +34,7 @@ router.post('/login', ratelimiter, async (req, res) => {
         } else {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
                 const jwtToken = jwt.sign({ email: teacher.email }, process.env.JWT_SECRET);
-                res.status(200).json({ message: "Logged in!", token: jwtToken });
+                res.status(200).set('Bearer', jwtToken).json({ message: "Logged in!"});
                 //return res.status(200).redirect('/overview');
 
             } else {

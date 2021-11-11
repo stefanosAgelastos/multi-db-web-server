@@ -1,41 +1,50 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('students_status', {
-    status_id: {
+  return sequelize.define('presence_key', {
+    presence_key_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    is_present: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
+    actual_presence_key: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     },
-    current_datetime: {
+    semester: {
+      type: DataTypes.STRING(5),
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'teachers_subjects',
+        key: 'semester'
+      }
+    },
+    current_dateTime: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    teacher_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'teachers_subjects',
+        key: 'teacher_id'
+      }
     },
     subject_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'students_subjects',
+        model: 'teachers_subjects',
         key: 'subject_id'
-      }
-    },
-    student_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'students_subjects',
-        key: 'student_id'
       }
     }
   }, {
     sequelize,
-    tableName: 'students_status',
+    tableName: 'presence_key',
     timestamps: false,
     indexes: [
       {
@@ -43,25 +52,27 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "status_id" },
+          { name: "presence_key_id" },
+          { name: "teacher_id" },
           { name: "subject_id" },
-          { name: "student_id" },
+          { name: "semester" },
         ]
       },
       {
-        name: "status_id",
+        name: "presence_key_id",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "status_id" },
+          { name: "presence_key_id" },
         ]
       },
       {
-        name: "subject_id",
+        name: "teacher_id",
         using: "BTREE",
         fields: [
+          { name: "teacher_id" },
           { name: "subject_id" },
-          { name: "student_id" },
+          { name: "semester" },
         ]
       },
     ]
