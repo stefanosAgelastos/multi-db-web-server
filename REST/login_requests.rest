@@ -1,9 +1,9 @@
 
-POST http://localhost:8080/login/
+POST http://localhost:8080/sql/login/
 Content-Type: application/json
 
 {
-    "email": "teste@test.com", 
+    "email": "test@test.com", 
     "password": "qweqweqwe"
 
 }
