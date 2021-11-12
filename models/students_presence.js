@@ -1,37 +1,46 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('code', {
-    code_id: {
+  return sequelize.define('students_presence', {
+    presence_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    current_dateTime: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    teacher_id: {
-      type: DataTypes.INTEGER,
+    semester: {
+      type: DataTypes.STRING(5),
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'teachers_subjects',
-        key: 'teacher_id'
+        model: 'students_subjects',
+        key: 'semester'
       }
+    },
+    current_datetime: {
+      type: DataTypes.DATE,
+      allowNull: false
     },
     subject_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'teachers_subjects',
+        model: 'students_subjects',
         key: 'subject_id'
+      }
+    },
+    student_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'students_subjects',
+        key: 'student_id'
       }
     }
   }, {
     sequelize,
-    tableName: 'code',
+    tableName: 'students_presence',
     timestamps: false,
     indexes: [
       {
@@ -39,25 +48,27 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "code_id" },
-          { name: "teacher_id" },
+          { name: "presence_id" },
           { name: "subject_id" },
+          { name: "student_id" },
+          { name: "semester" },
         ]
       },
       {
-        name: "code_id",
+        name: "presence_id",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "code_id" },
+          { name: "presence_id" },
         ]
       },
       {
-        name: "teacher_id",
+        name: "subject_id",
         using: "BTREE",
         fields: [
-          { name: "teacher_id" },
           { name: "subject_id" },
+          { name: "student_id" },
+          { name: "semester" },
         ]
       },
     ]
