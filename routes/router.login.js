@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 
 //Path to frontend folder. __dirname alone will only point to current path and not the correct one
 const path = require('path');
-const db = require('../../startup/db.mysql');
-const frontendPath = path.resolve(__dirname, '../../frontend/');
+const db = require('../connectors/db.mysql');
+const frontendPath = path.resolve(__dirname, '../frontend/');
 router.use(express.static(frontendPath));
 
 router.get('/login', (req, res) => {
@@ -34,7 +34,7 @@ router.post('/login', ratelimiter, async (req, res) => {
         } else {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
                 const jwtToken = jwt.sign({ email: teacher.email }, process.env.JWT_SECRET);
-                res.status(200).json({ message: "Logged in!", token: jwtToken });
+                res.status(200).set('Bearer', jwtToken).json({ message: "Logged in!"});
                 //return res.status(200).redirect('/overview');
 
             } else {

@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("../startup/db.mysql");
+const db = require("../connectors/db.mysql");
 const router = express.Router();
 
 router.post("/", function (req, res) {

@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const db = require("../../startup/db.mysql");
+const db = require("../connectors/db.mysql");
  
 //Modified Path
 const path = require('path');
 const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
-const frontendPath = path.resolve(__dirname, '../../frontend/');
+const frontendPath = path.resolve(__dirname, '../frontend/');
 
 
 //GET
@@ -29,6 +29,7 @@ router.post('/register', rateLimiter, async (req, res) => {
         const password = await bcrypt.hash(req.body.password, 10);
 
         const teacherAlreadyExists = await db.sequelize.models.teachers.findOne({ where: { email } })
+            .then()
             .catch((error) => {
                 console.log(error);
             });
@@ -43,8 +44,9 @@ router.post('/register', rateLimiter, async (req, res) => {
                 email,
                 password,
                 department_id,
-
-            }).then(newTeacher => res.send(newTeacher));
+            })
+            .then(newTeacher => res.send("New user created: "+newTeacher.email))
+            .catch();
 
 
         } return res.redirect('/login');

@@ -1,5 +1,5 @@
 
-POST http://localhost:8080/login/
+POST http://localhost:8080/sql/login/
 Content-Type: application/json
 
 {
