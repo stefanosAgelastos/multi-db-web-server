@@ -71,6 +71,7 @@ router.post("/updateTeacher/:id", (req, res) => {
 // Delete a Teacher by id 
 router.post("/delete/:id", (req, res) => {
 
+<<<<<<< HEAD:routes/teacherAPI.js
     try {
         db.sequelize.models.teachers.destroy({ where: { teacher_id: req.params.id } }).then(oneTeacher => res.send(oneTeacher))
     }
@@ -79,6 +80,19 @@ router.post("/delete/:id", (req, res) => {
 
     }
     return res.status(404).send('User not found')
+=======
+    db.sequelize.models.teachers.destroy({ where: { teacher_id: req.params.id } })
+        .then(rowDeleted => {
+            if (rowDeleted == 0) {
+                res.status(404).send("Teacher not found")
+            }
+            else {
+                res.send("Deleted teacher with ID: " + req.params.id)
+            }
+        })
+        .catch(err => res.status(500).send('Something went wrong'));
+
+>>>>>>> 948a69e2fc6eecb9519195c5445e568f409e24b2:routes/auth/teacherAPI.js
 })
 
 
