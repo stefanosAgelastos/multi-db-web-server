@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require('dotenv').config();
-const PORT = process.env.PORT || 9090;
+const PORT = process.env.NODE_LOCAL_PORT || 9090;
 
 //Allows the use of JSON (for POST requests)
 app.use(express.urlencoded({ extended: true }));
