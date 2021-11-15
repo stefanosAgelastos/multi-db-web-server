@@ -39,7 +39,10 @@ router.post("/presenceKey", function (req, res) {
                         custom_msg: "Teacher not found"
                     };
                 }
-                // else keep looking for teacher, with provided id AND associated to provided subject id
+                // else keep looking for teacher, this time:
+                // with provided id 
+                // AND associated subject id
+                // AND in the provided semester
                 return db.sequelize.models.teachers.findOne(
                     {
                         where: { teacher_id: providedTeacherId },
@@ -47,11 +50,7 @@ router.post("/presenceKey", function (req, res) {
                             model: db.sequelize.models.subjects,
                             as: 'subject_id_subjects_teachers_subjects',
                             where: { subject_id: providedSubjectId },
-                            // include: {
-                            //     model: db.sequelize.models.teachers_subjects,
-                            //     as: 'semester_presence_keys',
-                            //     where: { semester: providedSemester }
-                            // }
+                            through: { where: { semester: providedSemester } }
                         },
                     },
                     { transaction: t })
@@ -62,7 +61,7 @@ router.post("/presenceKey", function (req, res) {
                     // so throw custom error
                     throw {
                         custom_status: 404,
-                        custom_msg: "Teacher is not assigned to subject"
+                        custom_msg: "Teacher with id: " + providedTeacherId + ", is not assigned to subject with id " + providedSubjectId + ", for semester: " + providedSemester
                     };
                 }
 
