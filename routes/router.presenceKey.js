@@ -2,37 +2,95 @@ const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
 
-router.post("/", function (req, res) {
+const { Op } = require("sequelize");
 
-    // here we imagine that we already have the teachersId
-    // in the body of the request we expect to have the id of the subject
+router.post("/presenceKey", function (req, res) {
+
+    // here we imagine that we already have the 
+    // * teachers_id
+    // * subject_id
     // we expect to return a token
 
-    console.log(req.body)
+    const providedTeacherId = req.body.teacher_id;
+    const providedSubjectId = req.body.subject_id;
+    const providedSemester = req.body.semester;
 
-    res.send();
+    console.log("Teacher id is: " + providedTeacherId)
+    console.log("Subject id is: " + providedSubjectId)
+    console.log("Semester is: " + providedSemester)
 
-    return sequelize.transaction(
+    // starting transaction
+    return db.sequelize.transaction(
         {
-            autocommit: false,
-            isolationLevel: 'REPEATABLE_READ',
+            autocommit: false
         }
     ).then(function (t) {
-        return User.create(
-            {
-                firstName: 'Homer',
-                lastName: 'Simpson'
-            },
+        // transaction has started
+        // looking for teacher with provided id
+        return db.sequelize.models.teachers.findOne(
+            { where: { teacher_id: providedTeacherId } },
             { transaction: t })
-            .then(function (user) {
-                return user.addSibling({
-                    firstName: 'Lisa',
-                    lastName: 'Simpson'
-                }, { transaction: t });
-            }).then(function () {
-                return t.commit();
-            }).catch(function (err) {
-                return t.rollback();
+            .then(foundTeacher => {
+                // if null, there was no match
+                if (!foundTeacher) {
+                    // so throw custom error
+                    throw {
+                        custom_status: 404,
+                        custom_msg: "Teacher not found"
+                    };
+                }
+                // else keep looking for teacher, with provided id AND associated to provided subject id
+                return db.sequelize.models.teachers.findOne(
+                    {
+                        where: { teacher_id: providedTeacherId },
+                        include: {
+                            model: db.sequelize.models.subjects,
+                            as: 'subject_id_subjects_teachers_subjects',
+                            where: { subject_id: providedSubjectId },
+                            // include: {
+                            //     model: db.sequelize.models.teachers_subjects,
+                            //     as: 'semester_presence_keys',
+                            //     where: { semester: providedSemester }
+                            // }
+                        },
+                    },
+                    { transaction: t })
+            })
+            .then(foundTeacherAndSubject => {
+                // if null, there was no match
+                if (!foundTeacherAndSubject) {
+                    // so throw custom error
+                    throw {
+                        custom_status: 404,
+                        custom_msg: "Teacher is not assigned to subject"
+                    };
+                }
+
+                console.log(foundTeacherAndSubject.toJSON())
+
+                // else start saving a new presence key
+                return db.sequelize.models.presence_key.create({
+                    teacher_id: foundTeacherAndSubject.teacher_id,
+                    subject_id: foundTeacherAndSubject.subject_id_subjects_teachers_subjects[0].subject_id,
+                    semester: foundTeacherAndSubject.subject_id_subjects_teachers_subjects[0].teachers_subjects.semester,
+                    actual_presence_key: 'blabla',
+                    current_dateTime: db.sequelize.literal('CURRENT_TIMESTAMP')
+                });
+            })
+            .then(() => {
+                return t.commit()
+            })
+            .then(() => res.send())
+            .catch(function (err) {
+                t.rollback();
+                let { custom_status, custom_msg } = err
+                if (custom_status, custom_msg) {
+                    res.status(404).send(custom_msg);
+                    return true;
+                }
+                console.log(err)
+                res.status(500).send('Something went wrong')
+                return true
             });
     });
 })
