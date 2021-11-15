@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const db = require("../../startup/db.mysql");
+const db = require("../connectors/db.mysql");
  
 //Modified Path
 const path = require('path');
 const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
-const frontendPath = path.resolve(__dirname, '../../frontend/');
+const frontendPath = path.resolve(__dirname, '../frontend/');
 
 
 //GET

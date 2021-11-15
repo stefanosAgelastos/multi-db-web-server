@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 require('dotenv').config();
 const PORT = process.env.PORT || 9090;
 
@@ -10,9 +9,8 @@ app.use(express.json());
 
 
 // load the mysql routers to our app
-require("./startup/routes.mysql")(app);
-// routes for auth (login, register, etc.)
-require('./routes/auth/auth-routes.js')(app);
+require("./routes/routes.mysql")(app);
+
 
 const server = app.listen(PORT, (error) => {
     if(error){

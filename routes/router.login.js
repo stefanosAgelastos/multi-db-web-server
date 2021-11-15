@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 
 //Path to frontend folder. __dirname alone will only point to current path and not the correct one
 const path = require('path');
-const db = require('../../startup/db.mysql');
-const frontendPath = path.resolve(__dirname, '../../frontend/');
+const db = require('../connectors/db.mysql');
+const frontendPath = path.resolve(__dirname, '../frontend/');
 router.use(express.static(frontendPath));
 
 router.get('/login', (req, res) => {
