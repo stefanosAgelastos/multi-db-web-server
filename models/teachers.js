@@ -30,6 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING(60),
       allowNull: false,
+      unique: "email",
       validate: {
       isEmail: true,
       //msg: 'Please enter a valid email address'
