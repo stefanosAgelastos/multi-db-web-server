@@ -4,9 +4,11 @@ const router = express.Router();
 
 router.post("/presenceKey", function (req, res) {
 
-    // here we imagine that we already have the 
+    // we receive from request body:
     // * teachers_id
     // * subject_id
+    // * semester
+    // * passphrase to use as presenceKey
     // we expect to return a token
 
     const providedTeacherId = req.body.teacher_id;
