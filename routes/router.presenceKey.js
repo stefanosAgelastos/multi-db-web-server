@@ -2,6 +2,38 @@ const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
 
+router.get('/presenceKey/mySubjects', function (req, res) {
+
+    // we receive from request body:
+    // * teachers_id
+    // we expect to return
+    // * a list of subjects and semesters
+
+    const providedTeacherId = req.body.teacher_id;
+
+    db.sequelize.models.teachers_subjects.findAll(
+        {
+            attributes: ['semester'],
+            where: { teacher_id: providedTeacherId },
+            include: {
+                model: db.sequelize.models.subjects,
+                as: 'subject',
+                attributes: ['subject_name'],
+            },
+        }
+    ).then((foundTeacherAndSubjects) => {
+        console.log(foundTeacherAndSubjects.forEach(element => console.log(element.toJSON())));
+        const list = [];
+        foundTeacherAndSubjects.forEach(element => list.push([element.toJSON().semester, element.toJSON().subject.subject_name]))
+        res.send(list);
+    }
+    ).catch(err => {
+        console.log(err);
+        res.status(500).send("Something went wrong");
+    })
+
+})
+
 router.post("/presenceKey", function (req, res) {
 
     // we receive from request body:
@@ -82,7 +114,7 @@ router.post("/presenceKey", function (req, res) {
             .then(() => {
                 return t.commit()
             })
-            .then(() => res.send())
+            .then(() => res.send(providedPresenceKey))
             .catch(function (err) {
                 t.rollback();
                 let { custom_status, custom_msg } = err

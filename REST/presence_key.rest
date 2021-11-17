@@ -5,5 +5,14 @@ Content-Type: application/json
     "teacher_id": "1",
     "subject_id": "1",
     "semester": "SD21i",
-    "passphrase": "blue monkey"
+    "passphrase": "blue monkeys"
 }
+
+###
+GET http://localhost:8080/sql/presenceKey/mySubjects
+Content-Type: application/json
+
+{
+    "teacher_id": "1"
+}
+
