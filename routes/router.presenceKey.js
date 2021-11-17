@@ -2,8 +2,6 @@ const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
 
-const { Op } = require("sequelize");
-
 router.post("/presenceKey", function (req, res) {
 
     // here we imagine that we already have the 
@@ -14,10 +12,12 @@ router.post("/presenceKey", function (req, res) {
     const providedTeacherId = req.body.teacher_id;
     const providedSubjectId = req.body.subject_id;
     const providedSemester = req.body.semester;
+    const providedPresenceKey = req.body.passphrase;
 
     console.log("Teacher id is: " + providedTeacherId)
     console.log("Subject id is: " + providedSubjectId)
     console.log("Semester is: " + providedSemester)
+    console.log("Passphrase is: " + providedPresenceKey)
 
     // starting transaction
     return db.sequelize.transaction(
@@ -65,6 +65,7 @@ router.post("/presenceKey", function (req, res) {
                     };
                 }
 
+                // Print the records
                 console.log(foundTeacherAndSubject.toJSON())
 
                 // else start saving a new presence key
@@ -72,7 +73,7 @@ router.post("/presenceKey", function (req, res) {
                     teacher_id: foundTeacherAndSubject.teacher_id,
                     subject_id: foundTeacherAndSubject.subject_id_subjects_teachers_subjects[0].subject_id,
                     semester: foundTeacherAndSubject.subject_id_subjects_teachers_subjects[0].teachers_subjects.semester,
-                    actual_presence_key: 'blabla',
+                    actual_presence_key: providedPresenceKey,
                     current_dateTime: db.sequelize.literal('CURRENT_TIMESTAMP')
                 });
             })
@@ -85,13 +86,16 @@ router.post("/presenceKey", function (req, res) {
                 let { custom_status, custom_msg } = err
                 if (custom_status, custom_msg) {
                     res.status(404).send(custom_msg);
-                    return true;
+                    throw err;
                 }
-                console.log(err)
+                if (err.name === 'SequelizeUniqueConstraintError') {
+                    res.status(409).send('Passphrase taken, please choose a different one')
+                    throw err;
+                }
                 res.status(500).send('Something went wrong')
-                return true
+                throw err;
             });
-    });
+    }).catch(err => err);
 })
 
 module.exports = router;

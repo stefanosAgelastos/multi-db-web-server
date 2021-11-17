@@ -4,5 +4,6 @@ Content-Type: application/json
 {
     "teacher_id": "1",
     "subject_id": "1",
-    "semester": "SD21i"
+    "semester": "SD21i",
+    "passphrase": "blue monkey"
 }
