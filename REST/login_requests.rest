@@ -3,7 +3,7 @@ POST http://localhost:8080/sql/login/
 Content-Type: application/json
 
 {
-    "email": "test@test.com", 
+    "email": "teste@test.com", 
     "password": "qweqweqwe"
 
 }
