@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`teachers_subjects` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`presence_key` (
 `presence_key_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
--- Can be changed when we deceide to generate number or url as a presence_key  --
+-- Can be changed when we decide to generate number or url as a presence_key  --
 `actual_presence_key` varchar(255) UNIQUE NOT NULL,
 `semester` VARCHAR(5) NOT NULL,
 `current_dateTime` DATETIME NOT NULL,
