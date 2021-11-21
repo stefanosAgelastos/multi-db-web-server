@@ -18,13 +18,13 @@ router.get('/presenceKey/mySubjects', function (req, res) {
             include: {
                 model: db.sequelize.models.subjects,
                 as: 'subject',
-                attributes: ['subject_name'],
+                attributes: ['subject_name','subject_id'],
             },
         }
     ).then((foundTeacherAndSubjects) => {
         console.log(foundTeacherAndSubjects.forEach(element => console.log(element.toJSON())));
         const list = [];
-        foundTeacherAndSubjects.forEach(element => list.push([element.toJSON().semester, element.toJSON().subject.subject_name]))
+        foundTeacherAndSubjects.forEach(element => list.push([element.semester, element.subject.subject_name, element.subject.subject_id]))
         res.send(list);
     }
     ).catch(err => {
