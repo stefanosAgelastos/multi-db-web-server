@@ -29,7 +29,6 @@ services:
     volumes:
       - sqldb:/var/lib/mysql
       # this mounts the repo's ./sql directory to the container's init directory
-      # the scripts will run only when the volume is removed with docker-compose down -v
       # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
       - ./sql/:/docker-entrypoint-initdb.d/
   mongo:
