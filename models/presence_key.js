@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     actual_presence_key: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(25),
       allowNull: false,
       unique: "actual_presence_key"
     },
