@@ -10,51 +10,51 @@ module.exports = function(sequelize, DataTypes) {
     first_name: {
       type: DataTypes.STRING(20),
       allowNull: false,
-     /* validate: {
+      validate: {
         notNull: {
           msg: 'Please enter a first name'
         },
         is: ["^[a-z]+$",'i'], // will only allow letters
-      } */
+      } 
     }, 
     last_name: {
       type: DataTypes.STRING(20),
       allowNull: false,
-    /*  validate: {
+      validate: {
         notNull: {
-      //    msg: 'Please enter a last name'
+          msg: 'Please enter a last name'
         },
         is: ["^[a-z]+$",'i'], // will only allow letters
-      } */
+      } 
     },
     email: {
       type: DataTypes.STRING(60),
       allowNull: false,
       validate: {
       isEmail: true,
-      //msg: 'Please enter a valid email address'
+        msg: 'Please enter a valid email address'
     }
     },
     password: {
       type: DataTypes.STRING(120),
       allowNull: false,
-    /*  validate: 
-      {
-       // notNull: {
-        //  msg: 'You must enter a password'
-       // },
-        len:{
-          args:[5,8]
-         // msg:'Please enter a password with at least 5 chars long but no more than 8 chars long'
+      validate:{
+         notNull: {
+           msg: 'You must enter a password'
         },
-        startsWithUpper: function (first_name,last_name){
+        len:{
+          args:[5,8],
+          msg:'Please enter a password with at least 5 chars long but no more than 8 chars long'
+        },
+        
+       /* startsWithUpper: function (first_name,last_name){
           var first = string.charAt(0);
           var startsWithUpper = first === first.toUpperCase();
           if(!startsWithUpper){
             throw new Error('First letter must start with a uppercase letter')
-          } else {}
-        }
-      } */
+          } else {} 
+        } */
+     }  
     },
     department_id: {
       type: DataTypes.INTEGER,

@@ -21,6 +21,10 @@ router.post("/createNew", (req, res) => {
     }
     catch (error) {
         res.status(501).send(error);
+    //    console.log('err.name', err.name);
+    //    console.log('err.message', err.message);
+    //    console.log('err.errors', err.errors);
+     //   err.errors.map(e => console.log(e.message))
     }
 
 })
@@ -36,7 +40,17 @@ router.get("/all", (req, res) => {
 // Find a single Teacher with an id
 
 router.get("/findOne/:id", (req, res) => {
-    db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } }).then(oneTeacher => res.send(oneTeacher));
+    db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } })
+        .then(oneTeacher => {
+            if (teacherfound === 0) {
+                res.status(404).send("Teacher not found")
+            }
+            else {
+                res.send("Teacher found with ID: " + req.params.id + (teacherfound))
+            }
+        })
+        .catch(err => res.status(500).send('Something went wrong'));
+    //res.send(oneTeacher));
 
 });
 
@@ -71,16 +85,6 @@ router.post("/updateTeacher/:id", (req, res) => {
 // Delete a Teacher by id 
 router.post("/delete/:id", (req, res) => {
 
-<<<<<<< HEAD:routes/teacherAPI.js
-    try {
-        db.sequelize.models.teachers.destroy({ where: { teacher_id: req.params.id } }).then(oneTeacher => res.send(oneTeacher))
-    }
-    catch (error) {
-        console.log(error)
-
-    }
-    return res.status(404).send('User not found')
-=======
     db.sequelize.models.teachers.destroy({ where: { teacher_id: req.params.id } })
         .then(rowDeleted => {
             if (rowDeleted == 0) {
@@ -92,7 +96,6 @@ router.post("/delete/:id", (req, res) => {
         })
         .catch(err => res.status(500).send('Something went wrong'));
 
->>>>>>> 948a69e2fc6eecb9519195c5445e568f409e24b2:routes/auth/teacherAPI.js
 })
 
 

@@ -8,7 +8,7 @@ const db = require("../connectors/db.mysql");
 const path = require('path');
 const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
-const frontendPath = path.resolve(__dirname, '../frontend/');
+const frontendPath = path.resolve(__dirname, '../frontend');
 
 
 //GET
