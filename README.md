@@ -23,6 +23,14 @@ Look for more documentation at the `docker-compose.yml`.
 docker-compose up
 ```
 
+## How to start up MySQL Server + application (to-be-updated)
+
+#### Prerequisites: 
+- Run 'npm uninstall bcrypt' (only if running windows and already built this on your pc. Bcrypt dependencies can not work with other OS than the one they are built in)
+
+#### The Build:
+- Run 'docker-compose up' (this will the MySQL server as well as the App)
+
 ### mysql
 
 The first time you run this command it will spin up an empty mysql DB and then it will run all the scripts in `./sql`
