@@ -1,11 +1,11 @@
 FROM node:16
 
-WORKDIR /rollcall_app
+WORKDIR /
 
-COPY package*.json .
+COPY package*.json ./
 
-RUN npm install && npm generate-models
+RUN npm install && npm run generate-models
 
 COPY . .
 
-CMD [ "npm run deploy" ]
+CMD [ "node", "index.js" ]
