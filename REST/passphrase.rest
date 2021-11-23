@@ -6,7 +6,7 @@ Content-Type: application/json
     "teacher_id": "1",
     "subject_id": "1",
     "semester": "SD21i",
-    "passphrase": "blue monkeys"
+    "passphrase": "blue little monkeys"
 }
 
 ###

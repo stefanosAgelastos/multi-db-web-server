@@ -3,6 +3,6 @@ POST http://localhost:8080/sql/checkin
 Content-Type: application/json
 
 {
-    "student_id": "1",
-    "passphrase": "blue monkeys"
+    "student_id": "3",
+    "passphrase": "blue little monkeys"
 }
