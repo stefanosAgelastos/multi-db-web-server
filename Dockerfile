@@ -2,10 +2,14 @@ FROM node:16
 
 WORKDIR /
 
-COPY package*.json ./
+COPY package.json .
 
-RUN npm install && npm run generate-models
+RUN npm install && \
+npm rebuild bcrypt --build-from-source && \
+npm run generate-models
 
 COPY . .
+
+# VOLUME [ "/app/node_modules" ]
 
 CMD [ "node", "index.js" ]

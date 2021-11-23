@@ -18,24 +18,28 @@ services:
       # the scripts will run only when the volume is removed with docker-compose down -v
       # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
       - ./sql/:/docker-entrypoint-initdb.d/
+
+  app: 
+    depends_on: 
+      - mysql_container
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports: 
+      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
+    environment: 
+        - DB_HOST=mysql_container
+        - DB_USER=${DB_USER}
+        - DB_SECRET=${DB_SECRET}
+        - DB_NAME=${DB_NAME}
+        - DB_PORT=${DB_PORT}
+    volumes:
+    - .:/usr/src/app
+    - /usr/src/app/node_modules
+
 volumes:
   sqldb:
-
-
-  # app: 
-  #   depends_on: 
-  #     - mysql_container
-  #   build: ./
-  #   restart: unless-stopped
-  #   env_file: ./.env
-  #   ports: 
-  #     - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
-  #   environment: 
-  #       - DB_HOST=mysql_container
-  #       - DB_USER=${DB_USER}
-  #       - DB_SECRET=${DB_SECRET}
-  #       - DB_NAME=${DB_NAME}
-  #       - DB_PORT=${DB_PORT}
+  app:
 
   # mongo:
   #   image: mongo
