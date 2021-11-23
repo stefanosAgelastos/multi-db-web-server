@@ -2,7 +2,7 @@ const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
 
-router.get('/presenceKey/mySubjects', function (req, res) {
+router.get('/passphrase/mySubjects', function (req, res) {
 
     // we receive from request body:
     // * teachers_id
@@ -34,7 +34,7 @@ router.get('/presenceKey/mySubjects', function (req, res) {
 
 })
 
-router.post("/presenceKey", function (req, res) {
+router.post("/passphrase", function (req, res) {
 
     // we receive from request body:
     // * teachers_id

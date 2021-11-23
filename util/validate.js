@@ -42,7 +42,20 @@ const validateLogin = (data) => {
     return schema.validate(data);
 }
 
+//Login validation
+const validateCheckIn = (data) => {
+
+    const schema = joi.object({
+        student_id: joi.number()
+            .required(),
+            passphrase: joi.string()
+            .required()
+    }).unknown(true);
+    return schema.validate(data);
+}
+
 
 //Exports both methods
 module.exports.validateRegister = validateRegister;
 module.exports.validateLogin = validateLogin;
+module.exports.validateCheckIn = validateCheckIn;

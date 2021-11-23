@@ -81,11 +81,11 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students` (
 -- Table `rollcall_db`.`students_presence`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_presence` (
-`presence_id` INT NOT NULL AUTO_INCREMENT UNIQUE,
-`semester` VARCHAR(5) NOT NULL,
-`current_datetime` DATETIME NOT NULL,
+`presence_key_id` INT NOT NULL,
 `subject_id` INT NOT NULL,
-`student_id` INT NOT NULL);
+`student_id` INT NOT NULL,
+`semester` VARCHAR(5) NOT NULL,
+`current_datetime` DATETIME NOT NULL);
 
 
 
@@ -114,5 +114,6 @@ ALTER TABLE `rollcall_db`.`students_subjects` ADD PRIMARY KEY (`student_id`, `su
 ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`student_id`) REFERENCES `rollcall_db`.`students` (`student_id`);
 ALTER TABLE `rollcall_db`.`students_subjects` ADD FOREIGN KEY (`subject_id`) REFERENCES `rollcall_db`.`subjects` (`subject_id`);
 
-ALTER TABLE `rollcall_db`.`students_presence` ADD PRIMARY KEY (`presence_id`, `subject_id`, `student_id`, `semester`);
+ALTER TABLE `rollcall_db`.`students_presence` ADD PRIMARY KEY (`presence_key_id`, `subject_id`, `student_id`);
+ALTER TABLE `rollcall_db`.`students_presence` ADD FOREIGN KEY (`presence_key_id`) REFERENCES `rollcall_db`.`presence_key` (`presence_key_id`);
 ALTER TABLE `rollcall_db`.`students_presence` ADD FOREIGN KEY (`subject_id` , `student_id`, `semester`) REFERENCES `rollcall_db`.`students_subjects` (`subject_id` , `student_id`, `semester`);

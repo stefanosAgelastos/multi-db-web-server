@@ -46,6 +46,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'presence_key',
+    hasTrigger: true,
     timestamps: false,
     indexes: [
       {
