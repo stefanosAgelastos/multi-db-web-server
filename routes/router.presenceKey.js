@@ -18,13 +18,13 @@ router.get('/presenceKey/mySubjects', function (req, res) {
             include: {
                 model: db.sequelize.models.subjects,
                 as: 'subject',
-                attributes: ['subject_name'],
+                attributes: ['subject_name','subject_id'],
             },
         }
     ).then((foundTeacherAndSubjects) => {
         console.log(foundTeacherAndSubjects.forEach(element => console.log(element.toJSON())));
         const list = [];
-        foundTeacherAndSubjects.forEach(element => list.push([element.toJSON().semester, element.toJSON().subject.subject_name]))
+        foundTeacherAndSubjects.forEach(element => list.push([element.semester, element.subject.subject_name, element.subject.subject_id]))
         res.send(list);
     }
     ).catch(err => {
@@ -77,6 +77,7 @@ router.post("/presenceKey", function (req, res) {
                 // with provided id 
                 // AND associated subject id
                 // AND in the provided semester
+                console.log('Found teacher: ', foundTeacher.toJSON());
                 return db.sequelize.models.teachers.findOne(
                     {
                         where: { teacher_id: providedTeacherId },
@@ -99,10 +100,8 @@ router.post("/presenceKey", function (req, res) {
                     };
                 }
 
-                // Print the records
-                console.log(foundTeacherAndSubject.toJSON())
-
                 // else start saving a new presence key
+                console.log('Found teacher-subject-semester association: ', foundTeacherAndSubject.toJSON())
                 return db.sequelize.models.presence_key.create({
                     teacher_id: foundTeacherAndSubject.teacher_id,
                     subject_id: foundTeacherAndSubject.subject_id_subjects_teachers_subjects[0].subject_id,
@@ -129,7 +128,8 @@ router.post("/presenceKey", function (req, res) {
                 res.status(500).send('Something went wrong')
                 throw err;
             });
-    }).catch(err => err);
+    }).catch(err => console.log(err));
+
 })
 
 module.exports = router;
