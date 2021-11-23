@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8080/sql/presenceKey
+POST http://localhost:8080/sql/passphrase
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/sql/presenceKey/mySubjects
+GET http://localhost:8080/sql/passphrase/mySubjects
 Content-Type: application/json
 
 {
