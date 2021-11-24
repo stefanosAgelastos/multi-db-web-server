@@ -3,7 +3,12 @@ POST http://localhost:8080/sql/login/
 Content-Type: application/json
 
 {
-    "email": "test@test.com", 
+    "email": "teste@test.com", 
     "password": "qweqweqwe"
 
 }
+
+###
+
+GET http://localhost:8080/sql/auth/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQHRlc3QuY29tIiwiaWQiOjYsImlhdCI6MTYzNzc3NDgzM30.rcLtRIh9K4zscB8Sw38fsk5buNVuFYfRWxjY7soxHyg
