@@ -37,8 +37,7 @@ services:
   #   - .:/usr/src/app
   #   - /usr/src/app/node_modules
 
-volumes:
-  sqldb:
+
   # app:
 
   # mongo:
@@ -52,21 +51,24 @@ volumes:
   #     - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   #  app_container:
 
-  # neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
-  #   image: neo4j:3.5
-  #   restart: unless-stopped
-  #   ports:
-  #     - 7474:7474
-  #     - 7687:7687
-  #   # volumes:
-  #   #   - ./conf:/conf
-  #   #   - ./data:/data
-  #   #   - ./import:/import
-  #   #   - ./logs:/logs
-  #   #   - ./plugins:/plugins
-  #   environment:
-  #     # Raise memory limits
-  #     - NEO4J_dbms_memory_pagecache_size=1G
-  #     - NEO4J_dbms.memory.heap.initial_size=1G
-  #     - NEO4J_dbms_memory_heap_max__size=1G
-  #     - NEO4J_AUTH=neo4j/password
+  neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
+    image: neo4j:3.5
+    restart: unless-stopped
+    ports:
+      - 7474:7474
+      - 7687:7687
+    # volumes:
+    #   - ./conf:/conf
+    #   - ./data:/data
+    #   - ./import:/import
+    #   - ./logs:/logs
+    #   - ./plugins:/plugins
+    environment:
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms.memory.heap.initial_size=1G
+      - NEO4J_dbms_memory_heap_max__size=1G
+      - NEO4J_AUTH=neo4j/password
+
+volumes:
+  sqldb:
