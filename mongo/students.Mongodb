@@ -1,0 +1,30 @@
+
+//const database = 'rollcall_mongodb';
+//const collection = 'Students';
+
+
+use('rollcall_mongodb');
+
+ //Create a new collection.
+/*db.students.insertOne(
+ [
+    {
+      'first_name': 'Charlotte',
+      'last_name': 'Henson',
+      'user_name': 'charchar',
+      'password': '6666',
+      'Semester': 'SD1i',
+          'Subjects':{
+            'Subjects_name':[{
+               'Subject_1':'Databases for Developers',
+                'Subject_2':'Testing',
+                'Subject_3':'Development of Large System'
+                 }
+      ]
+    }
+    }
+ ]
+) */
+
+db.students.findOne( { 'Semester': 'SD1i'} )
+db.students.find( { 'Semester': 'SD1i'} )
