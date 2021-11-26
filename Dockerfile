@@ -4,12 +4,8 @@ WORKDIR /
 
 COPY package.json .
 
-RUN npm install && \
-npm rebuild bcrypt --build-from-source && \
-npm run generate-models
+RUN npm install
 
 COPY . .
-
-# VOLUME [ "/app/node_modules" ]
 
 CMD [ "node", "index.js" ]
