@@ -13,7 +13,7 @@ const validateRegister = (data) => {
             .required(),
         password: joi.string()
             .min(8)
-            .regex(/[a-zA-Z]+/)
+            .regex(/[a-zA-Z0-9]+/)
             .required(),
         email: joi.string()
             .min(6)
@@ -53,7 +53,6 @@ const validateCheckIn = (data) => {
     }).unknown(true);
     return schema.validate(data);
 }
-
 
 //Exports both methods
 module.exports.validateRegister = validateRegister;

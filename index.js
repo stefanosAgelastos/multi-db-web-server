@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
-
 require('dotenv').config();
-const PORT = process.env.PORT || 9090;
+const PORT = process.env.NODE_LOCAL_PORT || 9090;
 
 //Allows the use of JSON (for POST requests)
 app.use(express.urlencoded({ extended: true }));
@@ -11,6 +10,7 @@ app.use(express.json());
 
 // load the mysql routers to our app
 require("./routes/routes.mysql")(app);
+
 
 const server = app.listen(PORT, (error) => {
     if(error){

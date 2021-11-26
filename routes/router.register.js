@@ -8,7 +8,8 @@ const db = require("../connectors/db.mysql");
 const path = require('path');
 const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
-const frontendPath = path.resolve(__dirname, '../frontend');
+const frontendPath = path.resolve(__dirname, '../frontend/');
+
 
 
 //GET
@@ -45,14 +46,19 @@ router.post('/register', rateLimiter, async (req, res) => {
                 password,
                 department_id,
             })
-            .then(newTeacher => res.send("New user created: "+newTeacher.email))
+            .then(res.redirect('/sql/login'))
             .catch();
 
-
-        } return res.redirect('/login');
-    } catch (error) {
-        res.status(501).send(error);
-    }
+        }
+    } 
+    catch (err) {
+        if (err.name === 'SequelizeForeignKeyConstraintError') {
+            res.status(409).json( 'Invalid department' );
+            throw err;
+        } else {
+            return res.status(405).json( 'Registration failed' );
+        }
+}
 });
 
 module.exports = router;
