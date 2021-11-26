@@ -11,6 +11,7 @@ const { validateRegister } = require('../util/validate');
 const frontendPath = path.resolve(__dirname, '../frontend/');
 
 
+
 //GET
 router.get('/register', (req, res) => {
     return res.sendFile(frontendPath + '/register/register.html');

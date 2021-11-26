@@ -1,24 +1,26 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('students_presence', {
-    presence_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
+    current_datetime: {
+      type: DataTypes.DATE,
+      allowNull: false
     },
     semester: {
       type: DataTypes.STRING(5),
       allowNull: false,
-      primaryKey: true,
       references: {
         model: 'students_subjects',
         key: 'semester'
       }
     },
-    current_datetime: {
-      type: DataTypes.DATE,
-      allowNull: false
+    presence_key_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'presence_key',
+        key: 'presence_key_id'
+      }
     },
     subject_id: {
       type: DataTypes.INTEGER,
@@ -48,18 +50,9 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "presence_id" },
+          { name: "presence_key_id" },
           { name: "subject_id" },
           { name: "student_id" },
-          { name: "semester" },
-        ]
-      },
-      {
-        name: "presence_id",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "presence_id" },
         ]
       },
       {

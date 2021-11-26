@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const db = require('../connectors/db.mysql');
 const frontendPath = path.resolve(__dirname, '../frontend/');
+
 router.use(express.static(frontendPath));
 
 router.get('/login', (req, res) => {
@@ -30,6 +31,7 @@ router.post('/login', ratelimiter, async (req, res) => {
 
         if (teacher == null) {
             res.json({ message: "Teacher doesn't exist" });
+
 
             // to be used later when web-app is functional
             //res.status(404).redirect('/login');
@@ -56,7 +58,6 @@ router.post('/login', ratelimiter, async (req, res) => {
 });
 
 
-
 function authenticateToken(req, res, next){
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -73,6 +74,7 @@ function authenticateToken(req, res, next){
 router.get('/auth', authenticateToken, (req, res) => {
     return res.json({ message: "can you see me?" });
 });
+
 
 module.exports = router;
 
