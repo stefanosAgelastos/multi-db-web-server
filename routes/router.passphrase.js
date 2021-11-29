@@ -108,7 +108,8 @@ router.post("/passphrase", function (req, res) {
                     semester: foundTeacherAndSubject.subject_id_subjects_teachers_subjects[0].teachers_subjects.semester,
                     actual_presence_key: providedPresenceKey,
                     current_dateTime: db.sequelize.literal('CURRENT_TIMESTAMP')
-                });
+                },
+                { transaction: t });
             })
             .then(() => {
                 return t.commit()
