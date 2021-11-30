@@ -12,11 +12,5 @@ You can edit the diagrams by clicking on the link, but keep in mind that the edi
 
 # System Schema for report
 
-![Diagram](report_system_schema.svg)
+![Diagram](./overview.svg)
 <a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Freport_system_schema.svg" target="_blank">Edit in diagrams.net</a>
-
-# Use case Diagram
-
-![Diagram](use_case_diagram.svg)
-<a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Fuse_case_diagram.svg" target="_blank">Edit in diagrams.net</a>
-
