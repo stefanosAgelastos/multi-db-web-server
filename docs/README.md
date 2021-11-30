@@ -12,5 +12,5 @@ You can edit the diagrams by clicking on the link, but keep in mind that the edi
 
 # System Schema for report
 
-![Diagram](./overview.svg)
+![Diagram](./report_system_schema.svg)
 <a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Fdocs%2Freport_system_schema.svg" target="_blank">Edit in diagrams.net</a>
