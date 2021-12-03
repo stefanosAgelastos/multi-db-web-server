@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 
 require('dotenv').config();
+const mongoose = require('mongoose');
+
 const PORT = process.env.PORT || 9090;
 
 //Allows the use of JSON (for POST requests)
@@ -20,4 +22,18 @@ const server = app.listen(PORT, (error) => {
     }
 });
 
+
+
+mongoose.connect(
+    process.env.MDB_CONNECTION,{useNewUrlparser:true})
+    const con = mongoose.connection
+    
+    con.on('open', function (){
+        console.log('connected to mongo database !') 
+        
+    });
+
+
+
+module.exports = mongoose
 module.exports = server;
