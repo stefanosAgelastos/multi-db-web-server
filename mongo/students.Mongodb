@@ -57,9 +57,12 @@ db.students.find( { 'Semester': 'SD1i'} )
       "password": "6666",
       "Semester": "SD1i",
           "Subjects":{
-            "Subjects_name":[{
-               "Subject_1":"Databases for Developers",
-                "Subject_2":"Testing",
+            "Subjects_name":[
+              {
+               "Subject_1":"Databases for Developers",}
+               {
+                "Subject_2":"Testing",}
+                {
                 "Subject_3":"Development of Large System"
                  }
       ]
