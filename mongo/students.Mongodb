@@ -67,9 +67,4 @@ db.students.find( { 'Semester': 'SD1i'} )
     }
  ]
 
-
-
-
-
-
 */
