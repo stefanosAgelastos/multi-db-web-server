@@ -10,7 +10,7 @@ const sequelize = new Sequelize({
     database: process.env.MYSQLDB_DATABASE,
     dialect: 'mysql'
 });
-
+ 
 
 // define sequelize models
 initModels(sequelize);
