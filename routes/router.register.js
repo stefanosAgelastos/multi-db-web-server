@@ -47,7 +47,7 @@ router.post('/register', rateLimiter, async (req, res) => {
                 res.status(400).send("Email is not in the system")
             }
         })
-        .catch()
+        .catch(err => res.status(500).send(err))
 });
 
 module.exports = router;
