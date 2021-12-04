@@ -4,16 +4,7 @@ const bcrypt = require('bcrypt');
 const { validateLogin } = require('../util/validate');
 const ratelimiter = require('../util/rate-limiter');
 const jwt = require('jsonwebtoken');
-
-//Path to frontend folder. __dirname alone will only point to current path and not the correct one
-const path = require('path');
 const db = require('../connectors/db.mysql');
-const frontendPath = path.resolve(__dirname, '../frontend/');
-router.use(express.static(frontendPath));
-
-router.get('/login', (req, res) => {
-    return res.sendFile(frontendPath + '/login/login.html');
-});
 
 router.post('/login', ratelimiter, async (req, res) => {
     try {
@@ -35,7 +26,7 @@ router.post('/login', ratelimiter, async (req, res) => {
             //res.status(404).redirect('/login');
         } else {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
-                const accessToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id}, process.env.TOKEN_SECRET);
+                const accessToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id }, process.env.TOKEN_SECRET);
                 // const refreshToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id}, process.env.REFRESH_TOKEN_SECRET);
                 res.status(200).set('Bearer', accessToken).send(`Welcome ${teacher.email} with the ID: ${teacher.teacher_id}`);
                 //return res.status(200).redirect('/overview');
@@ -56,17 +47,17 @@ router.post('/login', ratelimiter, async (req, res) => {
 });
 
 
-function authenticateToken(req, res, next){
+function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null) return res.sendStatus(401);
 
     jwt.verify(token, process.env.TOKEN_SECRET, (error, teacher) => {
-        if(error) return res.sendStatus(403);
+        if (error) return res.sendStatus(403);
         req.teacher = teacher;
         next();
     });
-     
+
 }
 // test route
 router.get('/auth', authenticateToken, (req, res) => {

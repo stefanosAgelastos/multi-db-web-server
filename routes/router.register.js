@@ -1,20 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-
 const db = require("../connectors/db.mysql");
- 
-//Modified Path
-const path = require('path');
 const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
-const frontendPath = path.resolve(__dirname, '../frontend/');
-
-
-//GET
-router.get('/register', (req, res) => {
-    return res.sendFile(frontendPath + '/register/register.html');
-});
 
 //POST
 router.post('/register', rateLimiter, async (req, res) => {
@@ -45,19 +34,19 @@ router.post('/register', rateLimiter, async (req, res) => {
                 password,
                 department_id,
             })
-            .then(res.redirect('/sql/login'))
-            .catch();
+                .then(res.redirect('/sql/login'))
+                .catch();
 
         }
-    } 
+    }
     catch (err) {
         if (err.name === 'SequelizeForeignKeyConstraintError') {
-            res.status(409).json( 'Invalid department' );
+            res.status(409).json('Invalid department');
             throw err;
         } else {
-            return res.status(405).json( 'Registration failed' );
+            return res.status(405).json('Registration failed');
         }
-}
+    }
 });
 
 module.exports = router;
