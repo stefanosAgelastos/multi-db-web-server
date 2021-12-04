@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/sql/teachers/findOne/90
+GET http://localhost:8080/sql/teachers/findOne/2
 Content-Type: application/json
 
 ###
