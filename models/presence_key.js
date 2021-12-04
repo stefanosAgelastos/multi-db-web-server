@@ -8,8 +8,9 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     actual_presence_key: {
-      type: DataTypes.STRING(255),
-      allowNull: true
+      type: DataTypes.STRING(25),
+      allowNull: false,
+      unique: "actual_presence_key"
     },
     semester: {
       type: DataTypes.STRING(5),
@@ -45,6 +46,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'presence_key',
+    hasTrigger: true,
     timestamps: false,
     indexes: [
       {
@@ -64,6 +66,14 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "presence_key_id" },
+        ]
+      },
+      {
+        name: "actual_presence_key",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "actual_presence_key" },
         ]
       },
       {

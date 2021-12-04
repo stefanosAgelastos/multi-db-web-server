@@ -18,6 +18,10 @@ router.post("/createNew", (req, res) => {
     }
     catch (error) {
         res.status(501).send(error);
+    //    console.log('err.name', err.name);
+    //    console.log('err.message', err.message);
+    //    console.log('err.errors', err.errors);
+     //   err.errors.map(e => console.log(e.message))
     }
 });
 
@@ -33,6 +37,8 @@ router.get("/all", (req, res) => {
 // Find a single Teacher with an id
 
 router.get("/findOne/:id", (req, res) => {
+<<<<<<< HEAD:routes/router.teacherAPI.js
+=======
     db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } })
         .then(oneTeacher => {
             if (teacherfound === 0) {
@@ -44,6 +50,7 @@ router.get("/findOne/:id", (req, res) => {
         })
         .catch(err => res.status(500).send('Something went wrong'));
     //res.send(oneTeacher));
+>>>>>>> main:routes/teacherAPI.js
 
     db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } }).then(oneTeacher => res.send(oneTeacher));
 });

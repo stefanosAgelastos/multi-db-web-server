@@ -56,7 +56,6 @@ router.post('/login', ratelimiter, async (req, res) => {
 });
 
 
-
 function authenticateToken(req, res, next){
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];

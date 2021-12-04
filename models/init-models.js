@@ -1,5 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
 var _kea_departments = require("./kea_departments");
+var _presence_audit = require("./presence_audit");
 var _presence_key = require("./presence_key");
 var _programs = require("./programs");
 var _students = require("./students");
@@ -11,6 +12,7 @@ var _teachers_subjects = require("./teachers_subjects");
 
 function initModels(sequelize) {
   var kea_departments = _kea_departments(sequelize, DataTypes);
+  var presence_audit = _presence_audit(sequelize, DataTypes);
   var presence_key = _presence_key(sequelize, DataTypes);
   var programs = _programs(sequelize, DataTypes);
   var students = _students(sequelize, DataTypes);
@@ -28,6 +30,8 @@ function initModels(sequelize) {
   kea_departments.hasMany(programs, { as: "programs", foreignKey: "department_id"});
   teachers.belongsTo(kea_departments, { as: "department", foreignKey: "department_id"});
   kea_departments.hasMany(teachers, { as: "teachers", foreignKey: "department_id"});
+  students_presence.belongsTo(presence_key, { as: "presence_key", foreignKey: "presence_key_id"});
+  presence_key.hasMany(students_presence, { as: "students_presences", foreignKey: "presence_key_id"});
   students.belongsTo(programs, { as: "program", foreignKey: "program_id"});
   programs.hasMany(students, { as: "students", foreignKey: "program_id"});
   subjects.belongsTo(programs, { as: "program", foreignKey: "program_id"});
@@ -55,6 +59,7 @@ function initModels(sequelize) {
 
   return {
     kea_departments,
+    presence_audit,
     presence_key,
     programs,
     students,
