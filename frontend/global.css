@@ -58,4 +58,5 @@ h2.login{
 #logout{
     position: fixed;
     right: 0;
+    margin-right: 8%;
 }
