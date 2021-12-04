@@ -35,17 +35,14 @@ router.get("/all", (req, res) => {
 router.get("/findOne/:id", (req, res) => {
     db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } })
         .then(oneTeacher => {
-            if (teacherfound === 0) {
+            if (!oneTeacher) {
                 res.status(404).send("Teacher not found")
             }
             else {
-                res.send("Teacher found with ID: " + req.params.id + (teacherfound))
+                res.send(oneTeacher.toJSON())
             }
         })
         .catch(err => res.status(500).send('Something went wrong'));
-    //res.send(oneTeacher));
-
-    db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } }).then(oneTeacher => res.send(oneTeacher));
 });
 
 
@@ -62,7 +59,7 @@ router.post("/updateOne/:id", (req, res) => {
         password,
         department_id,
     },
-    { where: { teacher_id: req.params.id } }
+        { where: { teacher_id: req.params.id } }
 
     ).then(rowsaffected => {
         if (rowsaffected == 0) {

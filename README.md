@@ -25,12 +25,6 @@ docker-compose up
 
 ## How to start up MySQL Server + application (to-be-updated)
 
-#### Prerequisites: 
-```
-npm uninstall bcrypt
-``` 
-(only if running windows and already built this in your pc. BCrypt dependencies can not work with other OS than the one they are built in)
-
 #### The Build:
 ```
 docker-compose up 
