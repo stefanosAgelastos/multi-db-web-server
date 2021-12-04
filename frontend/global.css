@@ -54,3 +54,8 @@ h2.login{
     margin-top: 1%;
     text-align: center;
 }
+
+#logout{
+    position: fixed;
+    right: 0;
+}
