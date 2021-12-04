@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // server static files
-app.use(express.static('frontend'))
+app.use(express.static('frontend', { extensions: ['html'] }))
 // load the mysql routers to our app
 require("./routes/routes.mysql")(app);
 

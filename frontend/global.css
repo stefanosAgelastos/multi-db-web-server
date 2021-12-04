@@ -5,8 +5,7 @@ h2{
     padding-top: 20px;
 }
 
-p{
-    margin-top: 12%;
+p.custom-description{
     text-align: center;
     padding-bottom: 30px;
     padding-top: 20px;
