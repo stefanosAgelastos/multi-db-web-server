@@ -17,13 +17,9 @@ router.post('/register', rateLimiter, async (req, res) => {
     const { email, activation_code, password } = req.body;
     const hashed_password = await bcrypt.hash(password, 10);
 
-    _is_teacher = null
-    is_student = null
-
     db.sequelize.models.teachers.findOne({ where: { email: email } })
         .then(teacher => {
             if (teacher) {
-                _is_teacher = true
                 if (teacher.password === activation_code) {
                     teacher.update({ password: hashed_password });
                     res.redirect('/login')
@@ -36,7 +32,6 @@ router.post('/register', rateLimiter, async (req, res) => {
         })
         .then(student => {
             if (student) {
-                _is_student = true
                 if (student.password === activation_code) {
                     student.update({ password: hashed_password });
                     res.redirect('/login')
