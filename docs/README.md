@@ -9,7 +9,6 @@ You can edit the diagrams by clicking on the link, but keep in mind that the edi
 1. Create a new .svg file with an appropriate title
 2. Copy paste one of the below sections, replace the title in the link with the new title:
 
-
 # System Schema for report
 
 ![Diagram](./report_system_schema.drawio.png)
@@ -20,3 +19,7 @@ You can edit the diagrams by clicking on the link, but keep in mind that the edi
 ![Diagram](./auth-states.drawio.png)
 <a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Fdocs%2Fauth-states.drawio.png" target="_blank">Edit in diagrams.net</a>
 
+# Authorization FlowChart
+
+![Diagram](./auth-flowchart.drawio.png)
+<a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Fdocs%2Fauth-flowchart.drawio.png" target="_blank">Edit in diagrams.net</a>
