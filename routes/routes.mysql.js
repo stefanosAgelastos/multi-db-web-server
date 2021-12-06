@@ -14,5 +14,5 @@ module.exports = function (app) {
     app.use(baseRoute, healthCheckRouter)
     app.use(baseRoute, loginRoute);
     app.use(baseRoute, registerRoute);
-    app.use(baseRoute + '/teachers', teacherAPI)
+    app.use(baseRoute + '/teachers', teacherAPI);
 }

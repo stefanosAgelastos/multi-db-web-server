@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="/global.css" media="screen" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+</head>
+
+<body>
+
+
+
+    <h2 class="login">Login</h2>
+    <div>
+        <form method="POST" action="/sql/login">
+            <input class="center-blok" type="email" name="email" id="email" placeholder="Email" required><br>
+            <input class="center-blok" type="password" name="password" id="password" placeholder="Password" required><br>
+            <button class="btn btn-dark" id="login-button" name="login-button" type="submit">Login</button>
+        </form>
+        <p id="register-here">Not a member? <a href="/register">Register here</a></p>
+    </div>
+
+
+
+    </div>
+
+
+    <!-- <div id="footer-fragment"></div> -->
+
+    <!--JQuery To load fragment scripts (amongst other)-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- JQuery Function used to call on Navigation - For avoiding Boilerplate code
+    <script>
+        $(document).ready(function () {
+            $("#navbar-fragment").load("../fragments/navbar/navbar.html");
+            $("#footer-fragment").load("../fragments/footer/footer.html");
+        
+        });
+    
+    </script>
+    -->
+
+
+</body>
+
+</html>

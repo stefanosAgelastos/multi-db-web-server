@@ -1,21 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-
 const db = require("../connectors/db.mysql");
- 
-//Modified Path
-const path = require('path');
 const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
-const frontendPath = path.resolve(__dirname, '../frontend/');
-
-
-
-//GET
-router.get('/register', (req, res) => {
-    return res.sendFile(frontendPath + '/register/register.html');
-});
 
 //POST
 router.post('/register', rateLimiter, async (req, res) => {
@@ -23,42 +11,38 @@ router.post('/register', rateLimiter, async (req, res) => {
     const { error } = validateRegister(req.body);
     if (error) return res.status(400).send(error.details[0].message); //400 = bad request
 
+    console.log(req.body)
 
-    try {
+    // We receive this from the request body
+    const { email, activation_code, password } = req.body;
+    const hashed_password = await bcrypt.hash(password, 10);
 
-        const { first_name, last_name, email, department_id } = req.body;
-        const password = await bcrypt.hash(req.body.password, 10);
-
-        const teacherAlreadyExists = await db.sequelize.models.teachers.findOne({ where: { email } })
-            .then()
-            .catch((error) => {
-                console.log(error);
-            });
-
-        if (teacherAlreadyExists) {
-            res.json({ message: 'Teacher with that Email already exists' });
-        } else {
-            await db.sequelize.models.teachers.create({
-
-                first_name,
-                last_name,
-                email,
-                password,
-                department_id,
-            })
-            .then(res.redirect('/sql/login'))
-            .catch();
-
-        }
-    } 
-    catch (err) {
-        if (err.name === 'SequelizeForeignKeyConstraintError') {
-            res.status(409).json( 'Invalid department' );
-            throw err;
-        } else {
-            return res.status(405).json( 'Registration failed' );
-        }
-}
+    db.sequelize.models.teachers.findOne({ where: { email: email } })
+        .then(teacher => {
+            if (teacher) {
+                if (teacher.password === activation_code) {
+                    teacher.update({ password: hashed_password });
+                    res.redirect('/login')
+                } else {
+                    res.status(400).send("Teacher: wrong activation code")
+                }
+            } else {
+                return db.sequelize.models.students.findOne({ where: { user_name: email } })
+            }
+        })
+        .then(student => {
+            if (student) {
+                if (student.password === activation_code) {
+                    student.update({ password: hashed_password });
+                    res.redirect('/login')
+                } else {
+                    res.status(400).send("Student: wrong activation code")
+                }
+            } else {
+                res.status(400).send("Email is not in the system")
+            }
+        })
+        .catch(err => res.status(500).send(err))
 });
 
 module.exports = router;
