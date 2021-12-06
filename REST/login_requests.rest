@@ -1,10 +1,20 @@
-
+### Login Teacher
 POST http://localhost:8080/sql/login/
 Content-Type: application/json
 
 {
-    "email": "teste@test.com", 
-    "password": "qweqweqwe"
+    "email": "ASBC@kea.dk", 
+    "password": "weqweqwe"
+
+}
+
+### Login Student
+POST http://localhost:8080/sql/login/
+Content-Type: application/json
+
+{
+    "email": "Ole1234@kea.dk", 
+    "password": "weqweqwe"
 
 }
 

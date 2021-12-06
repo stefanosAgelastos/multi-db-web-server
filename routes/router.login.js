@@ -18,30 +18,30 @@ router.post('/login', ratelimiter, async (req, res) => {
 
         //Sequalize user -> Retrieve that teacher that matches the criteria
         const teacher = await db.sequelize.models.teachers.findOne({ where: { email } });
+        const student = await db.sequelize.models.students.findOne({ where: { user_name: email } });
 
-        if (teacher == null) {
-            res.json({ message: "Teacher doesn't exist" });
-
-            // to be used later when web-app is functional
-            //res.status(404).redirect('/login');
-        } else {
+        if (teacher == null && student == null) {
+            res.status(400).json({ message: "User doesn't exist" });
+        } else if (teacher) {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
-                const accessToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id }, process.env.TOKEN_SECRET);
-                // const refreshToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id}, process.env.REFRESH_TOKEN_SECRET);
-                res.status(200).set('Bearer', accessToken).send(`Welcome ${teacher.email} with the ID: ${teacher.teacher_id}`);
-                //return res.status(200).redirect('/overview');
-
+                const accessToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id }, process.env.JWT_SECRET);
+                res.status(200).set('Bearer', accessToken).redirect('/teacher_overview');
             } else {
-                res.json({ message: "Wrong email or password" });
-                //res.redirect('/login');
+                res.status(400).json({ message: "Wrong password" });
+            }
+        } else if (student) {
+            if (await bcrypt.compare(plainPassword, student.password)) {
+                const accessToken = jwt.sign({ email: student.user_name, id: student.student_id }, process.env.JWT_SECRET);
+                res.status(200).set('Bearer', accessToken).redirect('/student_overview');
+            } else {
+                res.status(400).json({ message: "Wrong password" });
             }
         }
 
 
 
     } catch (error) {
-        res.json({ message: `Error: ${error}` });
-        //res.status(404).redirect('/login');
+        res.status(500).json({ message: `Error: ${error}` });
     }
 
 });
@@ -61,7 +61,7 @@ function authenticateToken(req, res, next) {
 }
 // test route
 router.get('/auth', authenticateToken, (req, res) => {
-    return res.json({ message: "can you see me?" });
+    return res.status(500).json({ message: "can you see me?" });
 });
 
 module.exports = router;
