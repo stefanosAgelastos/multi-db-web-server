@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Create sample .env file
+        # it is required by docker-compose
+        # it is okay to make an empty file
+        # docker compose will read the variables from the environment
+        # that we declared above in env:
+        run: touch .env
       - name: Start containers
         run: docker-compose up -d --build
       - name: Wait for containers to start
