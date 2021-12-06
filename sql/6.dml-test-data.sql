@@ -15,7 +15,7 @@ INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Syst
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Development of Large System','1');
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Tests','1');
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Web Development','2');
-INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Interface Design',' 2' );
+INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Interface Design','2' );
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Databases','2');
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Development Environments','2');
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Theoretical Product Development','3');
@@ -29,23 +29,23 @@ INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Inte
 INSERT INTO `rollcall_db`.`subjects` (`subject_name`,`program_id`) VALUES ('Process,Design,Experiments and Prototyping','4');
  
  
-INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Asger Batting','Clausen','ASBC','AsgerBC','1');
-INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Tomas','Pesek','TOMP','TOM','1');
-INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Jarl','Tuxen','JART','jarlT','1');
-INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Andrea','Corradini','Andc','AndreaC','1');
-INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Anders','Latif','Andl','nodeanders','1');
+INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Asger Batting','Clausen','ASBC@kea.dk','ASBC','1');
+INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Tomas','Pesek','TOMP@kea.dk','TOMP','1');
+INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Jarl','Tuxen','JART@kea.dk','JART','1');
+INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Andrea','Corradini','ANDC@kea.dk','ANDC','1');
+INSERT INTO `rollcall_db`.`teachers` (`first_name`,`last_name`,`email`,`password`,`department_id`) VALUES ('Anders','Latif','ANDL@kea.dk','ANDL','1');
  
  
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Ole','Sørensen','Ole1234','Ole','2');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Maria', 'Van',' M1234','Mvan','3');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Archana', 'Maurya',' arch000','archM','1');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Tariq', 'Zamani' ,'Tariq11', 'TarZam','1');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Stefanos','Agelastos','Stef2222','Setf','1');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Anne','Sørensen','Anne1234','Ole','2');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Maya', 'Henson',' Maya234','MayaH','3');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Archi', 'Peterson',' archiP','12345','4');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Tara', 'Khamani' ,'TaraK', '123Tara','4');
-INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Kenneth','Henson','kenneth11','kenhan','4');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Ole','Sørensen','Ole1234@kea.dk','Ole1234','2');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Maria', 'Van','M1234@kea.dk','M1234','3');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Archana', 'Maurya','arch000@kea.dk','arch000','1');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Tariq', 'Zamani' ,'Tariq11@kea.dk', 'Tariq11','1');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Stefanos','Agelastos','Stef2222@kea.dk','Stef2222','1');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Anne','Sørensen','Anne1234@kea.dk','Anne1234','2');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Maya', 'Henson','Maya234@kea.dk','Maya234','3');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Archi', 'Peterson','archiP@kea.dk','archiP','4');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Tara', 'Khamani' ,'TaraK@kea.dk', 'TaraK','4');
+INSERT INTO `rollcall_db`.`students` (`first_name`,`last_name`,`user_name`,`password`,`program_id`) VALUES ('Kenneth','Henson','kenneth11@kea.dk','kenneth11','4');
 
 
 INSERT into `rollcall_db`.`students_subjects` (semester, student_id, subject_id) values ('SD21i', 1, 1);
