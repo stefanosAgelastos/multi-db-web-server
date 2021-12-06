@@ -28,8 +28,8 @@ jobs:
       - name: Wait for containers to start
         run: sleep 20s
       - name: Test connection to Database
-        run: mysql -h 127.0.0.1 -P 3306 -u root -pdatabases --database="rollcall_db"
+        run: mysql -h 127.0.0.1 -P 3306 -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}"
       - name: Test that the view exists
-        run: mysql -h 127.0.0.1 -P 3306 -u root -pdatabases --database="rollcall_db" --execute="select * from students_program;"
+        run: mysql -h 127.0.0.1 -P 3306 -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}" --execute="select * from students_program;"
       - name: Stop containers and remove volumes
         run: docker-compose down -v
