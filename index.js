@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require('dotenv').config();
-const PORT = process.env.NODE_DOCKER_PORT || 9090;
+
 
 //Allows the use of JSON (for POST requests)
 app.use(express.urlencoded({ extended: true }));
@@ -13,12 +13,5 @@ app.use(express.static('frontend', { extensions: ['html'] }))
 require("./routes/routes.mysql")(app);
 
 
-const server = app.listen(PORT, (error) => {
-    if (error) {
-        console.log(`Error on: ${error}`)
-    } else {
-        console.log(`Listening on port ${PORT}`);
-    }
-});
 
-module.exports = server;
+module.exports = app;
