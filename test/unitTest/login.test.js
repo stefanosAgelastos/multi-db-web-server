@@ -2,16 +2,18 @@ const request = require('supertest');
 const app = require('../../index');
 
 
+
+
 describe("Test route for login", () => {
 
-    test("Login: Test for valid inputs", done => {
+    test("Login: Test for valid inputs should redirect", done => {
         request(app)
             .post('/sql/login')
             .send({
                 email: "ASBC@kea.dk",
                 password: "ASBCASBC"
             }).then((response) => {
-                expect(response.statusCode).toBe(302); // found and redirecting 
+                expect(response.statusCode).toBe(302);  
                 done();
             });
     });
