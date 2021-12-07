@@ -1,11 +1,39 @@
 
 const request = require('supertest');
+require('dotenv').config();
+const db = require("../../connectors/db.mysql");
 const app = require('../../index');
 
 
 // test precondition (User must have access to the registration page.)
 
 describe("Test route for register", () => {
+
+
+    beforeEach(() => {
+        // create teacher
+        db.sequelize.models.teachers.create({
+            first_name: "Test",
+            last_name: "Teacher",
+            email: "teacher@test.com",
+            password: "12345678",
+            department_id: 1
+        });
+        // create student
+        db.sequelize.models.students.create({
+            first_name: "Test",
+            last_name: "student",
+            user_name: "student@test.com",
+            password: "12345678",
+            program_id: 1
+        });
+    });
+
+    afterEach(() => {
+        db.sequelize.models.teachers.destroy({ where: { email: "teacher@test.com" } });
+        db.sequelize.models.students.destroy({ where: { user_name: "student@test.com" } });
+    });
+
     test("It should response the GET method", done => {
         request(app)
             .get('/register')
@@ -14,15 +42,6 @@ describe("Test route for register", () => {
                 done();
             });
     });
-
-
-    //   1. Launch registration page,
-    //  2.  Enter valid email,       
-    //   3 . Enter valid activation,                    
-    //   4. Enter valid password,  
-    //      5.Confirm  correct password
-
-
 
     test("Test for valid input", done => {
         request(app)
@@ -33,76 +52,9 @@ describe("Test route for register", () => {
                 password: "weqweqwe",
                 repeat_password: "weqweqwe"
             }).then((response) => {
-
-                
                 expect(response.statusCode).toBe(400)
-                // .set({authorization: 'ASBC@kea.dk'},
-                // {authorization: 'a_valid_value_goes_here'},
-                // {authorization: 'a_valid_value_goes_here'},
-                // {authorization: 'a_valid_value_goes_here'} )
-
-
                 done();
             })
-
-
-
     })
 
-
-
-
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 
-
-// describe('user registration', () => {
-
-//     let cellphone;
-
-//     beforeEach(() => {
-//         cellphone = new Cellphone;
-//     });
-
-//     test('when a user is created, the user has an empty list of phones', () => {
-//         expect(cellphone.selected_phones).toEqual([]);
-//         expect(cellphone.getPrice()).toBe(0);
-//     });
-
-//     test('user adds phone to list', () => {
-//         cellphone.addPhone('Motorola G99');
-//         cellphone.addPhone('iPhone 99');
-//         expect(cellphone.getPrice()).toBe(6800);
-
-
-//     });
-
-//     test('User removes selected phone from list', () => {
-//         cellphone.addPhone('Motorola G99');
-//         cellphone.addPhone('iPhone 99');
-
-//         cellphone.removePhoneFromList('Motorola G99');
-//         expect(cellphone.getPrice()).toBe(6000);
-
-//     });
-
-// });
-// 
