@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "test": "jest",
     "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true #",
     "deploy": "node index.js"
   },

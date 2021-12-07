@@ -6,7 +6,7 @@ const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
 
 //POST
-router.post('/register', rateLimiter, async (req, res) => {
+router.post('/register', async (req, res) => {
 
     const { error } = validateRegister(req.body);
     if (error) return res.status(400).send(error.details[0].message); //400 = bad request
