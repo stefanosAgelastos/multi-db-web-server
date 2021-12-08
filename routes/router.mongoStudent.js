@@ -1,89 +1,86 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../connectors/db.mysql')
 const Student = require('../mongo/studentModel');
 
-
-
 // InsertOne
-router.post('/create',async (req,res)=> {
-    const student =new Student({
+router.post('/create', async (req, res) => {
+    const student = new Student({
         name: req.body.name,
-        user_name:req.body.user_name,
+        user_name: req.body.user_name,
         password: req.body.password,
-        semester:req.body.semester,
-        subjects:req.body.subject_name
-       
-       /* Subject[]:req.body.Subject1,
-        Subject2:req.body.Subject2,
-        Subject3:req.body.Subject3,
-        Subject4:req.body.Subject4  */
+        semester: req.body.semester,
+        subjects: req.body.subject_name
+
+        /* Subject[]:req.body.Subject1,
+         Subject2:req.body.Subject2,
+         Subject3:req.body.Subject3,
+         Subject4:req.body.Subject4  */
     })
-    try{
+    try {
         const newStudent = await student.save()
         res.json(newStudent)
-    }catch(error){
+    } catch (error) {
         res.send('Error')
     }
 })
 //findAll
-router.get('/findAll',async (req,res)=> {
-    try{
+router.get('/findAll', async (req, res) => {
+    try {
 
         const students = await Student.find()
         res.json(students)
-    }catch(error){
-        res.send('Error'+ err)
+    } catch (error) {
+        res.send('Error' + err)
     }
-    });
+});
 
 //findOne
 
-router.get('/find/:id',async (req,res)=> {
-    try{
+router.get('/find/:id', async (req, res) => {
+    try {
         const students = await Student.findById(req.params.id)
         res.json(students)
-     
-    } catch(err){
+
+    } catch (err) {
         if (err instanceof Error.BadRequest)
-    return res.status(HttpStatus.BAD_REQUEST).send({ message: err.message });
+            return res.status(HttpStatus.BAD_REQUEST).send({ message: err.message });
 
         if (err instanceof Error.NotFound)
-    return res.status(HttpStatus.NOT_FOUND).send({ message: err.message })
-    } 
-    });
-    
+            return res.status(HttpStatus.NOT_FOUND).send({ message: err.message })
+    }
+});
+
 // update
-router.patch('/update/:id',async (req,res)=> {
-    try{
+router.patch('/update/:id', async (req, res) => {
+    try {
         const students = await Student.findById(req.params.id)
-        students.name= req.body.name,
-        students.user_name= req.body.user_name,
-        students.password= req.body.password,
-        students.semester= req.body.semester
-        students.Subject[
-             req.body.Subject
-        ]
+        students.name = req.body.name,
+            students.user_name = req.body.user_name,
+            students.password = req.body.password,
+            students.semester = req.body.semester
+            students.Subject[
+                req.body.Subject
+            ]
         const data = await students.save()
         res.json(data)
-     
-    } catch(error){
-        res.send('Error'+ err)
+
+    } catch (error) {
+        res.send('Error' + err)
     }
-    
-    });
+
+});
 
 // delete
-router.get('/delete/:id',async (req,res)=> {
-    try{
+router.get('/delete/:id', async (req, res) => {
+    try {
         const students = await Student.findById(req.params.id)
         const data = await students.delete()
         res.json(data)
-     
-    } catch(error){
-        res.send('Error'+ err)
+
+    } catch (error) {
+        res.send('Error' + err)
     }
-    
-    });
- 
-module.exports =router
+
+});
+
+module.exports = router

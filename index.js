@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 require('dotenv').config();
-const mongoose = require('mongoose');
+const mongoose = require('./connectors/db.mongo');
 
 const PORT = process.env.NODE_DOCKER_PORT || 9090;
 
@@ -23,18 +23,4 @@ const server = app.listen(PORT, (error) => {
     }
 });
 
-
-
-mongoose.connect(
-    process.env.MDB_CONNECTION,{useNewUrlparser:true})
-    const con = mongoose.connection
-    
-    con.on('open', function (){
-        console.log('connected to mongo database !') 
-        
-    });
-
-
-
-module.exports = mongoose
 module.exports = server;

@@ -5,7 +5,6 @@ const healthCheckRouter = require('./router.healthCheck');
 const loginRoute = require('./router.login');
 const registerRoute = require('./router.register');
 const teacherAPI = require('./router.teacherAPI');
-const mongoSRouter = require('./router.mongoStudent');
 
 const baseRoute = '/sql';
 
@@ -16,5 +15,4 @@ module.exports = function (app) {
     app.use(baseRoute, loginRoute);
     app.use(baseRoute, registerRoute);
     app.use(baseRoute + '/teachers', teacherAPI)
-    app.use('/Student',mongoSRouter)
 }
