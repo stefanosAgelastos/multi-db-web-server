@@ -13,7 +13,8 @@ app.use(express.json());
 app.use(express.static('frontend', { extensions: ['html'] }))
 // load the mysql routers to our app
 require("./routes/routes.mysql")(app);
-
+// load the mysql routers to our app
+require("./routes/routes.mongo")(app);
 
 const server = app.listen(PORT, (error) => {
     if (error) {
