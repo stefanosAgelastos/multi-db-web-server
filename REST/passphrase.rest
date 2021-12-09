@@ -1,0 +1,19 @@
+###
+POST http://localhost:8080/sql/passphrase
+Content-Type: application/json
+
+{
+    "teacher_id": "1",
+    "subject_id": "1",
+    "semester": "SD21i",
+    "passphrase": "blue little monkeys"
+}
+
+###
+GET http://localhost:8080/sql/passphrase/mySubjects
+Content-Type: application/json
+
+{
+    "teacher_id": "1"
+}
+

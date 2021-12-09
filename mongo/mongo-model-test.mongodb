@@ -1,0 +1,114 @@
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+const database = 'Rollcall';
+const kea_departments = 'kea_departments_collection'
+const kea_students = 'kea_students_collection'
+const students_status = 'students_status_collection'
+const presenceKey = 'presenceKey_collection'
+const kea_teachers = 'kea_teachers_collection'
+
+// Create a new database.
+use(database);
+
+db.kea_departsments.insertOne(
+  {
+    "kea_departments_collection": [
+    {
+      "department_id": "",
+      "department_name": "",
+      "programs": [
+        {
+          "program_id": "",
+          "program_name": "",
+          "subjects": [
+            {
+              "subject_id": "",
+              "subject_name": ""
+            },
+          ]
+        },
+      ]
+    },
+  ],
+  }
+)
+
+db.kea_students.insertOne(
+  {
+    "kea_students_collection": [
+    {
+      "student_id": "",
+      "last_name": "",
+      "first_name": "",
+      "user_name": "",
+      "password": "",
+      "program_id": "",
+      "subjects_id": ["", "", ""]
+    }
+  ]
+  }
+)
+
+db.students_status.insertOne(
+  {
+     "students_status_collection": [
+    {
+      "status_id": "",
+      "student_id": "",
+      "subject_id": "",
+      "date_time": ""
+    },
+    {}
+  ]
+  }
+)
+
+db.presenceKey.insertOne(
+  {
+    "presenceKey_collection": [
+    {
+      "token_id": "",
+      "actual_token": "",
+      "subject_id": "",
+      "date_time": ""
+    },
+    {}
+  ]
+  }
+)
+
+db.kea_teachers.insertOne(
+  {
+      "kea_teachers_collection": [
+    {
+      "teacher_id": "",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "password": "",
+      "department_id": "",
+      "subjects_id": ["", "", ""]
+    }
+  ]
+  }
+)
+
+
+db.kea_teachers.insertOne(
+  {
+      "kea_teachers_collection": [
+    {
+      "teacher_id": 1,
+      "first_name": "Lars",
+      "last_name": "Larsen",
+      "email": "test@test.com",
+      "password": "123132",
+      "department_id": 1,
+      "subjects_id": [1, 2, 3]
+    }
+  ]
+  }
+)
+
+db.kea_teachers.findOne({ 'first_name': 'Lars'})
