@@ -1,23 +1,67 @@
 // here we can initialize and seed the docker-compose database
 // taken from here: https://gist.github.com/gbzarelli/c15b607d62fc98ae436564bf8129ea8e
-db = db.getSiblingDB('sample_db');
+db = db.getSiblingDB('test');
 
-db.createCollection('sample_collection');
+db.createCollection('students');
 
-db.sample_collection.insertMany([
+db.students.insertMany([
     {
-        org: 'helpdev',
-        filter: 'EVENT_A',
-        addrs: 'http://rest_client_1:8080/wh'
+        "name": "test",
+        "user_name": "sample1",
+        "password": "12345678",
+        "semester": "1",
+        "subjects": [
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            }
+        ]
     },
     {
-        org: 'helpdev',
-        filter: 'EVENT_B',
-        addrs: 'http://rest_client_2:8081/wh'
-    },
-    {
-        org: 'github',
-        filter: 'EVENT_C',
-        addrs: 'http://rest_client_3:8082/wh'
+        "name": "test",
+        "user_name": "sample2",
+        "password": "12345678",
+        "semester": "1",
+        "subjects": [
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            }
+        ]
+    }, {
+        "name": "test",
+        "user_name": "sample3",
+        "password": "12345678",
+        "semester": "1",
+        "subjects": [
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            },
+            {
+                "subjects_name": "test"
+            }
+        ]
     }
 ]);
