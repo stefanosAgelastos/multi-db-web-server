@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../index');
+const app = require('../../util/app');
 const bcrypt = require('bcrypt');
 const db = require("../../connectors/db.mysql");
 

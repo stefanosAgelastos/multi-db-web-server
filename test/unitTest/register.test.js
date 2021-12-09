@@ -2,7 +2,7 @@
 const request = require('supertest');
 require('dotenv').config();
 const db = require("../../connectors/db.mysql");
-const app = require('../../index');
+const app = require('../../util/app');
 
 const teacherEmail = 'teacher@test.com';
 const studentEmail = 'student@test.com';

@@ -2,12 +2,12 @@
   "name": "multi-db-web-server",
   "version": "1.0.0",
   "description": "Node.js API with polyglot persistence",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "test": "jest",
     "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true #",
-    "deploy": "node index.js"
+    "deploy": "node server.js"
   },
   "repository": {
     "type": "git",

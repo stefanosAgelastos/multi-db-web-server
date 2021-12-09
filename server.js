@@ -1,4 +1,4 @@
-const app = require("./index.js");
+const app = require("./util/app");
 const PORT = process.env.NODE_DOCKER_PORT || 9090;
 
 app.listen(PORT, (error) => {
