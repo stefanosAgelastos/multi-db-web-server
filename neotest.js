@@ -3,7 +3,7 @@ const neo = require('./connectors/db.neo');
 
 
 async function test() {
-    const personName = 'ArchanaTest3'
+    const personName = 'ArchanaTest1'
 
     try {
         const result = await neo.session.run(

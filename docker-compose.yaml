@@ -2,45 +2,66 @@ version: "3.1"
 
 services:
 
-  mysql_container:
-    image: mysql:8.0
+  # mysql_container:
+  #   image: mysql:8.0
+  #   restart: unless-stopped
+  #   env_file: ./.env
+  #   ports:
+  #     - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+  #   environment:
+  #     # here you set the root user's password for the new database
+  #     MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+  #     MYSQLDB_DATABASE: ${MYSQLDB_DATABASE}
+  #     MYSQL_TCP_PORT: ${MYSQLDB_DOCKER_PORT}
+  #   volumes:
+  #     - sqldb:/var/lib/mysql
+  #     # this mounts the repo's ./sql directory to the container's init directory
+  #     # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
+  #     - ./sql/:/docker-entrypoint-initdb.d/
+
+
+  # app: 
+  #   depends_on: 
+  #     - mysql_container
+  #   build: .
+  #   restart: unless-stopped
+  #   env_file: ./.env
+  #   ports: 
+  #     - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
+  #   environment: 
+  #       - DB_HOST=mysql_container
+  #       - DB_USER=${DB_USER}
+  #       - DB_SECRET=${DB_SECRET}
+  #       - MYSQLDB_DATABASE=${MYSQLDB_DATABASE}
+  #       - NODE_DOCKER_PORT=${NODE_DOCKER_PORT}
+  #       - MYSQLDB_LOCAL_PORT=${MYSQLDB_DOCKER_PORT}
+  #   volumes:
+  #   - .:/usr/src/app
+  #   - /usr/src/app/node_modules
+# volumes:
+#   sqldb:
+
+  neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
+    image: neo4j:3.5
     restart: unless-stopped
-    env_file: ./.env
     ports:
-      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+      - 7474:7474
+      - 7687:7687
+    # volumes:
+    #   - ./conf:/conf
+    #   - ./data:/data
+    #   - ./import:/import
+    #   - ./logs:/logs
+    #   - ./plugins:/plugins
     environment:
-      # here you set the root user's password for the new database
-      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
-      MYSQLDB_DATABASE: ${MYSQLDB_DATABASE}
-      MYSQL_TCP_PORT: ${MYSQLDB_DOCKER_PORT}
-    volumes:
-      - sqldb:/var/lib/mysql
-      # this mounts the repo's ./sql directory to the container's init directory
-      # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
-      - ./sql/:/docker-entrypoint-initdb.d/
+      # Raise memory limits
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms.memory.heap.initial_size=1G
+      - NEO4J_dbms_memory_heap_max__size=1G
+      - NEO4J_AUTH=neo4j/password
 
 
-  app: 
-    depends_on: 
-      - mysql_container
-    build: .
-    restart: unless-stopped
-    env_file: ./.env
-    ports: 
-      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
-    environment: 
-        - DB_HOST=mysql_container
-        - DB_USER=${DB_USER}
-        - DB_SECRET=${DB_SECRET}
-        - MYSQLDB_DATABASE=${MYSQLDB_DATABASE}
-        - NODE_DOCKER_PORT=${NODE_DOCKER_PORT}
-        - MYSQLDB_LOCAL_PORT=${MYSQLDB_DOCKER_PORT}
-    volumes:
-    - .:/usr/src/app
-    - /usr/src/app/node_modules
 
-volumes:
-  sqldb:
   # app:
 
   # mongo:
@@ -54,21 +75,3 @@ volumes:
   #     - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   #  app_container:
 
-  # neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
-  #   image: neo4j:3.5
-  #   restart: unless-stopped
-  #   ports:
-  #     - 7474:7474
-  #     - 7687:7687
-  #   # volumes:
-  #   #   - ./conf:/conf
-  #   #   - ./data:/data
-  #   #   - ./import:/import
-  #   #   - ./logs:/logs
-  #   #   - ./plugins:/plugins
-  #   environment:
-  #     # Raise memory limits
-  #     - NEO4J_dbms_memory_pagecache_size=1G
-  #     - NEO4J_dbms.memory.heap.initial_size=1G
-  #     - NEO4J_dbms_memory_heap_max__size=1G
-  #     - NEO4J_AUTH=neo4j/password
