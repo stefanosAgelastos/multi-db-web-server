@@ -1,21 +1,36 @@
 ###
-GET http://localhost:8080/Student/findAll
+GET http://localhost:8080/mongo/student/findAll
 
 ###
-POST http://localhost:8080/Student/create
+GET http://localhost:8080/mongo/student/find/61b0ee805fcc43b4db37ed4a
+
+###
+GET http://localhost:8080/mongo/student/findAll
+
+###
+GET http://localhost:8080/mongo/student/findAll
+
+###
+POST http://localhost:8080/mongo/student/create
 Content-Type: application/json
 
 {
-    "name": "test",
-    "user_name":"studentsasda",
-    "password": "12345678",
-    "semester":"1",
-    "subjects":[
-        {
-            "subjects_name": "test",
-            "subjects_name": "test",
-            "subjects_name": "test",
-            "subjects_name": "test"
-        }
-    ]
+   "name":"test",
+   "user_name":"sample",
+   "password":"12345678",
+   "semester":"1",
+   "subjects":[
+      {
+         "subjects_name":"test"
+      },
+      {
+         "subjects_name":"test"
+      },
+      {
+         "subjects_name":"test"
+      },
+      {
+         "subjects_name":"test"
+      }
+   ]
 }

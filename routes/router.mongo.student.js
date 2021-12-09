@@ -9,12 +9,7 @@ router.post('/create', async (req, res) => {
         user_name: req.body.user_name,
         password: req.body.password,
         semester: req.body.semester,
-        subjects: req.body.subject_name
-
-        /* Subject[]:req.body.Subject1,
-         Subject2:req.body.Subject2,
-         Subject3:req.body.Subject3,
-         Subject4:req.body.Subject4  */
+        subjects: req.body.subjects
     })
     try {
         const newStudent = await student.save()

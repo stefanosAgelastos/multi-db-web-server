@@ -27,7 +27,7 @@ const studentSchema = new mongoose.Schema({
         required: true,
     },
     subjects: {
-        type: Array,
+        type: [subjectSchema],
         required: true
     }
 });
