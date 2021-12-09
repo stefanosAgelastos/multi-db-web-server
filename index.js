@@ -11,6 +11,8 @@ app.use(express.json());
 app.use(express.static('frontend', { extensions: ['html'] }))
 // load the mysql routers to our app
 require("./routes/routes.mysql")(app);
+// Load the neo4j routes to our app 
+require('./routes/routes.neo')(app);
 
 
 const server = app.listen(PORT, (error) => {
