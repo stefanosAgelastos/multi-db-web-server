@@ -14,9 +14,9 @@ router.post('/create', async (req, res) => {
     try {
         const newStudent = await student.save()
         res.json(newStudent)
-    }catch(error){
+    } catch (error) {
         console.log(error)
-        res.send('Error')
+        res.status(500).send('Error')
     }
 })
 //findAll
@@ -50,13 +50,11 @@ router.get('/find/:id', async (req, res) => {
 router.patch('/update/:id', async (req, res) => {
     try {
         const students = await Student.findById(req.params.id)
-        students.name = req.body.name,
-            students.user_name = req.body.user_name,
-            students.password = req.body.password,
-            students.semester = req.body.semester
-            students.Subject[
-                req.body.Subject
-            ]
+        students.name = req.body.name
+        students.user_name = req.body.user_name
+        students.password = req.body.password
+        students.semester = req.body.semester
+        students.subject = req.body.subjects
         const data = await students.save()
         res.json(data)
 
