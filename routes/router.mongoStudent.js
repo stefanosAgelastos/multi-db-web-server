@@ -19,7 +19,8 @@ router.post('/create', async (req, res) => {
     try {
         const newStudent = await student.save()
         res.json(newStudent)
-    } catch (error) {
+    }catch(error){
+        console.log(error)
         res.send('Error')
     }
 })

@@ -39,19 +39,20 @@ services:
     - .:/usr/src/app
     - /usr/src/app/node_modules
 
+  mongo:
+    image: mongo
+    env_file: ./.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - "27017:27017"
+    # volumes:
+    #   - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 volumes:
   sqldb:
   # app:
 
-  # mongo:
-  #   image: mongo
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: helpdev
-  #     MONGO_INITDB_ROOT_PASSWORD: 123456
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   #  app_container:
 
   # neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0

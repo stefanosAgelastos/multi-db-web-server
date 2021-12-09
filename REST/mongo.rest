@@ -1,0 +1,21 @@
+###
+GET http://localhost:8080/Student/findAll
+
+###
+POST http://localhost:8080/Student/create
+Content-Type: application/json
+
+{
+    "name": "test",
+    "user_name":"studentsasda",
+    "password": "12345678",
+    "semester":"1",
+    "subjects":[
+        {
+            "subjects_name": "test",
+            "subjects_name": "test",
+            "subjects_name": "test",
+            "subjects_name": "test"
+        }
+    ]
+}
