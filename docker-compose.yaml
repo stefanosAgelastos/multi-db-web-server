@@ -20,24 +20,24 @@ services:
       - ./sql/:/docker-entrypoint-initdb.d/
 
 
-  app: 
-    depends_on: 
-      - mysql_container
-    build: .
-    restart: unless-stopped
-    env_file: ./.env
-    ports: 
-      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
-    environment: 
-        - DB_HOST=mysql_container
-        - DB_USER=${DB_USER}
-        - DB_SECRET=${DB_SECRET}
-        - MYSQLDB_DATABASE=${MYSQLDB_DATABASE}
-        - NODE_DOCKER_PORT=${NODE_DOCKER_PORT}
-        - MYSQLDB_LOCAL_PORT=${MYSQLDB_DOCKER_PORT}
-    volumes:
-    - .:/usr/src/app
-    - /usr/src/app/node_modules
+  # app: 
+  #   depends_on: 
+  #     - mysql_container
+  #   build: .
+  #   restart: unless-stopped
+  #   env_file: ./.env
+  #   ports: 
+  #     - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
+  #   environment: 
+  #       - DB_HOST=mysql_container
+  #       - DB_USER=${DB_USER}
+  #       - DB_SECRET=${DB_SECRET}
+  #       - MYSQLDB_DATABASE=${MYSQLDB_DATABASE}
+  #       - NODE_DOCKER_PORT=${NODE_DOCKER_PORT}
+  #       - MYSQLDB_LOCAL_PORT=${MYSQLDB_DOCKER_PORT}
+  #   volumes:
+  #   - .:/usr/src/app
+  #   - /usr/src/app/node_modules
 
   mongo:
     image: mongo
@@ -46,9 +46,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
-      - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongo/sample_data.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 volumes:
   sqldb:
   # app:

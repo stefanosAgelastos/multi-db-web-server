@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const subjectSchema = new mongoose.Schema({
     subjects_name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     }
 })
 
@@ -29,6 +30,7 @@ const studentSchema = new mongoose.Schema({
     subjects: {
         type: [subjectSchema],
         required: true
+       
     }
 });
 

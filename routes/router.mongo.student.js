@@ -54,12 +54,15 @@ router.patch('/update/:id', async (req, res) => {
         students.user_name = req.body.user_name
         students.password = req.body.password
         students.semester = req.body.semester
-        students.subject = req.body.subjects
+        students.subjects = req.body.subjects
         const data = await students.save()
         res.json(data)
+    
 
     } catch (error) {
+        console.log(error)
         res.send('Error' + err)
+
     }
 
 });
