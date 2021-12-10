@@ -16,7 +16,7 @@ router.post('/create', async (req, res) => {
         res.json(newStudent)
     } catch (error) {
         console.log(error)
-        res.status(500).send('Error')
+        res.status(500).send('An error occurred while creating a record')
     }
 })
 //findAll
@@ -75,7 +75,8 @@ router.get('/delete/:id', async (req, res) => {
         res.json(data)
 
     } catch (error) {
-        res.send('Error' + err)
+        console.log(error + 'Student not found')
+        res.status(500).send('Error' + err)
     }
 
 });
