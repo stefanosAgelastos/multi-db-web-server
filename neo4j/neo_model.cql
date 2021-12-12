@@ -1,0 +1,146 @@
+CREATE 
+
+// Subject nodes
+(python:Subject {name:'Python'}),
+(java:Subject {name:'Java'}),
+(advanced_python:Subject {name:'Advanced Python'}),
+(design_patterns:Subject {name:'Design Patterns'}),
+(database:Subject {name:'Database'}),
+(ruby:Subject {name:'Ruby'}),
+(c_sharp:Subject {name:'C#'}),
+(swift:Subject {name:'Swift'}),
+(android:Subject {name:'Android'}),
+(cplus:Subject {name:'C++'}),
+(javascript:Subject {name:'Javascript'}),
+(testing:Subject {name:'Testing'}),
+
+
+// student nodes
+(john:Student {name:'John', subject1: 'Python', subject2: 'Android'}),
+(gabriel:Student {name:'Gabriel', subject1: 'Python', subject2: 'Advanced Python'}),
+(henry:Student {name:'Henry', subject1: 'Database', subject2: 'Android'}),
+(ali:Student {name:'Ali', subject1: 'Database', subject2: 'Java'}),
+(archana:Student {name:'Archana', subject1: 'Java', subject2: 'Testing'}),
+(stefanos:Student {name:'Stefanos', subject1: 'Java', subject2: 'Python'}),
+(muhammad:Student {name:'Muhammad', subject1: 'Testing', subject2: 'Advanced Python'}),
+(rafael:Student {name:'Rafael', subject1: 'Testing', subject2: 'Ruby'}),
+(ismail:Student {name:'Ismail', subject1: 'Javascript', subject2: 'Testing'}),
+(rikke:Student {name:'Rikke', subject1: 'Javascript', subject2: 'Java'}),
+(catlyn:Student {name:'Catlyn', subject1: 'Ruby', subject2: 'Testing'}),
+(regitze:Student {name:'Regitze', subject1: 'Ruby', subject2: 'Design Patterns'}),
+(daria:Student {name:'Daria', subject1: 'Android', subject2: 'Testing'}),
+(dunya:Student {name:'Dunya', subject1: 'Android', subject2: 'C++'}),
+(sanna:Student {name:'Sanna', subject1: 'Swift', subject2: 'C#'}),
+(sama:Student {name:'Sama', subject1: 'Swift', subject2: 'Database'}),
+(daoud:Student {name:'Daoud', subject1: 'C++', subject2: 'Testing'}),
+(fardin:Student {name:'Fardin', subject1: 'C++', subject2: 'C#'}),
+(farid:Student {name:'Farid', subject1: 'C#', subject2: 'Java'}),
+(faruq:Student {name:'Faruq', subject1: 'Design Patterns', subject2: 'Swift'}),
+
+// department node
+(kea:Department {name: 'KEA Department'}),
+
+// Semester nodes
+(sd22sum: Semester {name: 'SD22 Summer'}),
+(sd22win: Semester {name: 'SD22 Winter'}),
+
+// teacher nodes
+(tomas:Teacher {name: 'Tomas', email:'tomas@kea.dk'}),
+(jarl:Teacher {name: 'Jarl', email:'jarl@kea.dk'}),
+(asger:Teacher {name: 'Asger', email:'asbc@kea.dk'}),
+(andrea:Teacher {name: 'Andrea', email:'ande@kea.dk'}),
+
+
+// teacher nodes and subjects nodes relations
+(tomas)-[:TEACHES]->(database),
+(tomas)-[:TEACHES]->(python),
+(tomas)-[:TEACHES]->(java),
+(jarl)-[:TEACHES]->(advanced_python),
+(jarl)-[:TEACHES]->(design_patterns),
+(jarl)-[:TEACHES]->(c_sharp),
+(asger)-[:TEACHES]->(swift),
+(asger)-[:TEACHES]->(ruby),
+(asger)-[:TEACHES]->(android),
+(andrea)-[:TEACHES]->(cplus),
+(andrea)-[:TEACHES]->(javascript),
+(andrea)-[:TEACHES]->(testing),
+
+// teacher nodes and department nodes
+(tomas)-[:BELONGS_TO]->(kea),
+(jarl)-[:BELONGS_TO]->(kea),
+(asger)-[:BELONGS_TO]->(kea),
+(andrea)-[:BELONGS_TO]->(kea),
+
+// Maybe unnecessary
+// (tomas)-[:COLLEAGUE_TO]->(jarl),
+// (tomas)-[:COLLEAGUE_TO]->(asger),
+// (tomas)-[:COLLEAGUE_TO]->(andrea),
+// (jarl)-[:COLLEAGUE_TO]->(tomas),
+// (jarl)-[:COLLEAGUE_TO]->(asger),
+// (jarl)-[:COLLEAGUE_TO]->(andrea),
+// (asger)-[:COLLEAGUE_TO]->(tomas),
+// (asger)-[:COLLEAGUE_TO]->(jarl),
+// (asger)-[:COLLEAGUE_TO]->(andrea),
+// (andrea)-[:COLLEAGUE_TO]->(tomas),
+// (andrea)-[:COLLEAGUE_TO]->(jarl),
+// (andrea)-[:COLLEAGUE_TO]->(asger)
+
+// Relations between student and subject --> Needs to be executed sequentially (probably a better way to do so)
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Python' AND f.name = 'Python'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Java' AND f.name = 'Java'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Advanced Python' AND f.name = 'Advanced Python'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Design Patterns' AND f.name = 'Design Patterns'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Database' AND f.name = 'Database'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Ruby' AND f.name = 'Ruby'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'C#' AND f.name = 'C#'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Swift' AND f.name = 'Swift'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Android' AND f.name = 'Android'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'C++' AND f.name = 'C++'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Javascript' AND f.name = 'Javascript'
+CREATE (s)-[:STUDIES]->(f)
+
+MATCH (s:Student), (f:Subject)
+WHERE s.subject1= 'Testing' AND f.name = 'Testing'
+CREATE (s)-[:STUDIES]->(f)
+
+// subject node and semester node relations
+MATCH (n:Subject), (m:Semester)
+WHERE m.name = 'SD22 Summer'
+CREATE (n)-[:TAUGHT_IN]->(m)
+
+MATCH (a:Subject:Winter), (b:Semester)
+WHERE b.name = 'SD22 Winter'
+CREATE (a)-[:TAUGHT_IN]->(b)
+
+
