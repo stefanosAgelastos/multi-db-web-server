@@ -31,6 +31,8 @@ jobs:
         run: mysql -h 127.0.0.1 -P $MYSQLDB_LOCAL_PORT -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}"
       - name: Test that the view exists
         run: mysql -h 127.0.0.1 -P $MYSQLDB_LOCAL_PORT -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}" --execute="select * from students_program;"
+      - name: Install dependencies
+        run: npm i
       - name: Tests, run unit tests
         run: npm run test
       - name: Stop containers and remove volumes
