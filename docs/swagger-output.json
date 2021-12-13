@@ -112,8 +112,8 @@
         }
       }
     },
-    "/sql/": {
-      "post": {
+    "/sql/healthcheck": {
+      "get": {
         "tags": [],
         "description": "",
         "parameters": [],
