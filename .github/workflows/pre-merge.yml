@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install Node Dependencies
+        run: npm install
       - name: Create sample .env file
         # it is required by docker-compose
         # it is okay to make an empty file
@@ -31,20 +37,7 @@ jobs:
         run: mysql -h 127.0.0.1 -P $MYSQLDB_LOCAL_PORT -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}"
       - name: Test that the view exists
         run: mysql -h 127.0.0.1 -P $MYSQLDB_LOCAL_PORT -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}" --execute="select * from students_program;"
-      - name: Setup Node.js
-        # from https://www.voorhoede.nl/en/blog/super-fast-npm-install-on-github-actions/
-        uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-      - name: Tests, run unit tests
-        run: npm run test
+      - name: Run Unit Tests
+        run: npm test
       - name: Stop containers and remove volumes
         run: docker-compose down -v
