@@ -26,7 +26,7 @@ jobs:
           mysql -u $user -p${secret} -h $host -P $port --execute="DROP DATABASE IF EXISTS $database;"
           mysql -u $user -p${secret} -h $host -P $port --execute="show databases;"
       - shell: bash
-        name: Seed Database
+        name: Create and populate database with new scripts
         env:
           host: ${{ secrets.DO_DB_HOST}}
           port: ${{ secrets.DO_DB_PORT}}

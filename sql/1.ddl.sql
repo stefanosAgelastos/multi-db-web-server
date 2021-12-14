@@ -1,6 +1,10 @@
 CREATE SCHEMA IF NOT EXISTS `rollcall_db`;
 USE `rollcall_db` ;
 
+-- Allow creation of tables without Primary Key
+-- Primary Keys are defined at the end of the script
+SET SESSION sql_require_primary_key=0;
+
 -- -----------------------------------------------------
 -- Table `rollcall_db`.`kea_departments`
 -- -----------------------------------------------------
