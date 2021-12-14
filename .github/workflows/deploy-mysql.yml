@@ -1,0 +1,17 @@
+name: Deploy SQL changes
+on:
+  push:
+    branches:
+      - main
+      - FM-18
+    paths:
+      - '**.sql'
+jobs:
+  start-container:
+    runs-on: ubuntu-latest
+    env:
+      DB_HOST: localhost
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo something
