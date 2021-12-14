@@ -5,13 +5,18 @@ on:
       - main
       - FM-18
     paths:
-      - '**.sql'
+      - "**.sql"
 jobs:
-  start-container:
+  deploy-digital-ocean:
     runs-on: ubuntu-latest
-    env:
-      DB_HOST: localhost
+    environment: test
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - run: echo something
+      - name: echo something
+        with:
+          host: ${{DB_HOST}}
+          secret: ${{DB_SECRET}}
+          user: ${{DB_USER}}
+          database: ${{MYSQLDB_DATABASE}}
+        run: echo $host $secret $user $database
