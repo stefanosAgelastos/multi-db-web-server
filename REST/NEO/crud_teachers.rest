@@ -1,0 +1,9 @@
+GET http://localhost:8080/neo/teachers/all
+Content-Type: application/json
+
+### 
+GET http://localhost:8080/neo/teachers/
+Content-Type: application/json
+{
+    
+}
