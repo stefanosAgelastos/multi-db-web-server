@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: echo something
+      - shell: bash
         with:
           host: ${{ secrets.DB_HOST}}
           secret: ${{ secrets.DB_SECRET}}
