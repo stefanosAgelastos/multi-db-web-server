@@ -7,7 +7,8 @@
     "dev": "nodemon index.js",
     "test": "jest --watchAll --verbose --detectOpenHandles",
     "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true #",
-    "deploy": "node index.js"
+    "swagger-autogen": "node ./util/swagger.js",
+    "deploy": "node index.js --production"
   },
   "repository": {
     "type": "git",
@@ -21,16 +22,18 @@
   "homepage": "https://github.com/stefanosAgelastos/multi-db-web-server#readme",
   "devDependencies": {
     "nodemon": "^2.0.14",
-    "sequelize-auto": "^0.8.5"
+    "sequelize-auto": "^0.8.5",
+    "swagger-autogen": "^2.17.2"
   },
   "dependencies": {
-    "bcrypt":"^5.0.1",
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.5.1",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.2",
-    "sequelize": "^6.7.0"
+    "sequelize": "^6.7.0",
+    "swagger-ui-express": "^4.2.0"
   }
 }
