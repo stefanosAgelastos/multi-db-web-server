@@ -27,3 +27,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          region: eu
+          env_file: ./.env
+          healthcheck: https://fresh-masticha-rollcall.herokuapp.com/sql/health_check
+          checkstring: Connection has been established successfully.
+          delay: 20
