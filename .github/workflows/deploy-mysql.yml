@@ -14,7 +14,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - shell: bash
-        with:
+        env:
           host: ${{ secrets.DB_HOST}}
           secret: ${{ secrets.DB_SECRET}}
           user: ${{ secrets.DB_USER}}
