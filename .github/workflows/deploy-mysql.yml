@@ -15,8 +15,8 @@ jobs:
         uses: actions/checkout@v2
       - name: echo something
         with:
-          host: ${{DB_HOST}}
-          secret: ${{DB_SECRET}}
-          user: ${{DB_USER}}
-          database: ${{MYSQLDB_DATABASE}}
+          host: ${{ secrets.DB_HOST}}
+          secret: ${{ secrets.DB_SECRET}}
+          user: ${{ secrets.DB_USER}}
+          database: ${{ secrets.MYSQLDB_DATABASE}}
         run: echo $host $secret $user $database
