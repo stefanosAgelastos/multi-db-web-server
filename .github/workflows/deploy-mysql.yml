@@ -9,7 +9,7 @@ on:
 jobs:
   deploy-digital-ocean:
     runs-on: ubuntu-latest
-    environment: test
+    environment: staging
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
