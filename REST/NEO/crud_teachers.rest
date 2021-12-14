@@ -1,9 +1,6 @@
-GET http://localhost:8080/neo/teachers/all
+GET http://localhost:8080/neo/teachers/
 Content-Type: application/json
 
 ### 
-GET http://localhost:8080/neo/teachers/
+GET http://localhost:8080/neo/teacher/33
 Content-Type: application/json
-{
-    
-}
