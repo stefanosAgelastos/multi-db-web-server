@@ -30,7 +30,6 @@ const studentSchema = new mongoose.Schema({
     subjects: {
         type: [subjectSchema],
         required: true
-       
     }
 });
 
