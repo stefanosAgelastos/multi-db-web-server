@@ -1,5 +1,5 @@
-require('dotenv').config();
-const neo = require('./connectors/db.neo');
+wwwwwwwrequire('dotenv').config();
+const neo = require('../connectors/db.neo');
 
 
 async function test() {
