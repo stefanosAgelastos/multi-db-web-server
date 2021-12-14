@@ -6,61 +6,55 @@ db.createCollection('students');
 
 db.students.insertMany([
     {
-        "name": "test",
-        "user_name": "sample1",
+        "name": "TariqZ",
+        "user_name": "Tariq@kea.dk",
         "password": "12345678",
         "semester": "1",
         "subjects": [
             {
-                "subjects_name": "test"
+                "subjects_name": "Database"
             },
             {
-                "subjects_name": "test"
+                "subjects_name": "DLS"
             },
             {
-                "subjects_name": "test"
-            },
-            {
-                "subjects_name": "test"
+                "subjects_name": "Testing"
             }
         ]
     },
     {
-        "name": "test",
-        "user_name": "sample2",
+        "name": "StefA",
+        "user_name": "StefA@kea.dk",
         "password": "12345678",
         "semester": "1",
         "subjects": [
             {
-                "subjects_name": "test"
+                "subjects_name": "Database"
             },
             {
-                "subjects_name": "test"
+                "subjects_name": "DLS"
             },
             {
-                "subjects_name": "test"
-            },
-            {
-                "subjects_name": "test"
+                "subjects_name": "Testing"
             }
         ]
     }, {
-        "name": "test",
-        "user_name": "sample3",
+        "name": "AnneM",
+        "user_name": "AnneM@kea.dk",
         "password": "12345678",
-        "semester": "1",
+        "semester": "2",
         "subjects": [
             {
-                "subjects_name": "test"
+                "subjects_name": "Python"
             },
             {
-                "subjects_name": "test"
+                "subjects_name": "Design Pattern"
             },
             {
-                "subjects_name": "test"
+                "subjects_name": "System Intregation"
             },
             {
-                "subjects_name": "test"
+                "subjects_name": "Java"
             }
         ]
     }
