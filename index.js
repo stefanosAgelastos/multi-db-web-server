@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 require('dotenv').config();
+const mongoose = require('./connectors/db.mongo');
+
 const PORT = process.env.NODE_DOCKER_PORT || 9090;
 
 //Allows the use of JSON (for POST requests)
@@ -11,7 +13,8 @@ app.use(express.json());
 app.use(express.static('frontend', { extensions: ['html'] }))
 // load the mysql routers to our app
 require("./routes/routes.mysql")(app);
-
+// load the mysql routers to our app
+require("./routes/routes.mongo")(app);
 
 const server = app.listen(PORT, (error) => {
     if (error) {
