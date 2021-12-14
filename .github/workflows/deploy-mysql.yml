@@ -24,3 +24,4 @@ jobs:
         run: |
           mysql -u $user -p${secret} -h $host -P $port --execute="show databases;"
           mysql -u $user -p${secret} -h $host -P $port --execute="DROP DATABASE IF EXISTS $database;"
+          mysql -u $user -p${secret} -h $host -P $port --execute="show databases;"
