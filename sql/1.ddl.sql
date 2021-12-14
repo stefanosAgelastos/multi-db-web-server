@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS `rollcall_db`;
 USE `rollcall_db` ;
-
+ 
 -- -----------------------------------------------------
 -- Table `rollcall_db`.`kea_departments`
 -- -----------------------------------------------------
