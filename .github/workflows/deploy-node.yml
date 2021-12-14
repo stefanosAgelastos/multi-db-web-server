@@ -6,7 +6,6 @@ on:
       - FM-18
 jobs:
   deploy-heroku:
-    needs: build
     runs-on: ubuntu-latest
     environment: staging
     steps:
