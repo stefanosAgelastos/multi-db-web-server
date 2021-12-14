@@ -15,8 +15,9 @@ jobs:
         uses: actions/checkout@v2
       - shell: bash
         env:
-          host: ${{ secrets.DB_HOST}}
-          secret: ${{ secrets.DB_SECRET}}
-          user: ${{ secrets.DB_USER}}
+          host: ${{ secrets.DO_DB_HOST}}
+          port: ${{ secrets.DO_DB_PORT}}
+          secret: ${{ secrets.DO_DB_SECRET}}
+          user: ${{ secrets.DO_DB_USER}}
           database: ${{ secrets.MYSQLDB_DATABASE}}
-        run: echo $host $secret $user $database
+        run: mysql -u $user -p${secret} -0 -h $host -P $port --execute="show databases;"
