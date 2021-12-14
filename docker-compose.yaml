@@ -1,5 +1,8 @@
 version: "3.1"
 
+volumes:
+  sqldb:
+
 services:
 
   mysql_container:
@@ -20,7 +23,7 @@ services:
       - ./sql/:/docker-entrypoint-initdb.d/
 
 
-  app: 
+  app_container: 
     depends_on: 
       - mysql_container
       - mongo_container
@@ -36,7 +39,7 @@ services:
         MYSQLDB_DATABASE: ${MYSQLDB_DATABASE}
         NODE_DOCKER_PORT: ${NODE_DOCKER_PORT}
         MYSQLDB_LOCAL_PORT: ${MYSQLDB_DOCKER_PORT}
-        MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:${MONGO_DOCKER_PORT}
+        MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:27017
     volumes:
     - .:/usr/src/app
     - /usr/src/app/node_modules
@@ -51,6 +54,5 @@ services:
       - ${MONGO_DOCKER_PORT}:27017
     volumes:
       - ./mongo/sample_data.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-volumes:
-  sqldb:
+
  
