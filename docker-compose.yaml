@@ -40,6 +40,7 @@ services:
         NODE_DOCKER_PORT: ${NODE_DOCKER_PORT}
         MYSQLDB_LOCAL_PORT: ${MYSQLDB_DOCKER_PORT}
         MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:27017
+        JWT_SECRET: ${JWT_SECRET}
     volumes:
     - .:/usr/src/app
     - /usr/src/app/node_modules

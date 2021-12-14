@@ -18,9 +18,10 @@ jobs:
           echo DB_SECRET=${{ secrets.DO_DB_SECRET }} >> .env
           echo MYSQLDB_DATABASE=${{ secrets.DO_DB_NAME }} >> .env
           echo MYSQLDB_LOCAL_PORT=${{ secrets.DO_DB_PORT }} >> .env
-          echo NODE_DOCKER_PORT=${{ secrets.NODE_PORT }} >> .env
           echo MDB_CONNECTION=${{ secrets.AT_MDB_CONNECTION }} >> .env
-          echo API_KEY=${{ secrets.API_KEY }} >> .env
+          echo NODE_DOCKER_PORT=${{ secrets.HEROKU_PORT }} >> .env
+          echo PORT=${{ secrets.HEROKU_PORT }} >> .env
+          echo JWT_SECRET=${{ secrets.HEROKU_JWT_SECRET }} >> .env
           cat .env
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
