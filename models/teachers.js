@@ -44,9 +44,9 @@ module.exports = function (sequelize, DataTypes) {
         notNull: {
           msg: 'You must enter a password'
         },
-        len: {
-          args: [5, 100],
-          msg: 'Please enter a password with at least 5 chars long but no more than 8 chars long'
+        len:{
+          args:[8,120],
+          msg:'Please enter a password with at least 5 chars long but no more than 8 chars long'
         },
 
         /* startsWithUpper: function (first_name,last_name){

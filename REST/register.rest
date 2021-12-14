@@ -1,0 +1,22 @@
+###Register teacher
+POST http://localhost:8080/sql/register/ 
+Content-Type: application/json
+
+{
+    "email": "ASBC@kea.dk",
+    "activation_code": "ASBC",
+    "password": "weqweqwe",
+    "repeat_password": "weqweqwe"
+}
+
+###Register student
+POST http://localhost:8080/sql/register/ 
+Content-Type: application/json
+
+{
+    "email": "Ole1234@kea.dk",
+    "activation_code": "Ole1234",
+    "password": "weqweqwe",
+    "repeat_password": "weqweqwe"
+}
+
