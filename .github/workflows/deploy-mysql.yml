@@ -20,4 +20,4 @@ jobs:
           secret: ${{ secrets.DO_DB_SECRET}}
           user: ${{ secrets.DO_DB_USER}}
           database: ${{ secrets.MYSQLDB_DATABASE}}
-        run: mysql -u $user -p${secret} -0 -h $host -P $port --execute="show databases;"
+        run: mysql -u $user -p${secret} -h $host -P $port --execute="show databases;"
