@@ -5,7 +5,7 @@ const doc = {
     title: 'Rollcall API documentation',
     description: 'Description of the application endpoints',
   },
-  host: 'localhost:3000',
+  host: 'localhost:8080',
   schemes: ['http'],
 };
 
