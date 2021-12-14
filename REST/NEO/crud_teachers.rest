@@ -2,5 +2,5 @@ GET http://localhost:8080/neo/teachers/
 Content-Type: application/json
 
 ### 
-GET http://localhost:8080/neo/teacher/2
+GET http://localhost:8080/neo/teacher/29
 Content-Type: application/json
