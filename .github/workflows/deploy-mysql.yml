@@ -4,8 +4,8 @@ on:
     branches:
       - main
       - FM-18
-    paths:
-      - "**.sql"
+    # paths:
+    #   - "**.sql"
 jobs:
   deploy-digital-ocean:
     runs-on: ubuntu-latest
