@@ -28,6 +28,8 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           region: eu
           env_file: ./.env
-          healthcheck: https://fresh-masticha-rollcall.herokuapp.com/sql/health_check
+          healthcheck: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/sql/health_check
           checkstring: Connection has been established successfully.
           delay: 10
+      - name: Print some application logs
+        run: heroku logs -a ${{secrets.HEROKU_APP_NAME}}

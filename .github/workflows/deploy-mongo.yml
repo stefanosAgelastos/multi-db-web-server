@@ -31,4 +31,6 @@ jobs:
           echo MDB_CONNECTION=${{ secrets.AT_MDB_CONNECTION }} >> .env
           cat .env
       - name: Install dependencies
+        run: echo true
       - name: Migrate data from staging mysql to staging mongo
+        run: echo true
