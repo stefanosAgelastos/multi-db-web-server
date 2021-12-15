@@ -30,4 +30,4 @@ jobs:
           env_file: ./.env
           healthcheck: https://fresh-masticha-rollcall.herokuapp.com/sql/health_check
           checkstring: Connection has been established successfully.
-          delay: 20
+          delay: 10
