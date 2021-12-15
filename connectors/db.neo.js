@@ -6,3 +6,15 @@ const session = driver.session();
 const neo = session;
 
 module.exports = { driver, session }
+
+
+// async function cypherQuery(statement, params = {}) {
+//     try {
+//         const result = await session.run(statement, params);
+//         await session.close();
+//         return result;
+//     } catch (err) {
+//         throw err;
+//     }
+// }
+// module.exports = {cypherQuery }

@@ -24,9 +24,9 @@ CREATE
 (semester2: Semester {name: 'Semester2'})-[:HAS]->(web_development), (semester2)-[:HAS]->(design_patterns), (semester2)-[:HAS]->(django),
 
 // teacher nodes and subject relations
-(tomas:Teacher {name: 'Tomas', email:'tomas@kea.dk'})-[:TEACHES]->(database),
-(jarl:Teacher {name: 'Jarl', email:'jarl@kea.dk'})-[:TEACHES]->(testing),
-(asger:Teacher {name: 'Asger', email:'asbc@kea.dk'})-[:TEACHES]->(testing),
-(andrea:Teacher {name: 'Andrea', email:'ande@kea.dk'})-[:TEACHES]->(dls), (andrea)-[:TEACHES]->(design_patterns),
-(peter:Teacher {name: 'Peter', email:'pet@kea.dk'})-[:TEACHES]->(django),
-(chris:Teacher {name: 'Chris', email:'chri@kea.dk'})-[:TEACHES]->(web_development)
+(tomas:Teacher {name: 'Tomas Pesek', email:'tomas@kea.dk'})-[:TEACHES]->(database),
+(jarl:Teacher {name: 'Jarl Tuxen', email:'jarl@kea.dk'})-[:TEACHES]->(testing),
+(asger:Teacher {name: 'Asger B Clausen', email:'asbc@kea.dk'})-[:TEACHES]->(testing),
+(andrea:Teacher {name: 'Andrea Andreasen', email:'ande@kea.dk'})-[:TEACHES]->(dls), (andrea)-[:TEACHES]->(design_patterns),
+(peter:Teacher {name: 'Peter Petersen', email:'pet@kea.dk'})-[:TEACHES]->(django),
+(chris:Teacher {name: 'Chris Christensen', email:'chri@kea.dk'})-[:TEACHES]->(web_development)
