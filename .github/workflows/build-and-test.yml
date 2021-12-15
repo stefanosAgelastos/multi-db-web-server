@@ -1,7 +1,7 @@
-name: Start docker container
+name: Build app and run tests
 on: [pull_request]
 jobs:
-  start-container:
+  build:
     runs-on: ubuntu-latest
     env:
       DB_HOST: localhost
@@ -21,11 +21,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Create sample .env file
-        # it is required by docker-compose
-        # it is okay to make an empty file
-        # docker compose will read the variables from the environment
-        # that we declared above in env:
+      - name: Create empty .env file (required by docker-compose)
         run: touch .env
       - name: Start containers
         run: docker-compose up -d --build
