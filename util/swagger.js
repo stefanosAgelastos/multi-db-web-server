@@ -11,8 +11,8 @@ const doc = {
     title: 'Rollcall API documentation',
     description: 'Description of the application endpoints',
   },
-  host: host_name,
-  schemes: ['http'],
+  host: null,
+  schemes: ['http', 'https'],
 };
 
 const outputFile = './docs/swagger-output.json';
