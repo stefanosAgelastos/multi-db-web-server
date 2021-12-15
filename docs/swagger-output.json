@@ -5,7 +5,7 @@
     "description": "Description of the application endpoints",
     "version": "1.0.0"
   },
-  "host": 0,
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [],
   "schemes": [

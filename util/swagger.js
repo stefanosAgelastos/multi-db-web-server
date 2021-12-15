@@ -1,11 +1,17 @@
 const swaggerAutogen = require('swagger-autogen')();
+require('dotenv').config();
+
+let host_name;
+
+if(process.env.NODE_ENV === 'production') host_name='fresh-masticha-rollcall.herokuapp.com'
+else host_name=`localhost:${process.env.NODE_DOCKER_PORT || process.env.PORT}`
 
 const doc = {
   info: {
     title: 'Rollcall API documentation',
     description: 'Description of the application endpoints',
   },
-  host: process.env.HEROKU_URL | `localhost:${process.env.PORT}`,
+  host: host_name,
   schemes: ['http'],
 };
 
