@@ -5,11 +5,11 @@
     "description": "Description of the application endpoints",
     "version": "1.0.0"
   },
-  "host": "fresh-masticha-rollcall.herokuapp.com",
   "basePath": "/",
   "tags": [],
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "consumes": [],
   "produces": [],
