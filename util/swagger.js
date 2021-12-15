@@ -1,18 +1,13 @@
 const swaggerAutogen = require('swagger-autogen')();
 require('dotenv').config();
 
-let host_name;
-
-if(process.env.SWAGGER_DEV) host_name=`localhost:${process.env.NODE_DOCKER_PORT || process.env.PORT}`
-else host_name='fresh-masticha-rollcall.herokuapp.com'
-
 const doc = {
   info: {
     title: 'Rollcall API documentation',
     description: 'Description of the application endpoints',
   },
   host: null,
-  schemes: ['http', 'https'],
+  schemes: ['https', 'http'],
 };
 
 const outputFile = './docs/swagger-output.json';
@@ -29,4 +24,4 @@ swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
 
 
 
-host_name='fresh-masticha-rollcall.herokuapp.com'
+host_name = 'fresh-masticha-rollcall.herokuapp.com'

@@ -8,8 +8,8 @@
   "basePath": "/",
   "tags": [],
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "consumes": [],
   "produces": [],
