@@ -3,8 +3,8 @@ require('dotenv').config();
 
 let host_name;
 
-if(process.env.NODE_ENV === 'production') host_name='fresh-masticha-rollcall.herokuapp.com'
-else host_name=`localhost:${process.env.NODE_DOCKER_PORT || process.env.PORT}`
+if(process.env.SWAGGER_DEV) host_name=`localhost:${process.env.NODE_DOCKER_PORT || process.env.PORT}`
+else host_name='fresh-masticha-rollcall.herokuapp.com'
 
 const doc = {
   info: {
@@ -26,3 +26,7 @@ swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
   if (process.env.SWAGGER_DEV) { require('../index.js'); }
   else return;
 });
+
+
+
+host_name='fresh-masticha-rollcall.herokuapp.com'
