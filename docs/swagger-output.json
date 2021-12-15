@@ -5,7 +5,7 @@
     "description": "Description of the application endpoints",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": 0,
   "basePath": "/",
   "tags": [],
   "schemes": [
@@ -162,7 +162,7 @@
         }
       }
     },
-    "/sql/healthcheck": {
+    "/sql/health_check": {
       "get": {
         "tags": [
           "operational",

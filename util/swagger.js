@@ -5,7 +5,7 @@ const doc = {
     title: 'Rollcall API documentation',
     description: 'Description of the application endpoints',
   },
-  host: 'localhost:8080',
+  host: process.env.HEROKU_URL | `localhost:${process.env.PORT}`,
   schemes: ['http'],
 };
 

@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - FM-18
+      - documentation
 jobs:
   deploy-heroku:
     runs-on: ubuntu-latest
@@ -20,6 +20,7 @@ jobs:
           echo MYSQLDB_LOCAL_PORT=${{ secrets.DO_DB_PORT }} >> .env
           echo MDB_CONNECTION=${{ secrets.AT_MDB_CONNECTION }} >> .env
           echo JWT_SECRET=${{ secrets.HEROKU_JWT_SECRET }} >> .env
+          echo HEROKU_URL=${{ secrets.HEROKU_APP_NAME }} >>.herokuapp.com .env
           cat .env
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -28,6 +29,7 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           region: eu
           env_file: ./.env
+          procfile: "web: npm run deploy"
           healthcheck: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/sql/health_check
           checkstring: Connection has been established successfully.
           delay: 10
