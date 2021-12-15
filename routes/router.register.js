@@ -8,6 +8,23 @@ const { validateRegister } = require('../util/validate');
 //POST
 router.post('/register', rateLimiter, async (req, res) => {
 
+    /*
+    #swagger.tags = ['authentication/authorization', 'mysql']
+    #swagger.summary = 'registertration for students and teachers'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'credentials',
+        required: true,
+        schema: {
+            "email": "ASBC@kea.dk",
+            "activation_code": "ASBC",
+            "password": "weqweqwe",
+            "repeat_password": "weqweqwe"
+        }
+    }
+    #swagger.responses[200] = { description: "Succesfull registered and redirect to login" } */
+
     const { error } = validateRegister(req.body);
     if (error) return res.status(400).send(error.details[0].message); //400 = bad request
 

@@ -7,6 +7,22 @@ const jwt = require('jsonwebtoken');
 const db = require('../connectors/db.mysql');
 
 router.post('/login', ratelimiter, async (req, res) => {
+
+    /*
+        #swagger.tags = ['authentication/authorization', 'mysql']
+        #swagger.summary = 'login for students and teachers and get token'
+        #swagger.consumes = ['application/json']
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'credential set of email and password',
+            required: true,
+            schema: {
+                email: "ASBC@kea.dk", 
+                password: "weqweqwe"
+            }
+        }
+        #swagger.responses[200] = { description: "Succesfull login and redirect to user's home" } */
+
     try {
 
         const { error } = validateLogin(req.body);
@@ -61,6 +77,11 @@ function authenticateToken(req, res, next) {
 }
 // test route
 router.get('/auth', authenticateToken, (req, res) => {
+
+        /*
+   #swagger.tags = ['authentication/authorization']
+   #swagger.summary = 'check token'*/
+
     return res.status(500).json({ message: "can you see me?" });
 });
 

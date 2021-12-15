@@ -4,6 +4,34 @@ const Student = require('../mongo/studentModel');
 
 // InsertOne
 router.post('/create', async (req, res) => {
+
+    /*
+   #swagger.tags = ['student', 'mongo']
+   #swagger.summary = 'create a student record in mongo db'
+   #swagger.consumes = ['application/json']
+   #swagger.parameters['body'] = {
+       in: 'body',
+       description: 'student details',
+       required: true,
+       schema: {
+           "name": "TariqZ",
+           "user_name": "Tariq@kea.dk",
+           "password": "12345678",
+           "semester": "1",
+           "subjects": [
+               {
+                   "subjects_name": "Database"
+               },
+               {
+                   "subjects_name": "DLS"
+               },
+               {
+                   "subjects_name": "Testing"
+               }
+           ]
+       }
+   }*/
+
     const student = new Student({
         name: req.body.name,
         user_name: req.body.user_name,
@@ -21,6 +49,11 @@ router.post('/create', async (req, res) => {
 })
 //findAll
 router.get('/findAll', async (req, res) => {
+
+    /*
+   #swagger.tags = ['student', 'mongo']
+   #swagger.summary = 'get all students records from mongo database'*/
+
     try {
 
         const students = await Student.find()
@@ -33,6 +66,16 @@ router.get('/findAll', async (req, res) => {
 //findOne
 
 router.get('/find/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['student', 'mongo']
+    #swagger.summary = 'find one student from mongo database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'student id',
+        required: true
+    } */
+
     try {
         const students = await Student.findById(req.params.id)
         res.json(students)
@@ -48,6 +91,36 @@ router.get('/find/:id', async (req, res) => {
 
 // update
 router.patch('/update/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['student', 'mongo']
+    #swagger.summary = 'update a student's record details in mongo db'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'student details',
+        required: true,
+        schema: {
+            "name": "TariqZ",
+            "user_name": "Tariq@kea.dk",
+            "password": "12345678",
+            "semester": "1",
+            "subjects": [
+                {
+                    "subjects_name": "Testing"
+                },
+                {
+                    "subjects_name": "Database"
+                }
+            ]
+        }
+    }
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'student id',
+        required: true
+    } */
+
     try {
         const students = await Student.findById(req.params.id)
         students.name = req.body.name
@@ -57,7 +130,7 @@ router.patch('/update/:id', async (req, res) => {
         students.subjects = req.body.subjects
         const data = await students.save()
         res.json(data)
-    
+
 
     } catch (error) {
         console.log(error)
@@ -69,6 +142,16 @@ router.patch('/update/:id', async (req, res) => {
 
 // delete
 router.get('/delete/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['student', 'mongo']
+    #swagger.summary = 'delete one student from mongo database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'student id',
+        required: true
+    } */
+
     try {
         const students = await Student.findById(req.params.id)
         const data = await students.delete()
