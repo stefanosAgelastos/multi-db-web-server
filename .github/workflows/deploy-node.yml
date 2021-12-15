@@ -1,0 +1,35 @@
+name: Deploy App
+on:
+  push:
+    branches:
+      - main
+      - FM-18
+jobs:
+  deploy-heroku:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create env file
+        run: |
+          touch .env
+          echo DB_HOST=${{ secrets.DO_DB_HOST }} >> .env
+          echo DB_USER=${{ secrets.DO_DB_USER }} >> .env
+          echo DB_SECRET=${{ secrets.DO_DB_SECRET }} >> .env
+          echo MYSQLDB_DATABASE=${{ secrets.DO_DB_NAME }} >> .env
+          echo MYSQLDB_LOCAL_PORT=${{ secrets.DO_DB_PORT }} >> .env
+          echo MDB_CONNECTION=${{ secrets.AT_MDB_CONNECTION }} >> .env
+          echo JWT_SECRET=${{ secrets.HEROKU_JWT_SECRET }} >> .env
+          cat .env
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          region: eu
+          env_file: ./.env
+          healthcheck: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/sql/health_check
+          checkstring: Connection has been established successfully.
+          delay: 10
+      - name: Print some application logs
+        run: heroku logs -a ${{secrets.HEROKU_APP_NAME}}

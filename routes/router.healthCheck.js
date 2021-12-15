@@ -2,7 +2,7 @@ const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
 
-router.get("/healthcheck", function (req, res) {
+router.get("/health_check", function (req, res) {
 
     /*
    #swagger.tags = ['operational', 'mysql']
