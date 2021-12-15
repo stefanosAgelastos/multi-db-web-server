@@ -3,7 +3,7 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('./connectors/db.mongo');
 
-const PORT = process.env.NODE_DOCKER_PORT || 9090;
+const PORT = process.env.NODE_DOCKER_PORT || process.env.PORT || 9090;
 
 //Allows the use of JSON (for POST requests)
 app.use(express.urlencoded({ extended: true }));
