@@ -1,10 +1,6 @@
 {
   "name": "multi-db-web-server",
   "version": "1.0.0",
-  "engines": {
-    "node": "12.x",
-    "npm": "6.3.x"
-  },
   "description": "Node.js API with polyglot persistence",
   "main": "index.js",
   "scripts": {
