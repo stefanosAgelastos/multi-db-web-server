@@ -8,7 +8,7 @@
     "test": "jest --watchAll --verbose --detectOpenHandles",
     "generate-models": "sequelize-auto -h localhost -d rollcall_db -u root -x databases -p 3306  --dialect mysql -o ./models/ -v true #",
     "swagger-generate": "node ./util/swagger.js",
-    "swagger-dev": "SWAGGER_DEV=true nodemon --ignore docs/ --exec node ./util/swagger.js",
+    "swagger-dev": "SWAGGER_DEV=true nodemon --ignore docs/ --exec node ./util/swagger.js"
   },
   "repository": {
     "type": "git",
