@@ -92,7 +92,6 @@ CREATE TABLE IF NOT EXISTS `rollcall_db`.`students_presence` (
 `current_datetime` DATETIME NOT NULL);
 
 
-
 ALTER TABLE `rollcall_db`.`kea_departments` ADD PRIMARY KEY (`department_id`);
 
 ALTER TABLE `rollcall_db`.`programs` ADD PRIMARY KEY (`program_id`);

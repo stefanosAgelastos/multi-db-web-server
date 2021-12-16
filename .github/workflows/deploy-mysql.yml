@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - FM-18
     paths:
       - "./sql/**.sql"
 jobs:
