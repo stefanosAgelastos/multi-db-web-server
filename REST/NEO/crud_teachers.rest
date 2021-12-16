@@ -1,0 +1,28 @@
+GET http://localhost:8080/neo/teachers/
+Content-Type: application/json
+
+### 
+GET http://localhost:8080/neo/teacher/4
+Content-Type: application/json
+
+###
+POST http://localhost:8080/neo/newTeacher
+Content-Type: application/json
+
+{
+    "name":"Anders Latif",
+    "email":"Latif@kea.dk"
+}
+
+###
+PATCH  http://localhost:8080/neo/teacher/88
+Content-Type: application/json
+
+{
+    "name":"Jiayi",
+    "email":"Jiayi@KEA.com"
+}
+
+###
+DELETE http://localhost:8080/neo/teacher/88
+Content-Type: application/json
