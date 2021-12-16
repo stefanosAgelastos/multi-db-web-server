@@ -5,7 +5,7 @@ on:
       - main
       - FM-18
     paths:
-      - "./sql/**.sql"
+      - "./sql/**"
 jobs:
   deploy-digital-ocean:
     runs-on: ubuntu-latest
