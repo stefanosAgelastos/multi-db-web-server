@@ -19,6 +19,8 @@ app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // load the mysql routers to our app
 require("./routes/routes.mysql")(app);
+// Load the neo4j routes to our app 
+require('./routes/routes.neo')(app);
 
 // load the mongo routers to our app
 require("./routes/routes.mongo")(app);
