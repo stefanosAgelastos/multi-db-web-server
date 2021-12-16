@@ -500,6 +500,172 @@
         }
       }
     },
+    "/neo/newTeacher": {
+      "post": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "create a teacher record in neo4j db",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Anders Latif"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Latif@kea.dk"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      }
+    },
+    "/neo/teachers/": {
+      "get": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "get all teachers records from neo4j database",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/neo/teacher/{id}": {
+      "get": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "find one teacher from neo4j database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "update a teacher",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Jiayi"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Jiayi@KEA.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "delete one teacher from neo4j database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
     "/mongo/student/create": {
       "post": {
         "tags": [
