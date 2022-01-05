@@ -2,7 +2,7 @@ USE rollcall_db;
 
 DROP VIEW  IF EXISTS students_program;
 
-CREATE VIEW students_program
+CREATE VIEW students_programs_departments
 AS
 SELECT 
 	student_id AS Student_id, 
@@ -17,3 +17,22 @@ FROM
     students AS s INNER JOIN programs AS p, kea_departments AS k 
 WHERE p.department_id = k.department_id
 AND s.program_id = p.program_id;
+
+
+
+DROP VIEW  IF EXISTS teachers_semesters_subjects;
+
+CREATE VIEW teachers_semesters_subjects
+AS
+SELECT
+	teachers.teacher_id,
+	fullname (first_name,
+	last_name) AS Fullname,
+	semester,
+	subject_name
+FROM
+	teachers
+JOIN teachers_subjects ON
+	teachers.teacher_id = teachers_subjects.teacher_id
+JOIN subjects ON
+	teachers_subjects.subject_id = subjects.subject_id;
