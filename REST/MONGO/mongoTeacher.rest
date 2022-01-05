@@ -4,16 +4,16 @@ POST http://localhost:8080/mongo/teacher/createTeacher
 Content-Type: application/json
 
 {
-    "name": "Jarl Tuxen",
-    "user_name": "JarlT@kea.dk",
+    "name": "David C ",
+    "user_name": "DavC@kea.dk",
     "password": "12345678",
     "semester": "SD21i",
     "subjects": [
         {
-            "subjects_name": "Software Des"
+            "subjects_name": "Software Designing"
         },
         {
-            "subjects_name": "Testing"
+            "subjects_name": "ITO"
         }
     ]
 }
@@ -22,29 +22,30 @@ Content-Type: application/json
 GET http://localhost:8080/mongo/teacher/findAllTeacher
 
 ###
-GET http://localhost:8080/mongo/teacher/findTeacher/61b20fe23af923a52761634d
+GET http://localhost:8080/mongo/teacher/findTeacher/61d60760bb8cca54bb5453ec
 
 
 ###
-GET http://localhost:8080/mongo/teacher/deleteTeacher/61b20fe23af923a52761634d
+GET http://localhost:8080/mongo/teacher/deleteTeacher/61d60760bb8cca54bb5453ec
 
 ###
-PATCH http://localhost:8080/mongo/teacher/updateTeacher/61b20fe23af923a52761634d
-
-
+PATCH http://localhost:8080/mongo/teacher/updateTeacher/61d6087abb8cca54bb545404
 Content-Type: application/json
 
 {
-    "name": "Jarl Tuxen",
-    "user_name": "JarlT@kea.dk",
+    "name": "Andrea C",
+    "user_name": "Andc@kea.dk",
     "password": "12345678",
     "semester": "SD21i",
     "subjects": [
-        {
-            "subjects_name": "Software Des"
-        },
-        {
-            "subjects_name": "Testing"
-        }
+      {
+        "subjects_name": "Software Pattern"  
+      },
+      {
+        "subjects_name": "DLS"
+      },
+      {
+        "subjects_name": "Scalability"
+      }
     ]
 }

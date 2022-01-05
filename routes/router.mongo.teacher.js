@@ -57,12 +57,10 @@ router.patch('/updateTeacher/:id', async (req, res) => {
         teachers.subjects = req.body.subjects
         const data = await teachers.save()
         res.json(data)
-    
 
     } catch (error) {
         console.log(error)
         res.send('Error' + err)
-
     }
 
 });
