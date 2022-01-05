@@ -1,0 +1,50 @@
+
+###
+POST http://localhost:8080/mongo/teacher/createTeacher
+Content-Type: application/json
+
+{
+    "name": "Jarl Tuxen",
+    "user_name": "JarlT@kea.dk",
+    "password": "12345678",
+    "semester": "SD21i",
+    "subjects": [
+        {
+            "subjects_name": "Software Des"
+        },
+        {
+            "subjects_name": "Testing"
+        }
+    ]
+}
+
+###
+GET http://localhost:8080/mongo/teacher/findAllTeacher
+
+###
+GET http://localhost:8080/mongo/teacher/findTeacher/61b20fe23af923a52761634d
+
+
+###
+GET http://localhost:8080/mongo/teacher/deleteTeacher/61b20fe23af923a52761634d
+
+###
+PATCH http://localhost:8080/mongo/teacher/updateTeacher/61b20fe23af923a52761634d
+
+
+Content-Type: application/json
+
+{
+    "name": "Jarl Tuxen",
+    "user_name": "JarlT@kea.dk",
+    "password": "12345678",
+    "semester": "SD21i",
+    "subjects": [
+        {
+            "subjects_name": "Software Des"
+        },
+        {
+            "subjects_name": "Testing"
+        }
+    ]
+}
