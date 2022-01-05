@@ -27,4 +27,4 @@ jobs:
       - name: Create and populate database
         run: cat ./sql/*.sql | mysql -u $user -p${secret} -h $host -P $port
       - name: Test that view object exists
-        run: mysql -u $user -p${secret} -h $host -P $port --database="${database}" --execute="select * from students_program;"
+        run: mysql -u $user -p${secret} -h $host -P $port --database="${database}" --execute="select * from teachers_semesters_subjects;"
