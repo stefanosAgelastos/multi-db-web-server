@@ -1,6 +1,6 @@
 USE rollcall_db;
 
-DROP VIEW  IF EXISTS students_program;
+DROP VIEW  IF EXISTS students_programs_departments;
 
 CREATE VIEW students_programs_departments
 AS
@@ -26,9 +26,10 @@ CREATE VIEW teachers_semesters_subjects
 AS
 SELECT
 	teachers.teacher_id,
+	subjects.subject_id,
+	semester,
 	fullname (first_name,
 	last_name) AS Fullname,
-	semester,
 	subject_name
 FROM
 	teachers
