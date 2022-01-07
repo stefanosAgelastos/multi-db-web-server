@@ -12,10 +12,10 @@ app.use(express.static('frontend', { extensions: ['html'], index: 'login.html' }
 require("../routes/routes.mysql")(app);
 
 // Load the neo4j routes to our app 
-require('./routes/routes.neo')(app);
+require('../routes/routes.neo')(app);
 
 // load the mysql routers to our app
-require("./routes/routes.mongo")(app);
+require("../routes/routes.mongo")(app);
 
 
 module.exports = app;
