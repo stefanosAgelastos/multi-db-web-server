@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/stefanosAgelastos/multi-db-web-server#readme",
   "devDependencies": {
-    "nodemon": "^2.0.14",
+    "nodemon": "^2.0.15",
     "sequelize-auto": "^0.8.5"
   },
   "dependencies": {
@@ -31,8 +31,10 @@
     "jest": "^27.4.3",
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.0",
     "mysql2": "^2.3.2",
-    "sequelize": "^6.7.0",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "neo4j-driver": "^4.4.1",
+    "sequelize": "^6.7.0"
   }
 }
