@@ -18,6 +18,10 @@ jobs:
       MONGO_DOCKER_ROOT_PASSWORD: 12345678
       MONGO_DOCKER_PORT: 27017
       MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:27017
+      NEO_HOST: bolt://localhost:7687
+      NEO_SECRET: password
+      NEO_USER: neo4j
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
