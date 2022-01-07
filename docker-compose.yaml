@@ -45,7 +45,8 @@ services:
       # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
       - ./sql/:/docker-entrypoint-initdb.d/
 
-  neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
+  neo4j:
+    # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
     image: neo4j:3.5
     restart: unless-stopped
     ports:
