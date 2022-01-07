@@ -19,6 +19,7 @@ router.post('/newTeacher', (req, res) => {
             }
         } */
 
+
     try {
         const name = req.body.name;
         const email = req.body.email;
@@ -111,6 +112,7 @@ router.patch('/teacher/:id', async (req, res) => {
         description: 'teacher id',
         required: true
     } */
+
 
     try {
         const id = req.params.id;
