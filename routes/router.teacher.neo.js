@@ -52,7 +52,7 @@ router.get('/teacher/:id', async (req, res) => {
             res.status(404).send('Teacher not found')
         } else {
 
-            res.status(200).json(formatSignleTeacher(temp_teacher));
+            res.status(200).json(formatSingleTeacher(temp_teacher));
         }
 
     } catch (error) {
@@ -95,7 +95,7 @@ router.delete('/teacher/:id', async (req, res) => {
 });
 
 
-function formatSignleTeacher(teacherObj) {
+function formatSingleTeacher(teacherObj) {
     const output = teacherObj.records['length'];
     const myList = [];
     myList[0] = teacherObj.records[0]._fields[0].properties.name;
