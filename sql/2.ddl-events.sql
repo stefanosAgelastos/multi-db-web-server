@@ -1,7 +1,7 @@
 -- DELETE ALL CODES ONCE A DAY --
 USE rollcall_db;
 
-DROP EVENT IF EXISTS deleteCodesDaily;
+DROP EVENT IF EXISTS deletePresenceKeyDaily;
 
 CREATE EVENT deletePresenceKeyDaily
 ON SCHEDULE EVERY 1 DAY
