@@ -1,0 +1,859 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Rollcall API documentation",
+    "description": "Description of the application endpoints",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/sql/passphrase/mySubjects": {
+      "post": {
+        "tags": [
+          "checkin",
+          "teacher",
+          "mysql"
+        ],
+        "summary": "Get a list of subject-semester pairs for a teacher",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The id of the teacher.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacher_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of the teacher's subject-semester pairs"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/passphrase": {
+      "post": {
+        "tags": [
+          "checkin",
+          "teacher",
+          "mysql"
+        ],
+        "summary": "teacher creates passphrase for their class, so that students can checkin",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "id of the teacher, passphrase, subject id and semester of the class",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "teacher_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "subject_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "semester": {
+                  "type": "string",
+                  "example": "SD21i"
+                },
+                "passphrase": {
+                  "type": "string",
+                  "example": "little blue monkeys"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully created passphrase"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/checkin": {
+      "post": {
+        "tags": [
+          "checkin",
+          "student",
+          "mysql"
+        ],
+        "summary": "student checks in as present using a passphrase",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "id of the student, passphrase",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "student_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "passphrase": {
+                  "type": "string",
+                  "example": "little blue monkeys"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully checked in"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/health_check": {
+      "get": {
+        "tags": [
+          "operational",
+          "mysql"
+        ],
+        "summary": "get health status of application health and database connectivity",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/login": {
+      "post": {
+        "tags": [
+          "authentication/authorization",
+          "mysql"
+        ],
+        "summary": "login for students and teachers and get token",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "credential set of email and password",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "ASBC@kea.dk"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "weqweqwe"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfull login and redirect to user's home"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/auth": {
+      "get": {
+        "tags": [
+          "authentication/authorization"
+        ],
+        "summary": "check token",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/register": {
+      "post": {
+        "tags": [
+          "authentication/authorization",
+          "mysql"
+        ],
+        "summary": "registertration for students and teachers",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "credentials",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "ASBC@kea.dk"
+                },
+                "activation_code": {
+                  "type": "string",
+                  "example": "ASBC"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "weqweqwe"
+                },
+                "repeat_password": {
+                  "type": "string",
+                  "example": "weqweqwe"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfull registered and redirect to login"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/sql/teachers/createNew": {
+      "post": {
+        "tags": [
+          "teacher",
+          "mysql"
+        ],
+        "summary": "create a teacher record in mysql database",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Doeh"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "sage@test.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "department_id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      }
+    },
+    "/sql/teachers/all": {
+      "get": {
+        "tags": [
+          "teacher",
+          "mysql"
+        ],
+        "summary": "get all teachers records from mysql database",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/sql/teachers/findOne/{id}": {
+      "get": {
+        "tags": [
+          "teacher",
+          "mysql"
+        ],
+        "summary": "find one teacher from mysql database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/teachers/updateOne/{id}": {
+      "post": {
+        "tags": [
+          "teacher",
+          "mysql"
+        ],
+        "summary": "update a teacher",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Doeh"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "sage@test.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "department_id": {
+                  "type": "number",
+                  "example": 2
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sql/teachers/delete/{id}": {
+      "post": {
+        "tags": [
+          "teacher",
+          "mysql"
+        ],
+        "summary": "delete one teacher from mysql database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/neo/newTeacher": {
+      "post": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "create a teacher record in neo4j db",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Anders Latif"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Latif@kea.dk"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      }
+    },
+    "/neo/teachers/": {
+      "get": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "get all teachers records from neo4j database",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/neo/teacher/{id}": {
+      "get": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "find one teacher from neo4j database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "update a teacher",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Jiayi"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "Jiayi@KEA.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "501": {
+            "description": "Not Implemented"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "teacher",
+          "neo4j"
+        ],
+        "summary": "delete one teacher from neo4j database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/mongo/student/create": {
+      "post": {
+        "tags": [
+          "student",
+          "mongo"
+        ],
+        "summary": "create a student record in mongo db",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "student details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "TariqZ"
+                },
+                "user_name": {
+                  "type": "string",
+                  "example": "Tariq@kea.dk"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "semester": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "subjects": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subjects_name": {
+                        "type": "string",
+                        "example": "Testing"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/mongo/student/findAll": {
+      "get": {
+        "tags": [
+          "student",
+          "mongo"
+        ],
+        "summary": "get all students records from mongo database",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mongo/student/find/{id}": {
+      "get": {
+        "tags": [
+          "student",
+          "mongo"
+        ],
+        "summary": "find one student from mongo database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "student id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mongo/student/update/{id}": {
+      "patch": {
+        "tags": [
+          "student",
+          "mongo"
+        ],
+        "summary": "update a student",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "student id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "student details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "TariqZ"
+                },
+                "user_name": {
+                  "type": "string",
+                  "example": "Tariq@kea.dk"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "semester": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "subjects": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subjects_name": {
+                        "type": "string",
+                        "example": "Database"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mongo/student/delete/{id}": {
+      "get": {
+        "tags": [
+          "student",
+          "mongo"
+        ],
+        "summary": "delete one student from mongo database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "student id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

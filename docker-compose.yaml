@@ -3,7 +3,30 @@ version: "3.1"
 volumes:
   sqldb:
 
+    null
 services:
+
+  app_container:
+    depends_on:
+      - mysql_container
+      - mongo_container
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
+    environment:
+      DB_HOST: mysql_container
+      DB_USER: ${DB_USER}
+      DB_SECRET: ${DB_SECRET}
+      MYSQLDB_DATABASE: ${MYSQLDB_DATABASE}
+      NODE_DOCKER_PORT: ${NODE_DOCKER_PORT}
+      MYSQLDB_LOCAL_PORT: ${MYSQLDB_DOCKER_PORT}
+      MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:27017
+      JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
   mysql_container:
     image: mysql:8.0
@@ -22,7 +45,8 @@ services:
       # search for docker-entrypoint-initdb in the docs: https://hub.docker.com/_/mysql
       - ./sql/:/docker-entrypoint-initdb.d/
 
-  neo4j: # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
+  neo4j:
+    # documentation https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
     image: neo4j:3.5
     restart: unless-stopped
     ports:
@@ -40,28 +64,6 @@ services:
       - NEO4J_dbms.memory.heap.initial_size=1G
       - NEO4J_dbms_memory_heap_max__size=1G
       - NEO4J_AUTH=neo4j/password
-
-  app_container: 
-    depends_on: 
-      - mysql_container
-      - mongo_container
-    build: .
-    restart: unless-stopped
-    env_file: ./.env
-    ports: 
-      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
-    environment: 
-        DB_HOST: mysql_container
-        DB_USER: ${DB_USER}
-        DB_SECRET: ${DB_SECRET}
-        MYSQLDB_DATABASE: ${MYSQLDB_DATABASE}
-        NODE_DOCKER_PORT: ${NODE_DOCKER_PORT}
-        MYSQLDB_LOCAL_PORT: ${MYSQLDB_DOCKER_PORT}
-        MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:27017
-        JWT_SECRET: ${JWT_SECRET}
-    volumes:
-    - .:/usr/src/app
-    - /usr/src/app/node_modules
 
   mongo_container:
     image: mongo

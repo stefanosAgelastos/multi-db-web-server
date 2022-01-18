@@ -14,6 +14,11 @@ You can edit the diagrams by clicking on the link, but keep in mind that the edi
 ![Diagram](./report_system_schema.drawio.png)
 <a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Fdocs%2Freport_system_schema.drawio.png" target="_blank">Edit in diagrams.net</a>
 
+# Current Monolithic Layered Architecture
+
+![Diagram](./layered-architecture.drawio.png)
+<a href="https://app.diagrams.net/#HstefanosAgelastos%2Fmulti-db-web-server%2Fdocumentation%2Fdocs%2Flayered-architecture.drawio.png" target="_blank">Edit in diagrams.net</a>
+
 # Authorization State Transitions
 
 ![Diagram](./auth-states.drawio.png)
