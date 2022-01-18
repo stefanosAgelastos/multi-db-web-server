@@ -1,5 +1,5 @@
 const app = require("./util/app");
-const PORT = process.env.NODE_DOCKER_PORT || 9090;
+const PORT = process.env.NODE_DOCKER_PORT || process.env.PORT || 9090;
 
 app.listen(PORT, (error) => {
     if (error) {
