@@ -34,8 +34,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.0",
     "mysql2": "^2.3.2",
-    "supertest": "^6.1.6",
     "neo4j-driver": "^4.4.1",
-    "sequelize": "^6.7.0"
+    "sequelize": "^6.7.0",
+    "supertest": "^6.1.6",
+    "swagger-ui-express": "^4.3.0"
   }
 }
