@@ -18,9 +18,19 @@ jobs:
       MONGO_DOCKER_ROOT_PASSWORD: 12345678
       MONGO_DOCKER_PORT: 27017
       MDB_CONNECTION: mongodb://${MONGO_DOCKER_ROOT_USERNAME}:${MONGO_DOCKER_ROOT_PASSWORD}@mongo_container:27017
+      NEO_HOST: bolt://localhost:7687
+      NEO_SECRET: password
+      NEO_USER: neo4j
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install Node Dependencies
+        run: npm install
       - name: Create empty .env file (required by docker-compose)
         run: touch .env
       - name: Start containers
@@ -31,5 +41,7 @@ jobs:
         run: mysql -h 127.0.0.1 -P $MYSQLDB_LOCAL_PORT -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}"
       - name: Test that the view exists
         run: mysql -h 127.0.0.1 -P $MYSQLDB_LOCAL_PORT -u root -p${MYSQLDB_ROOT_PASSWORD} --database="${MYSQLDB_DATABASE}" --execute="select * from students_program;"
+      - name: Run Unit Tests
+        run: npm test
       - name: Stop containers and remove volumes
         run: docker-compose down -v
