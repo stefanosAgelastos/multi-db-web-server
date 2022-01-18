@@ -6,7 +6,7 @@ const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
 
 //POST
-router.post('/register', rateLimiter, async (req, res) => {
+router.post('/register', async (req, res) => {
 
     /*
     #swagger.tags = ['authentication/authorization', 'mysql']
@@ -39,9 +39,9 @@ router.post('/register', rateLimiter, async (req, res) => {
             if (teacher) {
                 if (teacher.password === activation_code) {
                     teacher.update({ password: hashed_password });
-                    res.redirect('/login')
+                    return res.redirect('/login')
                 } else {
-                    res.status(400).send("Teacher: wrong activation code")
+                    return res.status(400).send("Teacher: wrong activation code")
                 }
             } else {
                 return db.sequelize.models.students.findOne({ where: { user_name: email } })
@@ -51,15 +51,19 @@ router.post('/register', rateLimiter, async (req, res) => {
             if (student) {
                 if (student.password === activation_code) {
                     student.update({ password: hashed_password });
-                    res.redirect('/login')
+                    return res.redirect('/login')
                 } else {
-                    res.status(400).send("Student: wrong activation code")
+                    return res.status(400).send("Student: wrong activation code")
                 }
             } else {
-                res.status(400).send("Email is not in the system")
+                return res.status(400).send("Email is not in the system")
             }
         })
-        .catch(err => res.status(500).send(err))
+        .catch(err => {
+            return true
+            //res.status(500).send(err)
+            
+        })
 });
 
 module.exports = router;
