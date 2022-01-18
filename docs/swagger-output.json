@@ -6,13 +6,10 @@
     "version": "1.0.0"
   },
   "basePath": "/",
-  "tags": [],
   "schemes": [
     "https",
     "http"
   ],
-  "consumes": [],
-  "produces": [],
   "paths": {
     "/sql/passphrase/mySubjects": {
       "post": {
@@ -299,9 +296,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -861,6 +855,5 @@
         }
       }
     }
-  },
-  "definitions": {}
+  }
 }
