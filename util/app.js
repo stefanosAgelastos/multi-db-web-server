@@ -2,6 +2,7 @@ const express = require("express");
 const swaggerUi = require('swagger-ui-express')
 const app = express();
 require('dotenv').config();
+const mongoose = require('../connectors/db.mongo');
 
 //Allows the use of JSON (for POST requests)
 app.use(express.urlencoded({ extended: true }));
