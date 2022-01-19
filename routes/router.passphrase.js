@@ -2,12 +2,23 @@ const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
 
-router.get('/passphrase/mySubjects', function (req, res) {
+router.post('/passphrase/mySubjects', function (req, res) {
 
-    // we receive from request body:
-    // * teachers_id
-    // we expect to return
-    // * a list of subjects and semesters
+    /*
+       #swagger.tags = ['checkin', 'teacher', 'mysql']
+       #swagger.summary = 'Get a list of subject-semester pairs for a teacher'
+       #swagger.consumes = ['application/json']
+       #swagger.parameters['body'] = {
+           in: 'body',
+           description: 'The id of the teacher.',
+           required: true,
+           schema: {
+               teacher_id: 1
+           }
+       }
+       #swagger.responses[200] = {
+           description: "list of the teacher's subject-semester pairs",
+       } */
 
     const providedTeacherId = req.body.teacher_id;
 
@@ -18,7 +29,7 @@ router.get('/passphrase/mySubjects', function (req, res) {
             include: {
                 model: db.sequelize.models.subjects,
                 as: 'subject',
-                attributes: ['subject_name','subject_id'],
+                attributes: ['subject_name', 'subject_id'],
             },
         }
     ).then((foundTeacherAndSubjects) => {
@@ -35,13 +46,24 @@ router.get('/passphrase/mySubjects', function (req, res) {
 })
 
 router.post("/passphrase", function (req, res) {
+    
+    /*
+       #swagger.tags = ['checkin', 'teacher', 'mysql']
+       #swagger.summary = 'teacher creates passphrase for their class, so that students can checkin'
+       #swagger.consumes = ['application/json']
+       #swagger.parameters['body'] = {
+           in: 'body',
+           description: 'id of the teacher, passphrase, subject id and semester of the class',
+           required: true,
+           schema: {
+               teacher_id: 1,
+               subject_id: 1,
+               semester: 'SD21i',
+               passphrase: 'little blue monkeys'
+           }
+       }
+       #swagger.responses[200] = { description: "Succesfully created passphrase" } */
 
-    // we receive from request body:
-    // * teachers_id
-    // * subject_id
-    // * semester
-    // * passphrase to use as presenceKey
-    // we expect to return a token
 
     const providedTeacherId = req.body.teacher_id;
     const providedSubjectId = req.body.subject_id;
@@ -109,7 +131,7 @@ router.post("/passphrase", function (req, res) {
                     actual_presence_key: providedPresenceKey,
                     current_dateTime: db.sequelize.literal('CURRENT_TIMESTAMP')
                 },
-                { transaction: t });
+                    { transaction: t });
             })
             .then(() => {
                 return t.commit()
