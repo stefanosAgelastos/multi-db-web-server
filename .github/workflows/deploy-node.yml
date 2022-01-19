@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - stefanos/view/teacher_semester_subject
+
 jobs:
   deploy-heroku:
     runs-on: ubuntu-latest
