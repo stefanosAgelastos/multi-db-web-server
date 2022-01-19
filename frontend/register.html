@@ -29,21 +29,15 @@
         <p id="sign-in-here">Already a member? <a href="/login">Sign in here</a></p>
     </div>
 
+    <div id="footer-fragment"></div>
 
-
-
-    <!-- <div id="footer-fragment"></div> -->
-    <!--JQuery To load fragment scripts (amongst other)-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Function used to call on Navigation - For avoiding Boilerplate code
     <script>
         $(document).ready(function () {
-            $("#navbar-fragment").load("../fragments/navbar/navbar.html");
-            $("#footer-fragment").load("../fragments/footer/footer.html");
-        })
+          $("#navbar-fragment").load("/fragment/navbar.html");
+          $("#footer-fragment").load("/fragment/footer.html");
+        });
     </script>
-    -->
 </body>
 
 </html>
