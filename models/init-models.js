@@ -5,9 +5,11 @@ var _presence_key = require("./presence_key");
 var _programs = require("./programs");
 var _students = require("./students");
 var _students_presence = require("./students_presence");
+var _students_programs_departments = require("./students_programs_departments");
 var _students_subjects = require("./students_subjects");
 var _subjects = require("./subjects");
 var _teachers = require("./teachers");
+var _teachers_semesters_subjects = require("./teachers_semesters_subjects");
 var _teachers_subjects = require("./teachers_subjects");
 
 function initModels(sequelize) {
@@ -17,9 +19,11 @@ function initModels(sequelize) {
   var programs = _programs(sequelize, DataTypes);
   var students = _students(sequelize, DataTypes);
   var students_presence = _students_presence(sequelize, DataTypes);
+  var students_programs_departments = _students_programs_departments(sequelize, DataTypes);
   var students_subjects = _students_subjects(sequelize, DataTypes);
   var subjects = _subjects(sequelize, DataTypes);
   var teachers = _teachers(sequelize, DataTypes);
+  var teachers_semesters_subjects = _teachers_semesters_subjects(sequelize, DataTypes);
   var teachers_subjects = _teachers_subjects(sequelize, DataTypes);
 
   students.belongsToMany(subjects, { as: 'subject_id_subjects', through: students_subjects, foreignKey: "student_id", otherKey: "subject_id" });
@@ -64,9 +68,11 @@ function initModels(sequelize) {
     programs,
     students,
     students_presence,
+    students_programs_departments,
     students_subjects,
     subjects,
     teachers,
+    teachers_semesters_subjects,
     teachers_subjects,
   };
 }
