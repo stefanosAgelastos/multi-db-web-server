@@ -1,5 +1,29 @@
 # Roll call application, KEA study project with a nodejs backend and mutliple database architecture
 
+![Diagram](./docs/report_system_schema.drawio.png)
+
+## How to run the application
+
+### Prerequisites
+
+You need npm, node, docker, docker-compose
+
+You also need to copy the `.env-sample` to a `.env` file, and add values to the evnironment variables.
+
+### Steps to run app
+
+In the root directory of the project run:
+
+```
+npm install
+docker-compose up
+node server.js
+```
+
+Now you can just access the `localhost:{$PORT}/register`
+
+You can use these credentials in order to register:
+
 ## About the Use Cases
 
 1. Teacher Logins and Generates self expiring code for the subject
@@ -26,9 +50,11 @@ docker-compose up
 ## How to start up MySQL Server + application (to-be-updated)
 
 #### The Build:
+
 ```
-docker-compose up 
+docker-compose up
 ```
+
 (this will the MySQL server as well as the App)
 
 ### mysql
@@ -69,3 +95,13 @@ We can run this command `sequelize-auto -h localhost -d rollcall_db -u root -x d
 We have made a shortcut for this command at out `package.json`, so one can just run `npm run generate-models`
 
 Remember that the databse must be up and running when you run this command.
+
+# Testing
+
+### Test Cases for Login
+
+![Diagram](./docs/login-test-cases.png)
+
+### Test Cases for Register
+
+![Diagram](./docs/register_test_cases.png)

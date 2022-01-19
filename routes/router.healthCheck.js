@@ -3,6 +3,11 @@ const db = require("../connectors/db.mysql");
 const router = express.Router();
 
 router.get("/health_check", function (req, res) {
+
+    /*
+   #swagger.tags = ['operational', 'mysql']
+   #swagger.summary = 'get health status of application health and database connectivity'*/
+
     console.log("Checking db connection health")
     db.sequelize
         .authenticate()

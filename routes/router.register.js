@@ -6,7 +6,24 @@ const rateLimiter = require('../util/rate-limiter');
 const { validateRegister } = require('../util/validate');
 
 //POST
-router.post('/register', rateLimiter, async (req, res) => {
+router.post('/register', async (req, res) => {
+
+    /*
+    #swagger.tags = ['authentication/authorization', 'mysql']
+    #swagger.summary = 'registertration for students and teachers'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'credentials',
+        required: true,
+        schema: {
+            "email": "ASBC@kea.dk",
+            "activation_code": "ASBC",
+            "password": "weqweqwe",
+            "repeat_password": "weqweqwe"
+        }
+    }
+    #swagger.responses[200] = { description: "Succesfull registered and redirect to login" } */
 
     const { error } = validateRegister(req.body);
     if (error) return res.status(400).send(error.details[0].message); //400 = bad request
@@ -22,9 +39,9 @@ router.post('/register', rateLimiter, async (req, res) => {
             if (teacher) {
                 if (teacher.password === activation_code) {
                     teacher.update({ password: hashed_password });
-                    res.redirect('/login')
+                    return res.redirect('/login')
                 } else {
-                    res.status(400).send("Teacher: wrong activation code")
+                    return res.status(400).send("Teacher: wrong activation code")
                 }
             } else {
                 return db.sequelize.models.students.findOne({ where: { user_name: email } })
@@ -34,15 +51,19 @@ router.post('/register', rateLimiter, async (req, res) => {
             if (student) {
                 if (student.password === activation_code) {
                     student.update({ password: hashed_password });
-                    res.redirect('/login')
+                    return res.redirect('/login')
                 } else {
-                    res.status(400).send("Student: wrong activation code")
+                    return res.status(400).send("Student: wrong activation code")
                 }
             } else {
-                res.status(400).send("Email is not in the system")
+                return res.status(400).send("Email is not in the system")
             }
         })
-        .catch(err => res.status(500).send(err))
+        .catch(err => {
+            return true
+            //res.status(500).send(err)
+            
+        })
 });
 
 module.exports = router;

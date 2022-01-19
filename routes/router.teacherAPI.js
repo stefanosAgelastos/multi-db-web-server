@@ -6,6 +6,23 @@ const db = require('../connectors/db.mysql');
 // Create and Save a new Teacher
 router.post("/createNew", (req, res) => {
 
+     /*
+    #swagger.tags = ['teacher', 'mysql']
+    #swagger.summary = 'create a teacher record in mysql database'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'teacher details',
+        required: true,
+        schema: {
+            "first_name": "John",
+            "last_name": "Doeh",
+            "email": "sage@test.com",
+            "password": "12345678",
+            "department_id": 2
+        }
+    } */
+
     try {
         db.sequelize.models.teachers.create({
 
@@ -25,6 +42,11 @@ router.post("/createNew", (req, res) => {
 
 router.get("/all", (req, res) => {
 
+    /*
+   #swagger.tags = ['teacher', 'mysql']
+   #swagger.summary = 'get all teachers records from mysql database'*/
+
+
     db.sequelize.models.teachers.findAll().then(allTeachers => res.send(allTeachers));
 
 });
@@ -33,6 +55,16 @@ router.get("/all", (req, res) => {
 // Find a single Teacher with an id
 
 router.get("/findOne/:id", (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mysql']
+    #swagger.summary = 'find one teacher from mysql database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
+
     db.sequelize.models.teachers.findOne({ where: { teacher_id: req.params.id } })
         .then(oneTeacher => {
             if (!oneTeacher) {
@@ -48,6 +80,28 @@ router.get("/findOne/:id", (req, res) => {
 
 // Update a teacher by the id 
 router.post("/updateOne/:id", (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mysql']
+    #swagger.summary = 'update a teacher's record details in mysql db'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'teacher details',
+        required: true,
+        schema: {
+            "first_name": "John",
+            "last_name": "Doeh",
+            "email": "sage@test.com",
+            "password": "12345678",
+            "department_id": 2
+        }
+    }
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
 
     const { first_name, last_name, email, department_id, password } = req.body;
 
@@ -79,6 +133,15 @@ router.post("/updateOne/:id", (req, res) => {
 
 // Delete a Teacher by id 
 router.post("/delete/:id", (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mysql']
+    #swagger.summary = 'delete one teacher from mysql database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
 
     db.sequelize.models.teachers.destroy({ where: { teacher_id: req.params.id } })
         .then(rowDeleted => {
