@@ -22,20 +22,14 @@ router.post('/passphrase/mySubjects', function (req, res) {
 
     const providedTeacherId = req.body.teacher_id;
 
-    db.sequelize.models.teachers_subjects.findAll(
+    db.sequelize.models.teachers_semesters_subjects.findAll(
         {
-            attributes: ['semester'],
             where: { teacher_id: providedTeacherId },
-            include: {
-                model: db.sequelize.models.subjects,
-                as: 'subject',
-                attributes: ['subject_name', 'subject_id'],
-            },
         }
     ).then((foundTeacherAndSubjects) => {
         console.log(foundTeacherAndSubjects.forEach(element => console.log(element.toJSON())));
         const list = [];
-        foundTeacherAndSubjects.forEach(element => list.push([element.semester, element.subject.subject_name, element.subject.subject_id]))
+        foundTeacherAndSubjects.forEach(element => list.push([element.semester, element.subject_name, element.subject_id]))
         res.send(list);
     }
     ).catch(err => {
