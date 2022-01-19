@@ -854,6 +854,201 @@
           }
         }
       }
+    },
+    "/mongo/teacher/createTeacher": {
+      "post": {
+        "tags": [
+          "teacher",
+          "mongo"
+        ],
+        "summary": "create a teacher record in mongo db",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "David C "
+                },
+                "user_name": {
+                  "type": "string",
+                  "example": "DavC@kea.dk"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "semester": {
+                  "type": "string",
+                  "example": "SD21i"
+                },
+                "subjects": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subjects_name": {
+                        "type": "string",
+                        "example": "ITO"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/mongo/teacher/findAllTeacher": {
+      "get": {
+        "tags": [
+          "teacher",
+          "mongo"
+        ],
+        "summary": "get all teachers records from mongo database",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mongo/teacher/findTeacher/{id}": {
+      "get": {
+        "tags": [
+          "teacher",
+          "mongo"
+        ],
+        "summary": "find one teacher from mongo database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mongo/teacher/updateTeacher/{id}": {
+      "patch": {
+        "tags": [
+          "teacher",
+          "mongo"
+        ],
+        "summary": "update a teacher",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "teacher details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Andrea C"
+                },
+                "user_name": {
+                  "type": "string",
+                  "example": "Andc@kea.dk"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "semester": {
+                  "type": "string",
+                  "example": "SD21i"
+                },
+                "subjects": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "subjects_name": {
+                        "type": "string",
+                        "example": "Scalability"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mongo/teacher/deleteTeacher/{id}": {
+      "get": {
+        "tags": [
+          "teacher",
+          "mongo"
+        ],
+        "summary": "delete one teacher from mongo database",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "teacher id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   }
 }

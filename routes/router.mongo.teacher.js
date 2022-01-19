@@ -4,6 +4,32 @@ const Teacher = require('../mongo/teacherModel');
 
 // InsertOne
 router.post('/createTeacher', async (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mongo']
+    #swagger.summary = 'create a teacher record in mongo db'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'teacher details',
+        required: true,
+        schema: {
+            "name": "David C ",
+            "user_name": "DavC@kea.dk",
+            "password": "12345678",
+            "semester": "SD21i",
+            "subjects": [
+                {
+                    "subjects_name": "Software Designing"
+                },
+                {
+                    "subjects_name": "ITO"
+                }
+            ]
+        }
+    } */
+
+
     const teacher = new Teacher({
         name: req.body.name,
         user_name: req.body.user_name,
@@ -21,6 +47,11 @@ router.post('/createTeacher', async (req, res) => {
 })
 //findAll
 router.get('/findAllTeacher', async (req, res) => {
+
+    /*
+   #swagger.tags = ['teacher', 'mongo']
+   #swagger.summary = 'get all teachers records from mongo database'*/
+
     try {
 
         const teachers = await Teacher.find()
@@ -33,6 +64,16 @@ router.get('/findAllTeacher', async (req, res) => {
 //findOne
 
 router.get('/findTeacher/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mongo']
+    #swagger.summary = 'find one teacher from mongo database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
+
     try {
         const teachers = await Teacher.findById(req.params.id)
         res.json(teachers)
@@ -48,6 +89,39 @@ router.get('/findTeacher/:id', async (req, res) => {
 
 // update
 router.patch('/updateTeacher/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mongo']
+    #swagger.summary = 'update a teacher's record details in mongo db'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'teacher details',
+        required: true,
+        schema: {
+            "name": "Andrea C",
+            "user_name": "Andc@kea.dk",
+            "password": "12345678",
+            "semester": "SD21i",
+            "subjects": [
+                {
+                    "subjects_name": "Software Pattern"
+                },
+                {
+                    "subjects_name": "DLS"
+                },
+                {
+                    "subjects_name": "Scalability"
+                }
+            ]
+        }
+    }
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
+
     try {
         const teachers = await Teacher.findById(req.params.id)
         teachers.name = req.body.name
@@ -67,6 +141,16 @@ router.patch('/updateTeacher/:id', async (req, res) => {
 
 // delete
 router.get('/deleteTeacher/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'mongo']
+    #swagger.summary = 'delete one teacher from mongo database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
+
     try {
         const teachers = await Teacher.findById(req.params.id)
         const data = await teachers.delete()
