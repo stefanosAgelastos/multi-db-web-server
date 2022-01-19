@@ -13,6 +13,7 @@ const validateRegister = (data) => {
             .required(),
         password: joi.string()
             .min(8)
+            .max(120)
             .regex(/[a-zA-Z0-9]+/)
             .required(),
         repeat_password: joi.any()
