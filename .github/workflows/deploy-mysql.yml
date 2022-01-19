@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - "./sql/**"
+      - "./sql/*"
 jobs:
   deploy-digital-ocean:
     runs-on: ubuntu-latest

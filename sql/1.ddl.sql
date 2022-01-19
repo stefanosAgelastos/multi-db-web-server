@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS `rollcall_db`;
-USE `rollcall_db` ;
+USE `rollcall_db`;
 
 -- Allow creation of tables without Primary Key
 -- Primary Keys are defined at the end of the script
