@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>Statics</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="/global.css" media="screen" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+        <script src=
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+            </script>
+</head>
+
+<body>
+    
+    <h1 class="statics">Statics</h1>
+    <div id="table"></div>
+
+            <script type="text/javascript">
+        var urlLink = {
+            url: 'http://localhost:8080/statics/'
+        };
+
+        fetch(urlLink)
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .then((rows) => {
+                for (let row of rows) {
+                    // row will be a mysql row -- we can loop over these rows
+                }
+            })
+            .catch(console.log);
+    </script>
+   
+
+
+
+
+   
+
+</body>
+</html>
