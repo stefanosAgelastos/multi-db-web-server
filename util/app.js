@@ -3,10 +3,19 @@ const swaggerUi = require('swagger-ui-express')
 const app = express();
 require('dotenv').config();
 const mongoose = require('../connectors/db.mongo');
+const { authenticateToken } = require('../util/authenticate');
 
 //Allows the use of JSON (for POST requests)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.get('/teacher_overview', authenticateToken('teacher'), (req, res, next) => {
+    next();
+});
+
+app.get('/student_overview', authenticateToken('student'), (req, res, next) => {
+    next();
+});
 
 // server static files
 app.use(express.static('frontend', { extensions: ['html'], index: 'login.html' }))

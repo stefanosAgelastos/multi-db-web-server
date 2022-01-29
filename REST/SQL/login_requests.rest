@@ -21,4 +21,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/sql/auth/
-Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic3R1ZGVudCIsImVtYWlsIjoiT2xlMTIzNEBrZWEuZGsiLCJpZCI6MSwiaWF0IjoxNjQzNDUzNTc5fQ.L0QpSwVQCVglt55wbG_SI_iCLMLy69QYQZeePV_Vtw4
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGVhY2hlciIsImVtYWlsIjoiQVNCQ0BrZWEuZGsiLCJpZCI6MSwiaWF0IjoxNjQzNDU3MDQ2fQ.kjLkG0mVS8i1UzVhbcX2fD7ovRi9ZquIVuTLZRgXVmc
+
+###
+GET http://localhost:8080/sql/logout/

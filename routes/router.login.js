@@ -3,8 +3,10 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { validateLogin } = require('../util/validate');
 const ratelimiter = require('../util/rate-limiter');
-const jwt = require('jsonwebtoken');
 const db = require('../connectors/db.mysql');
+const jwt = require('jsonwebtoken');
+const { authenticateToken } = require('../util/authenticate');
+
 
 router.post('/login', ratelimiter, async (req, res) => {
 
@@ -41,14 +43,17 @@ router.post('/login', ratelimiter, async (req, res) => {
         } else if (teacher) {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
                 const accessToken = jwt.sign({ role: 'teacher', email: teacher.email, id: teacher.teacher_id }, process.env.JWT_SECRET);
-                res.status(200).set('Bearer', accessToken).redirect('/teacher_overview');
+                res.status(200).cookie('accessToken', accessToken);
+                //res.cookie('refreshToken');
+                return res.redirect('/teacher_overview');
             } else {
                 res.status(400).json({ message: "Wrong password" });
             }
         } else if (student) {
             if (await bcrypt.compare(plainPassword, student.password)) {
                 const accessToken = jwt.sign({ role: 'student', email: student.user_name, id: student.student_id }, process.env.JWT_SECRET);
-                res.status(200).set('Bearer', accessToken).redirect('/student_overview');
+                res.status(200).cookie('accessToken', accessToken);
+                return res.redirect('/student_overview');
             } else {
                 res.status(400).json({ message: "Wrong password" });
             }
@@ -63,19 +68,12 @@ router.post('/login', ratelimiter, async (req, res) => {
 });
 
 
-function authenticateToken(req, res, next) {
-    const token = req.headers['bearer'];
-    console.log(JSON.stringify(req.headers));
-    console.log(token)
-    if (token == null) return res.sendStatus(401);
+router.get('/logout', (req, res) => {
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    return res.status(200).redirect('/login')
+})
 
-    jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
-        if (error) return res.sendStatus(403);
-        req.user = user;
-        next();
-    });
-
-}
 // test route
 router.get('/auth', authenticateToken, (req, res) => {
 
