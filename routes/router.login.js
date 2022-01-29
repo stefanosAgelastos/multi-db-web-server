@@ -64,13 +64,14 @@ router.post('/login', ratelimiter, async (req, res) => {
 
 
 function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = req.headers['bearer'];
+    console.log(JSON.stringify(req.headers));
+    console.log(token)
     if (token == null) return res.sendStatus(401);
 
-    jwt.verify(token, process.env.TOKEN_SECRET, (error, teacher) => {
+    jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
         if (error) return res.sendStatus(403);
-        req.teacher = teacher;
+        req.user = user;
         next();
     });
 
@@ -78,11 +79,11 @@ function authenticateToken(req, res, next) {
 // test route
 router.get('/auth', authenticateToken, (req, res) => {
 
-        /*
-   #swagger.tags = ['authentication/authorization']
-   #swagger.summary = 'check token'*/
+    /*
+#swagger.tags = ['authentication/authorization']
+#swagger.summary = 'check token'*/
 
-    return res.status(500).json({ message: "can you see me?" });
+    return res.status(500).json({ user: req.user, message: "can you see me?" });
 });
 
 module.exports = router;
