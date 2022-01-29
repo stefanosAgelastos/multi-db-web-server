@@ -5,6 +5,20 @@ const neo_db = require('../connectors/db.neo');
 
 router.post('/newTeacher', (req, res) => {
 
+    /*
+        #swagger.tags = ['teacher', 'neo4j']
+        #swagger.summary = 'create a teacher record in neo4j db'
+        #swagger.consumes = ['application/json']
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'teacher details',
+            required: true,
+            schema: {
+                "name": "Anders Latif",
+                "email": "Latif@kea.dk"
+            }
+        } */
+
     try {
         const name = req.body.name;
         const email = req.body.email;
@@ -22,6 +36,12 @@ router.post('/newTeacher', (req, res) => {
 
 //endpoint for find all teachers
 router.get('/teachers/', async (req, res) => {
+
+    /*
+   #swagger.tags = ['teacher', 'neo4j']
+   #swagger.summary = 'get all teachers records from neo4j database'*/
+
+
     try {
         teachersObj = await neo_db.session.run('MATCH ( t:Teacher ) RETURN t')
         const teachers = formatGeneralResponse(teachersObj);
@@ -42,6 +62,15 @@ router.get('/teachers/', async (req, res) => {
 //endpoint for find one teacher
 router.get('/teacher/:id', async (req, res) => {
 
+    /*
+    #swagger.tags = ['teacher', 'neo4j']
+    #swagger.summary = 'find one teacher from neo4j database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
+
     try {
         const id = req.params.id;
         const query = `MATCH (n : Teacher) WHERE id(n) = {id} MATCH (n)-[]-(connected) RETURN n, connected`;
@@ -52,7 +81,7 @@ router.get('/teacher/:id', async (req, res) => {
             res.status(404).send('Teacher not found')
         } else {
 
-            res.status(200).json(formatSingleTeacher(temp_teacher));
+            res.status(200).json(formatSignleTeacher(temp_teacher));
         }
 
     } catch (error) {
@@ -63,6 +92,25 @@ router.get('/teacher/:id', async (req, res) => {
 });
 
 router.patch('/teacher/:id', async (req, res) => {
+
+    /*
+    #swagger.tags = ['teacher', 'neo4j']
+    #swagger.summary = 'update a teacher's record details in neo4j db'
+    #swagger.consumes = ['application/json']
+    #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'teacher details',
+        required: true,
+        schema: {
+            "name": "Jiayi",
+            "email": "Jiayi@KEA.com"
+        }
+    }
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
 
     try {
         const id = req.params.id;
@@ -81,13 +129,22 @@ router.patch('/teacher/:id', async (req, res) => {
 
 router.delete('/teacher/:id', async (req, res) => {
 
-    try{
-        const id = req.params.id; 
+    /*
+    #swagger.tags = ['teacher', 'neo4j']
+    #swagger.summary = 'delete one teacher from neo4j database'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'teacher id',
+        required: true
+    } */
+
+    try {
+        const id = req.params.id;
         const params = { id: parseInt(id) };
         const query = `MATCH (n : Teacher) WHERE ID(n) = {id} DETACH DELETE n`;
-    
+
         neo_db.session.run(query, params).
-        then(deletedTeacher => res.status(200).send('Deleted: ' + JSON.stringify(deletedTeacher.records)));
+            then(deletedTeacher => res.status(200).send('Deleted: ' + JSON.stringify(deletedTeacher.records)));
     } catch (err) {
         return res.status(401).send(err);
     }
@@ -95,7 +152,7 @@ router.delete('/teacher/:id', async (req, res) => {
 });
 
 
-function formatSingleTeacher(teacherObj) {
+function formatSignleTeacher(teacherObj) {
     const output = teacherObj.records['length'];
     const myList = [];
     myList[0] = teacherObj.records[0]._fields[0].properties.name;

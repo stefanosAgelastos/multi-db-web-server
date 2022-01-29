@@ -1,18 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('students_presence', {
-    current_datetime: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    semester: {
-      type: DataTypes.STRING(5),
-      allowNull: false,
-      references: {
-        model: 'students_subjects',
-        key: 'semester'
-      }
-    },
     presence_key_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -39,6 +27,18 @@ module.exports = function(sequelize, DataTypes) {
         model: 'students_subjects',
         key: 'student_id'
       }
+    },
+    semester: {
+      type: DataTypes.STRING(5),
+      allowNull: false,
+      references: {
+        model: 'students_subjects',
+        key: 'semester'
+      }
+    },
+    current_datetime: {
+      type: DataTypes.DATE,
+      allowNull: false
     }
   }, {
     sequelize,

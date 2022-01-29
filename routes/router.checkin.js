@@ -5,10 +5,20 @@ const router = express.Router();
 
 router.post("/checkin", function (req, res) {
 
-    // we receive from request body:
-    // * student_id
-    // * passphrase
-    // we expect to return success or fail
+    /*
+       #swagger.tags = ['checkin', 'student', 'mysql']
+       #swagger.summary = 'student checks in as present using a passphrase'
+       #swagger.consumes = ['application/json']
+       #swagger.parameters['body'] = {
+           in: 'body',
+           description: 'id of the student, passphrase',
+           required: true,
+           schema: {
+               student_id: 1,
+               passphrase: 'little blue monkeys'
+           }
+       }
+       #swagger.responses[200] = { description: "Succesfully checked in" } */
 
     const { error } = validateCheckIn(req.body);
     if (error) return res.status(400).send(error.details[0].message);

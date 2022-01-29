@@ -1,0 +1,51 @@
+
+###
+POST http://localhost:8080/mongo/teacher/createTeacher
+Content-Type: application/json
+
+{
+    "name": "David C ",
+    "user_name": "DavC@kea.dk",
+    "password": "12345678",
+    "semester": "SD21i",
+    "subjects": [
+        {
+            "subjects_name": "Software Designing"
+        },
+        {
+            "subjects_name": "ITO"
+        }
+    ]
+}
+
+###
+GET http://localhost:8080/mongo/teacher/findAllTeacher
+
+###
+GET http://localhost:8080/mongo/teacher/findTeacher/61d60760bb8cca54bb5453ec
+
+
+###
+GET http://localhost:8080/mongo/teacher/deleteTeacher/61d60760bb8cca54bb5453ec
+
+###
+PATCH http://localhost:8080/mongo/teacher/updateTeacher/61d6087abb8cca54bb545404
+Content-Type: application/json
+
+{
+    "name": "Andrea C",
+    "user_name": "Andc@kea.dk",
+    "password": "12345678",
+    "semester": "SD21i",
+    "subjects": [
+      {
+        "subjects_name": "Software Pattern"  
+      },
+      {
+        "subjects_name": "DLS"
+      },
+      {
+        "subjects_name": "Scalability"
+      }
+    ]
+}
