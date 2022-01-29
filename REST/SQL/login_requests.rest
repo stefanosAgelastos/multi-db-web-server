@@ -21,4 +21,4 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/sql/auth/
-Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Ik9sZTEyMzRAa2VhLmRrIiwiaWQiOjEsImlhdCI6MTY0MzQ1MzQyNX0.Q0QSaMnOye_88DM267ij3tfJTEK6Y9UlwWd2RH3ypQo
+Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoic3R1ZGVudCIsImVtYWlsIjoiT2xlMTIzNEBrZWEuZGsiLCJpZCI6MSwiaWF0IjoxNjQzNDUzNTc5fQ.L0QpSwVQCVglt55wbG_SI_iCLMLy69QYQZeePV_Vtw4

@@ -40,14 +40,14 @@ router.post('/login', ratelimiter, async (req, res) => {
             res.status(400).json({ message: "User doesn't exist" });
         } else if (teacher) {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
-                const accessToken = jwt.sign({ email: teacher.email, id: teacher.teacher_id }, process.env.JWT_SECRET);
+                const accessToken = jwt.sign({ role: 'teacher', email: teacher.email, id: teacher.teacher_id }, process.env.JWT_SECRET);
                 res.status(200).set('Bearer', accessToken).redirect('/teacher_overview');
             } else {
                 res.status(400).json({ message: "Wrong password" });
             }
         } else if (student) {
             if (await bcrypt.compare(plainPassword, student.password)) {
-                const accessToken = jwt.sign({ email: student.user_name, id: student.student_id }, process.env.JWT_SECRET);
+                const accessToken = jwt.sign({ role: 'student', email: student.user_name, id: student.student_id }, process.env.JWT_SECRET);
                 res.status(200).set('Bearer', accessToken).redirect('/student_overview');
             } else {
                 res.status(400).json({ message: "Wrong password" });
