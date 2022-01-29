@@ -1,8 +1,10 @@
 const express = require("express");
 const db = require("../connectors/db.mysql");
 const router = express.Router();
+const { authenticateToken } = require('../util/authenticate');
 
-router.post('/passphrase/mySubjects', function (req, res) {
+
+router.post('/passphrase/mySubjects', authenticateToken('teacher'), function (req, res) {
 
     /*
        #swagger.tags = ['checkin', 'teacher', 'mysql']
@@ -20,7 +22,7 @@ router.post('/passphrase/mySubjects', function (req, res) {
            description: "list of the teacher's subject-semester pairs",
        } */
 
-    const providedTeacherId = req.body.teacher_id;
+    const providedTeacherId = req.user.id;
 
     db.sequelize.models.teachers_semesters_subjects.findAll(
         {
@@ -29,7 +31,7 @@ router.post('/passphrase/mySubjects', function (req, res) {
     ).then((foundTeacherAndSubjects) => {
         console.log(foundTeacherAndSubjects.forEach(element => console.log(element.toJSON())));
         const list = [];
-        foundTeacherAndSubjects.forEach(element => list.push([element.semester, element.subject_name, element.subject_id]))
+        foundTeacherAndSubjects.forEach(element => list.push({semester: element.semester, subject_name: element.subject_name, subject_id: element.subject_id}));
         res.send(list);
     }
     ).catch(err => {

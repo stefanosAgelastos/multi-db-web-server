@@ -6,7 +6,7 @@ const authenticateToken = (role) => {
         const cookie = req.headers['cookie'];
         const token = cookie && cookie.split('accessToken=')[1];
         // console.log(JSON.stringify(req.headers));
-        console.log('HERE BRUV', token);
+        // console.log('HERE BRUV', token);
         if (token == null) return res.status(401).send('You are not authorised');
 
         jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
