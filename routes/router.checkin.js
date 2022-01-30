@@ -1,9 +1,10 @@
 const express = require("express");
 const db = require("../connectors/db.mysql");
 const { validateCheckIn } = require('../util/validate');
+const { authenticateToken } = require('../util/authenticate');
 const router = express.Router();
 
-router.post("/checkin", function (req, res) {
+router.post("/checkin", authenticateToken('student'), function (req, res) {
 
     /*
        #swagger.tags = ['checkin', 'student', 'mysql']
@@ -14,7 +15,6 @@ router.post("/checkin", function (req, res) {
            description: 'id of the student, passphrase',
            required: true,
            schema: {
-               student_id: 1,
                passphrase: 'little blue monkeys'
            }
        }
@@ -24,7 +24,7 @@ router.post("/checkin", function (req, res) {
     if (error) return res.status(400).send(error.details[0].message);
 
 
-    const providedStudentId = req.body.student_id;
+    const providedStudentId = req.user.id;
     const providedPresenceKey = req.body.passphrase;
 
     console.log('student is: ', providedStudentId)
@@ -59,24 +59,20 @@ router.post("/checkin", function (req, res) {
 
         })
         .then(() => {
-            res.send('Checked in!')
+            return res.send('Checked in!')
         })
         .catch(err => {
             let { custom_status, custom_msg } = err
             if (custom_status, custom_msg) {
-                res.status(custom_status).send(custom_msg);
-                throw err;
+                return res.status(custom_status).send(custom_msg);
             }
             if (err.name === 'SequelizeUniqueConstraintError') {
-                res.status(409).send('You have already checked in')
-                throw err;
+                return res.status(409).send('You have already checked in')
             }
             if (err.name === 'SequelizeForeignKeyConstraintError') {
-                res.status(401).send('You are not authorized for this Class')
-                throw err;
+                return res.status(401).send('You are not authorized for this Class')
             }
-            res.status(500).send('Something went wrong');
-            throw err;
+            return res.status(500).send('Something went wrong');
         });
 })
 

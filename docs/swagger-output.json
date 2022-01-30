@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Rollcall API documentation",
-    "description": "Description of the application endpoints",
+    "description": "Description of the application endpoints, please login when you want to try protected endpoints",
     "version": "1.0.0"
   },
   "basePath": "/",
@@ -11,6 +11,46 @@
     "http"
   ],
   "paths": {
+    "/teacher_overview": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/student_overview": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
     "/sql/passphrase/mySubjects": {
       "post": {
         "tags": [
@@ -25,24 +65,20 @@
         ],
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "description": "The id of the teacher.",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "teacher_id": {
-                  "type": "number",
-                  "example": 1
-                }
-              }
-            }
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "list of the teacher's subject-semester pairs"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -64,6 +100,11 @@
         ],
         "parameters": [
           {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "id of the teacher, passphrase, subject id and semester of the class",
@@ -71,10 +112,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "teacher_id": {
-                  "type": "number",
-                  "example": 1
-                },
                 "subject_id": {
                   "type": "number",
                   "example": 1
@@ -94,6 +131,12 @@
         "responses": {
           "200": {
             "description": "Succesfully created passphrase"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -121,6 +164,11 @@
         ],
         "parameters": [
           {
+            "name": "cookie",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "id of the student, passphrase",
@@ -128,10 +176,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "student_id": {
-                  "type": "number",
-                  "example": 1
-                },
                 "passphrase": {
                   "type": "string",
                   "example": "little blue monkeys"
@@ -149,6 +193,9 @@
           },
           "401": {
             "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "409": {
             "description": "Conflict"
@@ -216,33 +263,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/sql/auth": {
-      "get": {
-        "tags": [
-          "authentication/authorization"
-        ],
-        "summary": "check token",
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"

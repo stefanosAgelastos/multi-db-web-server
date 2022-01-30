@@ -13,6 +13,7 @@ const validateRegister = (data) => {
             .required(),
         password: joi.string()
             .min(8)
+            .max(120)
             .regex(/[a-zA-Z0-9]+/)
             .required(),
         repeat_password: joi.any()
@@ -41,8 +42,6 @@ const validateLogin = (data) => {
 const validateCheckIn = (data) => {
 
     const schema = joi.object({
-        student_id: joi.number()
-            .required(),
         passphrase: joi.string()
             .required()
     }).unknown(true);

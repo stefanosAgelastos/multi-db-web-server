@@ -1,5 +1,6 @@
 ###
 POST http://localhost:8080/sql/checkin
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGVhY2hlciIsImVtYWlsIjoiQVNCQ0BrZWEuZGsiLCJpZCI6MSwiaWF0IjoxNjQzNDU3MDQ2fQ.kjLkG0mVS8i1UzVhbcX2fD7ovRi9ZquIVuTLZRgXVmc
 Content-Type: application/json
 
 {

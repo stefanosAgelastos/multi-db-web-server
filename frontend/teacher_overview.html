@@ -17,18 +17,19 @@
     <p class="custom-description">This is your very simple over view page</p>
 
     <h2>Create Check-in Passphrase</h2>
-    <form method="POST" action="">
-        <div class="dropdown center-blok">
+    <form id="generate_passphrase" method="POST" action="/sql/passphrase">
+        <div class="dropdown center-blok" id="myDropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Select Semester and Subject
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">SD21i | "Database for System Developers</a>
-              <a class="dropdown-item" href="#">SD21i | "System Integration"</a>
+              <a class="dropdown-item"></a>
         </div>
         </div>   
         <br>
-        <input class="center-blok" type="text" name="Passphrase" id="passphrase_input" placeholder="Passphrase">
+        <input type="hidden" id="selectedSemester" name="semester" required>
+        <input type="hidden" id="selectedSubjectID" name="subject_id" required>
+        <input type="text" class="center-blok" name="passphrase" id="passphrase_input" placeholder="Passphrase" required>
         <br>
         <button type="submit" class="btn btn-dark" id="submit-passphrase-button">Generate</button>
     </form>
@@ -42,6 +43,67 @@
           $("#navbar-fragment").load("/fragment/navbar.html");
           $("#footer-fragment").load("/fragment/footer.html");
         });
+    </script>
+
+    <script>
+      // populate dropdown
+      var List;
+      jQuery.ajax({
+          url: "/sql/passphrase/mySubjects",
+          type: "POST",
+          dataType: "json",
+          async: false,
+          success: function (data) {
+          List = data
+              $('.dropdown-menu').empty();
+              for (i in List ) {
+                  $('.dropdown-menu').append('<a class="dropdown-item" data-semester="' + List[i].semester + '" data-subject-id="' + List[i].subject_id + '"  >' + List[i].semester + ' | ' + List[i].subject_name + '</a>');
+              }
+          }
+      });
+    </script>
+
+    <script>
+      // handle user select from dropdown
+      $('#myDropdown').on('hidden.bs.dropdown', function (relatedTarget) {
+        semester = relatedTarget.clickEvent.target.dataset.semester
+        subjectId = relatedTarget.clickEvent.target.dataset.subjectId
+        $("#selectedSemester").val(semester);
+        $("#selectedSubjectID").val(subjectId);
+        $("#dropdownMenuButton").html(relatedTarget.clickEvent.target.text);
+      })
+    </script>
+
+    <script>
+      // handle the submit in a user friendly way
+        $("#generate_passphrase").submit(function(e){
+          e.preventDefault();
+          semester = $("#selectedSemester").val();
+          subject_id = $("#selectedSubjectID").val();
+          passphrase = $("#passphrase_input").val();
+          if(semester && subject_id && passphrase) {
+            console.log("There are values")
+            jQuery.ajax({
+              url: "/sql/passphrase",
+              type: "POST",
+              data: {
+                semester: semester,
+                subject_id: subject_id,
+                passphrase: passphrase 
+              },
+              dataType: "json",
+              async: false,
+              success: function (data) {
+                alert('Generated passphrase: ' + data)
+              },
+              error: function (err) {
+                alert(err.responseText)
+              }
+            });
+          } else {
+            alert("Please select semester and subject :) ")
+          }
+      });
     </script>
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

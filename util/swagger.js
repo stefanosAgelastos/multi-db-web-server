@@ -4,7 +4,7 @@ require('dotenv').config();
 const doc = {
   info: {
     title: 'Rollcall API documentation',
-    description: 'Description of the application endpoints',
+    description: 'Description of the application endpoints, please login when you want to try protected endpoints',
   },
   host: null,
   schemes: ['https', 'http'],
