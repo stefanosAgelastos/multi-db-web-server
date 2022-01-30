@@ -44,7 +44,6 @@ router.post('/login', ratelimiter, async (req, res) => {
             if (await bcrypt.compare(plainPassword, teacher.password)) {
                 const accessToken = jwt.sign({ role: 'teacher', email: teacher.email, id: teacher.teacher_id }, process.env.JWT_SECRET);
                 res.status(200).cookie('accessToken', accessToken);
-                //res.cookie('refreshToken');
                 return res.redirect('/teacher_overview');
             } else {
                 res.status(400).json({ message: "Wrong password" });
@@ -66,6 +65,12 @@ router.post('/login', ratelimiter, async (req, res) => {
     }
 
 });
+
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('accessToken');
+    return res.status(200).redirect('/login')
+})
 
 module.exports = router;
 
