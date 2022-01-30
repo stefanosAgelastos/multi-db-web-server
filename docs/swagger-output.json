@@ -270,44 +270,6 @@
         }
       }
     },
-    "/sql/logout": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/sql/auth": {
-      "get": {
-        "tags": [
-          "authentication/authorization"
-        ],
-        "summary": "check token",
-        "description": "",
-        "parameters": [
-          {
-            "name": "cookie",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/sql/register": {
       "post": {
         "tags": [

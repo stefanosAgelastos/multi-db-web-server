@@ -67,22 +67,5 @@ router.post('/login', ratelimiter, async (req, res) => {
 
 });
 
-
-router.get('/logout', (req, res) => {
-    res.clearCookie('accessToken');
-    res.clearCookie('refreshToken');
-    return res.status(200).redirect('/login')
-})
-
-// test route
-router.get('/auth', authenticateToken, (req, res) => {
-
-    /*
-#swagger.tags = ['authentication/authorization']
-#swagger.summary = 'check token'*/
-
-    return res.status(500).json({ user: req.user, message: "can you see me?" });
-});
-
 module.exports = router;
 
