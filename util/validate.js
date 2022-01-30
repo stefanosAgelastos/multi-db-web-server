@@ -42,8 +42,6 @@ const validateLogin = (data) => {
 const validateCheckIn = (data) => {
 
     const schema = joi.object({
-        student_id: joi.number()
-            .required(),
         passphrase: joi.string()
             .required()
     }).unknown(true);

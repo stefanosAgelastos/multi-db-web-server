@@ -17,7 +17,7 @@
     <p class="custom-description">This is your very simple over view page</p>
 
     <h2>Submit Check-in</h2>
-    <form method="POST" action="">
+    <form id="check_in" method="POST" action="/sql/checkin">
         <input class="center-blok" type="text" name="Passphrase" id="passphrase_input" placeholder="Passphrase">
         <br>
         <button type="submit" class="btn btn-dark" id="submit-passphrase-button">Submit</button>
@@ -32,6 +32,34 @@
         $(document).ready(function () {
           $("#navbar-fragment").load("/fragment/navbar.html");
           $("#footer-fragment").load("/fragment/footer.html");
+        });
+    </script>
+
+    <script>
+        // handle the submit in a user friendly way
+          $("#check_in").submit(function(e){
+            e.preventDefault();
+            passphrase = $("#passphrase_input").val();
+            if(passphrase) {
+              console.log("There are values")
+              jQuery.ajax({
+                url: "/sql/checkin",
+                type: "POST",
+                data: {
+                  passphrase: passphrase 
+                },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                  alert('Generated passphrase: ' + data)
+                },
+                error: function (err) {
+                  alert(err.responseText)
+                }
+              });
+            } else {
+              alert("Please select semester and subject :) ")
+            }
         });
     </script>
 </body>
