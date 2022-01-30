@@ -66,11 +66,11 @@
     <script>
       // handle user select from dropdown
       $('#myDropdown').on('hidden.bs.dropdown', function (relatedTarget) {
-        //SD21i | Database for System Developers
         semester = relatedTarget.clickEvent.target.dataset.semester
         subjectId = relatedTarget.clickEvent.target.dataset.subjectId
         $("#selectedSemester").val(semester);
         $("#selectedSubjectID").val(subjectId);
+        $("#dropdownMenuButton").html(relatedTarget.clickEvent.target.text);
       })
     </script>
 
