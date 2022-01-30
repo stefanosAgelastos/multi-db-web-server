@@ -30,7 +30,6 @@ require("../routes/routes.mongo")(app);
 
 // load the swagger documentation endpoint to our app
 const swaggerFile = require('../docs/swagger-output.json');
-// const { UPSERT } = require("sequelize/dist/lib/query-types");
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 module.exports = app;
