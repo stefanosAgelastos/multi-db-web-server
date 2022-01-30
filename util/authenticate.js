@@ -21,8 +21,4 @@ const authenticateToken = (role) => {
     }
 }
 
-// function jwt_sign(payload) {
-//     const accessToken = jwt.sign({ role: 'teacher', email: teacher.email, id: teacher.teacher_id }, process.env.JWT_SECRET);
-// }
-
 module.exports.authenticateToken = authenticateToken;
