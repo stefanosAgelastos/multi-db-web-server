@@ -10,14 +10,6 @@ router.post('/passphrase/mySubjects', authenticateToken('teacher'), function (re
        #swagger.tags = ['checkin', 'teacher', 'mysql']
        #swagger.summary = 'Get a list of subject-semester pairs for a teacher'
        #swagger.consumes = ['application/json']
-       #swagger.parameters['body'] = {
-           in: 'body',
-           description: 'The id of the teacher.',
-           required: true,
-           schema: {
-               teacher_id: 1
-           }
-       }
        #swagger.responses[200] = {
            description: "list of the teacher's subject-semester pairs",
        } */
@@ -41,7 +33,7 @@ router.post('/passphrase/mySubjects', authenticateToken('teacher'), function (re
 
 })
 
-router.post("/passphrase", function (req, res) {
+router.post("/passphrase", authenticateToken('teacher'), function (req, res) {
     
     /*
        #swagger.tags = ['checkin', 'teacher', 'mysql']
@@ -52,7 +44,6 @@ router.post("/passphrase", function (req, res) {
            description: 'id of the teacher, passphrase, subject id and semester of the class',
            required: true,
            schema: {
-               teacher_id: 1,
                subject_id: 1,
                semester: 'SD21i',
                passphrase: 'little blue monkeys'
@@ -61,7 +52,7 @@ router.post("/passphrase", function (req, res) {
        #swagger.responses[200] = { description: "Succesfully created passphrase" } */
 
 
-    const providedTeacherId = req.body.teacher_id;
+    const providedTeacherId = req.user.id;
     const providedSubjectId = req.body.subject_id;
     const providedSemester = req.body.semester;
     const providedPresenceKey = req.body.passphrase;
