@@ -59,24 +59,20 @@ router.post("/checkin", authenticateToken('student'), function (req, res) {
 
         })
         .then(() => {
-            res.send('Checked in!')
+            return res.send('Checked in!')
         })
         .catch(err => {
             let { custom_status, custom_msg } = err
             if (custom_status, custom_msg) {
-                res.status(custom_status).send(custom_msg);
-                throw err;
+                return res.status(custom_status).send(custom_msg);
             }
             if (err.name === 'SequelizeUniqueConstraintError') {
-                res.status(409).send('You have already checked in')
-                throw err;
+                return res.status(409).send('You have already checked in')
             }
             if (err.name === 'SequelizeForeignKeyConstraintError') {
-                res.status(401).send('You are not authorized for this Class')
-                throw err;
+                return res.status(401).send('You are not authorized for this Class')
             }
-            res.status(500).send('Something went wrong');
-            throw err;
+            return res.status(500).send('Something went wrong');
         });
 })
 
