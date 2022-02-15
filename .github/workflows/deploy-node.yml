@@ -23,6 +23,7 @@ jobs:
           echo NEO_HOST=${{ secrets.NEO_HOST }} >> .env
           echo NEO_USER=${{ secrets.NEO_USER }} >> .env
           echo NEO_SECRET=${{ secrets.NEO_SECRET }} >> .env
+          echo PASSPHRASE_DURATION_SECONDS=${{ secrets.PASSPHRASE_DURATION_SECONDS }} >> .env
           cat .env
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:

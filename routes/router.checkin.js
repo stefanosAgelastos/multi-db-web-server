@@ -4,8 +4,6 @@ const { validateCheckIn } = require('../util/validate');
 const { authenticateToken } = require('../util/authenticate');
 const router = express.Router();
 
-const passphraseDurationSeconds = process.env.PASSPHRASE_DURATION_SECONDS
-
 router.post("/checkin", authenticateToken('student'), function (req, res) {
 
     /*
@@ -42,8 +40,9 @@ router.post("/checkin", authenticateToken('student'), function (req, res) {
                     custom_msg: "Passphrase not found"
                 };
             }
-            expiresAt = (new Date(foundPresenceKey.current_datetime).valueOf()) + passphraseDurationSeconds * 1000;            
-            if (expiresAt < new Date().valueOf()) {
+
+            console.log("expires in : " + (expiresAt - (new Date().valueOf())) + "ms")        
+            if (expiresAt < (new Date().valueOf())) {
                 throw {
                     custom_status: 404,
                     custom_msg: "Passphrase expired"
