@@ -21,6 +21,7 @@ jobs:
       NEO_HOST: bolt://localhost:7687
       NEO_SECRET: password
       NEO_USER: neo4j
+      PASSPHRASE_DURATION_SECONDS: 30
 
     steps:
       - name: Check out repository code

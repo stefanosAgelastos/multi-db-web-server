@@ -50,6 +50,14 @@ router.post("/checkin", authenticateToken('student'), function (req, res) {
                 };
             }
 
+            expiresAt = (new Date(foundPresenceKey.current_dateTime).valueOf()) + process.env.PASSPHRASE_DURATION_SECONDS * 1000;
+            if (expiresAt < (new Date().valueOf())) {
+                throw {
+                    custom_status: 404,
+                    custom_msg: "Passphrase expired"
+                };
+            }
+
             const semester = foundPresenceKey.semester;
             const subject_id = foundPresenceKey.subject_id;
             const presence_key_id = foundPresenceKey.presence_key_id;
