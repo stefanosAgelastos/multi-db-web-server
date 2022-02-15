@@ -41,7 +41,7 @@ router.post("/checkin", authenticateToken('student'), function (req, res) {
                 };
             }
 
-            console.log("expires in : " + (expiresAt - (new Date().valueOf())) + "ms")        
+            expiresAt = (new Date(foundPresenceKey.current_dateTime).valueOf()) + process.env.PASSPHRASE_DURATION_SECONDS * 1000;
             if (expiresAt < (new Date().valueOf())) {
                 throw {
                     custom_status: 404,
